@@ -1,0 +1,15 @@
+COLUMN TABLE my_roicead_MaterialAllocation (
+  Site NVARCHAR(10) NOT NULL,
+  SiteType NVARCHAR(5) NOT NULL,
+  TankNum NVARCHAR(10) NOT NULL,
+  Valid_from DATE NOT NULL,
+  MaterialId_MaterialId NVARCHAR(18) NOT NULL,
+  Reason NVARCHAR(30),
+  Regdate DATE,
+  RegTime TIME,
+  RegUser NVARCHAR(50),
+  PRIMARY KEY(Site, SiteType, TankNum, Valid_from, MaterialId_MaterialId)
+) WITH ASSOCIATIONS (
+  MANY TO ONE JOIN my_roicead_Materials AS MaterialId ON (MaterialId.MaterialId = MaterialId_MaterialId),
+  MANY TO MANY JOIN my_roicead_Tanks AS TankGrp ON (TankGrp.Site = Site)
+)

@@ -1,0 +1,23 @@
+VIEW CardService_Cards AS SELECT
+  Cards_0.CardNum,
+  Cards_0.SupplierName,
+  Cards_0.TypeName,
+  Cards_0.Driver,
+  Cards_0.VehRegNum,
+  Cards_0.Customer,
+  Cards_0.CustomerName,
+  Cards_0.SalesOrgName,
+  Cards_0.SalesOffName,
+  Cards_0.Status,
+  Cards_0.ExpiryDate,
+  Cards_0.BlockDate,
+  Cards_0.BlockReason,
+  Cards_0.CancelDate,
+  Cards_0.CancelReason,
+  Cards_0.IssueDate,
+  Cards_0.OrigIssueDate,
+  Cards_0.Bpno
+FROM my_roicead_Cards AS Cards_0
+WITH ASSOCIATIONS (
+  MANY TO MANY JOIN CardService_Drawings AS Drawings ON (Drawings.Card_CardNum = CardNum)
+)

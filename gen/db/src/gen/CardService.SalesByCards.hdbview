@@ -1,0 +1,6 @@
+VIEW CardService_SalesByCards AS SELECT
+  SalesByCards_0.TYPENAME,
+  SalesByCards_0.VALUECURRENCY,
+  SalesByCards_0.TOTALGROSSVALUE,
+  SalesByCards_0.GROSSVALUE
+FROM my_roicead_SalesByCards AS SalesByCards_0

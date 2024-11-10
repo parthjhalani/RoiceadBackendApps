@@ -1,0 +1,15 @@
+VIEW my_roicead_POSSales AS SELECT
+  SitePosHeader_0.SiteTrnID,
+  Site_1.PrimaryNetwork,
+  SitePosHeader_0.TRN_TIMESTAMP,
+  Site_1.Site,
+  Site_1.Acronym,
+  Site_1.LocationGroup,
+  Site_1.SiteType,
+  Items_2.MATERIAL_MaterialId,
+  Items_2.AMOUNT,
+  1 AS transcount
+FROM ((my_roicead_SitePosHeader AS SitePosHeader_0 LEFT JOIN my_roicead_SiteDetails AS Site_1 ON (SitePosHeader_0.Site_Site = Site_1.Site) AND (SitePosHeader_0.Site_SiteType = Site_1.SiteType)) LEFT JOIN my_roicead_SitePosItems AS Items_2 ON Items_2.SiteTrnID = SitePosHeader_0.SiteTrnID)
+WITH ASSOCIATIONS (
+  MANY TO ONE JOIN my_roicead_Materials AS MATERIAL ON (MATERIAL.MaterialId = MATERIAL_MaterialId)
+)

@@ -1,0 +1,15 @@
+VIEW CardService_SiteProfileAllocation AS SELECT
+  SiteProfileAllocation_0.Profile,
+  SiteProfileAllocation_0.Counter,
+  SiteProfileAllocation_0.Site,
+  SiteProfileAllocation_0.TankNum,
+  SiteProfileAllocation_0.Profile_Type,
+  SiteProfileAllocation_0.Description,
+  SiteProfileAllocation_0.Allocat_Desc,
+  SiteProfileAllocation_0.Date_From,
+  SiteProfileAllocation_0.Date_To
+FROM my_roicead_SiteProfileAllocation AS SiteProfileAllocation_0
+WITH ASSOCIATIONS (
+  MANY TO MANY JOIN CardService_SiteSalesProfile AS SiteSalesProfile ON (SiteSalesProfile.Profile = Profile),
+  MANY TO MANY JOIN CardService_PublicHolidayProfile AS PublicHolidayProfile ON (PublicHolidayProfile.Profile = Profile)
+)

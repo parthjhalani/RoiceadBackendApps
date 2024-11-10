@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="MY_ROICEAD_POSANALYTICS" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="MY_ROICEAD_POSANALYTICS.hdbcalculationview"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="MY_ROICEAD_SITEPOSITEMS">
+    <resourceUri>MY_ROICEAD_SITEPOSITEMS</resourceUri>
+  </DataSource>
+  <DataSource id="MY_ROICEAD_SITEPOSHEADER">
+    <resourceUri>MY_ROICEAD_SITEPOSHEADER</resourceUri>
+  </DataSource>
+  <DataSource id="MY_ROICEAD_SITEDETAILS">
+    <resourceUri>MY_ROICEAD_SITEDETAILS</resourceUri>
+  </DataSource>
+  <DataSource id="MY_ROICEAD_MATERIALS">
+    <resourceUri>MY_ROICEAD_MATERIALS</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="SITETRNID"/>
+      <viewAttribute id="AMOUNT"/>
+      <viewAttribute id="CURRENCY"/>
+    
+      <viewAttribute id="MATERIAL_MATERIALID"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="C_AMOUNT" datatype="DECIMAL" length="15" scale="2" expressionLanguage="COLUMN_ENGINE">
+        <formula>double(&quot;AMOUNT&quot;)</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="MY_ROICEAD_SITEPOSITEMS"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2">
+    <viewAttributes>
+      <viewAttribute id="TRN_TIMESTAMP"/>
+      <viewAttribute id="SITETRNID"/>
+      <viewAttribute id="SITE_SITE"/>
+      <viewAttribute id="MOP_TYPE"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="YEAROFPAY" datatype="NVARCHAR" length="4" expressionLanguage="COLUMN_ENGINE">
+        <formula>component(&quot;TRN_TIMESTAMP&quot;,1)</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="MY_ROICEAD_SITEPOSHEADER"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_3">
+    <viewAttributes>
+      <viewAttribute id="SITE"/>
+      <viewAttribute id="NAME1"/>
+      <viewAttribute id="PRIMARYNETWORK"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="MY_ROICEAD_SITEDETAILS"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2" cardinality="CN_N" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="CURRENCY"/>
+      <viewAttribute id="PRIMARYNETWORK"/>
+      <viewAttribute id="SITE"/>
+      <viewAttribute id="NAME1"/>
+      <viewAttribute id="MATERIALGROUP"/>
+      <viewAttribute id="MOP_TYPE"/>
+      <viewAttribute id="YEAROFPAY"/>
+      <viewAttribute id="AMOUNT" aggregationType="sum"/>
+      <viewAttribute hidden="true" id="JOIN$SITE_SITE$SITE"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Join_1_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MATERIALGROUP" source="MATERIALGROUP"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MOP_TYPE" source="MOP_TYPE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAROFPAY" source="YEAROFPAY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="AMOUNT" source="C_AMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$SITE_SITE$SITE" source="SITE_SITE"/>
+    </input>
+    <input node="Projection_3">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRIMARYNETWORK" source="PRIMARYNETWORK"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SITE" source="SITE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME1" source="NAME1"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$SITE_SITE$SITE" source="SITE"/>
+    </input>
+    <joinAttribute name="JOIN$SITE_SITE$SITE"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_4">
+    <viewAttributes>
+      <viewAttribute id="MATERIALID"/>
+      <viewAttribute id="MATERIALDESC"/>
+      <viewAttribute id="MATERIALGROUP"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="MY_ROICEAD_MATERIALS"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="Projection_5">
+    <viewAttributes>
+      <viewAttribute id="YEAROFPAY"/>
+      <viewAttribute id="YEARTODATEAMOUNT" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Join_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEARTODATEAMOUNT" source="AMOUNT"/>
+    </input></calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="Projection_6">
+    <viewAttributes>
+      <viewAttribute id="TOTAMOUNT" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Join_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOTAMOUNT" source="AMOUNT"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_3">
+    <viewAttributes>
+      <viewAttribute id="TOTAMOUNT" aggregationType="sum"/>
+      <viewAttribute id="YEARTODATEAMOUNT" aggregationType="sum"/>
+    
+      <viewAttribute id="YEAROFPAY"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Projection_6">
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOTAMOUNT" source="TOTAMOUNT"/>
+    </input>
+    <input node="Projection_5">
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEARTODATEAMOUNT" source="YEARTODATEAMOUNT"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAROFPAY" source="YEAROFPAY"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_4" cardinality="CN_N" joinType="leftOuter">
+    <viewAttributes>
+      <viewAttribute id="CURRENCY"/>
+      <viewAttribute id="PRIMARYNETWORK"/>
+      <viewAttribute id="SITE"/>
+      <viewAttribute id="NAME1"/>
+      <viewAttribute id="MATERIALGROUP"/>
+      <viewAttribute id="MOP_TYPE"/>
+      <viewAttribute id="YEAROFPAY"/>
+      <viewAttribute id="TOTAMOUNT" aggregationType="sum"/>
+      <viewAttribute id="YEARTODATEAMOUNT" aggregationType="sum"/>
+      <viewAttribute id="AMOUNT" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Join_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRIMARYNETWORK" source="PRIMARYNETWORK"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SITE" source="SITE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME1" source="NAME1"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MATERIALGROUP" source="MATERIALGROUP"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MOP_TYPE" source="MOP_TYPE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAROFPAY" source="YEAROFPAY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="AMOUNT" source="AMOUNT"/>
+    </input>
+  
+    <input node="Join_3">
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOTAMOUNT" source="TOTAMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEARTODATEAMOUNT" source="YEARTODATEAMOUNT"/>
+  
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAROFPAY" source="YEAROFPAY"/>
+  
+    </input>
+    <joinAttribute name="YEAROFPAY"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_1" cardinality="CN_N" joinType="inner" multiJoinNode="Join_1" multiJoinCentralTable="Projection_1" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="CURRENCY"/>
+      <viewAttribute id="MOP_TYPE"/>
+      <viewAttribute id="YEAROFPAY"/>
+      <viewAttribute id="C_AMOUNT" aggregationType="sum"/>
+      <viewAttribute id="SITE_SITE"/>
+      <viewAttribute id="SITETRNID"/>
+      <viewAttribute id="MATERIAL_MATERIALID"/>
+      <viewAttribute hidden="true" id="JOIN$SITETRNID$SITETRNID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Projection_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="SITE_SITE" source="SITE_SITE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MOP_TYPE" source="MOP_TYPE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAROFPAY" source="YEAROFPAY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$SITETRNID$SITETRNID" source="SITETRNID"/>
+    </input>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SITETRNID" source="SITETRNID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="C_AMOUNT" source="C_AMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MATERIAL_MATERIALID" source="MATERIAL_MATERIALID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$SITETRNID$SITETRNID" source="SITETRNID"/>
+    </input>
+    <joinAttribute name="JOIN$SITETRNID$SITETRNID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_2" cardinality="CN_N" joinType="inner" multiJoinNode="Join_1" multiJoinCentralTable="Projection_1" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="CURRENCY"/>
+      <viewAttribute id="MATERIALGROUP"/>
+      <viewAttribute id="MOP_TYPE"/>
+      <viewAttribute id="YEAROFPAY"/>
+      <viewAttribute id="C_AMOUNT" aggregationType="sum"/>
+      <viewAttribute id="SITE_SITE"/>
+      <viewAttribute id="SITETRNID"/>
+      <viewAttribute hidden="true" id="JOIN$MATERIALID$MATERIAL_MATERIALID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Projection_4">
+      <mapping xsi:type="Calculation:AttributeMapping" target="MATERIALGROUP" source="MATERIALGROUP"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$MATERIALID$MATERIAL_MATERIALID" source="MATERIALID"/>
+    </input>
+    <input node="Join_1_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MOP_TYPE" source="MOP_TYPE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAROFPAY" source="YEAROFPAY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="C_AMOUNT" source="C_AMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SITE_SITE" source="SITE_SITE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SITETRNID" source="SITETRNID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$MATERIALID$MATERIAL_MATERIALID" source="MATERIAL_MATERIALID"/>
+    </input>
+    <joinAttribute name="JOIN$MATERIALID$MATERIAL_MATERIALID"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_4">
+  <attributes>
+    <attribute id="CURRENCY" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CURRENCY"/>
+      <keyMapping columnObjectName="Join_4" columnName="CURRENCY"/>
+    </attribute>
+    <attribute id="PRIMARYNETWORK" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRIMARYNETWORK"/>
+      <keyMapping columnObjectName="Join_4" columnName="PRIMARYNETWORK"/>
+    </attribute>
+    <attribute id="SITE" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SITE"/>
+      <keyMapping columnObjectName="Join_4" columnName="SITE"/>
+    </attribute>
+    <attribute id="NAME1" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="NAME1"/>
+      <keyMapping columnObjectName="Join_4" columnName="NAME1"/>
+    </attribute>
+    <attribute id="MATERIALGROUP" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MATERIALGROUP"/>
+      <keyMapping columnObjectName="Join_4" columnName="MATERIALGROUP"/>
+    </attribute>
+    <attribute id="MOP_TYPE" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MOP_TYPE"/>
+      <keyMapping columnObjectName="Join_4" columnName="MOP_TYPE"/>
+    </attribute>
+    <attribute id="YEAROFPAY" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="YEAROFPAY"/>
+      <keyMapping columnObjectName="Join_4" columnName="YEAROFPAY"/>
+    </attribute>
+  
+    <attribute id="TOTAMOUNT" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="C_AMOUNT"/>
+  
+      <keyMapping columnObjectName="Join_4" columnName="TOTAMOUNT"/>
+  
+    </attribute>
+    <attribute id="YEARTODATEAMOUNT" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="C_AMOUNT"/>
+      <keyMapping columnObjectName="Join_4" columnName="YEARTODATEAMOUNT"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="AMOUNT" order="10" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="C_AMOUNT"/>
+      <measureMapping columnObjectName="Join_4" columnName="AMOUNT"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="213" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302" y="956"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="956"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_3" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="115" y="801"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="213" y="641"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Join_1_2" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape>
+    <shape modelObjectName="Projection_3" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="205" y="-21"/>
+      <rectangleSize width="192"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_4" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="512" y="956"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_5" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="423" y="496"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_6" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="213" y="506"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_3" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="239" y="356"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_6" modelObjectNameSpace="Join_3" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="154"/>
+    </shape>
+    <shape modelObjectName="Projection_5" modelObjectNameSpace="Join_3" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="620" y="30"/>
+      <rectangleSize width="207"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_4" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="213" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Join_2" modelObjectNameSpace="Join_4" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="154"/>
+    </shape>
+    <shape modelObjectName="Join_3" modelObjectNameSpace="Join_4" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="314" y="30"/>
+      <rectangleSize width="192"/>
+    </shape>
+  
+  
+  
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="325" y="801"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_4" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="356" y="107"/>
+      <rectangleSize width="180"/>
+    </shape>
+    <shape modelObjectName="Projection_2" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="350" y="-69"/>
+      <rectangleSize width="178"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="148"/>
+    </shape></shapes>
+</layout>
+</Calculation:scenario>

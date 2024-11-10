@@ -1,0 +1,13 @@
+COLUMN TABLE my_roicead_SiteSalesProfile (
+  Profile NVARCHAR(10) NOT NULL,
+  Profile_Time NVARCHAR(12) NOT NULL,
+  Monday NVARCHAR(6),
+  Tuesday NVARCHAR(6),
+  Wednesday NVARCHAR(6),
+  Thursday NVARCHAR(6),
+  Friday NVARCHAR(6),
+  Saturday NVARCHAR(6),
+  Sunday NVARCHAR(6),
+  PublicHoliday NVARCHAR(6),
+  PRIMARY KEY(Profile, Profile_Time)
+)

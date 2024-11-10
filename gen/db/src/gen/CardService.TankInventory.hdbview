@@ -1,0 +1,22 @@
+VIEW CardService_TankInventory AS SELECT
+  TankInventory_0.createdAt,
+  TankInventory_0.createdBy,
+  TankInventory_0.modifiedAt,
+  TankInventory_0.modifiedBy,
+  TankInventory_0.ID,
+  TankInventory_0.Site,
+  TankInventory_0.TankNum,
+  TankInventory_0.MDATE,
+  TankInventory_0.MTIME,
+  TankInventory_0.MTYPE,
+  TankInventory_0.MTZONE,
+  TankInventory_0.MaterialId,
+  TankInventory_0.MaterialDesc,
+  TankInventory_0.MFLEVEL,
+  TankInventory_0.MFUOM,
+  TankInventory_0.MQUAN,
+  TankInventory_0.MQUOM,
+  TankInventory_0.Regdate,
+  TankInventory_0.RegTime,
+  TankInventory_0.RegUser
+FROM my_roicead_TankInventory AS TankInventory_0

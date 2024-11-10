@@ -1,0 +1,12 @@
+COLUMN TABLE my_roicead_MeterTankAllocation (
+  Site NVARCHAR(10) NOT NULL,
+  SiteType NVARCHAR(5) NOT NULL,
+  MeterNum NVARCHAR(10) NOT NULL,
+  Valid_from DATE NOT NULL,
+  TankNum NVARCHAR(10),
+  Reason NVARCHAR(30),
+  Regdate DATE,
+  RegTime TIME,
+  RegUser NVARCHAR(50),
+  PRIMARY KEY(Site, SiteType, MeterNum, Valid_from)
+)

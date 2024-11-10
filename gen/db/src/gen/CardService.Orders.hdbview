@@ -1,0 +1,21 @@
+VIEW CardService_Orders AS SELECT
+  Orders_0.OrderNo,
+  Orders_0.Item,
+  Orders_0.PrimaryNetwork,
+  Orders_0.SubNetwork,
+  Orders_0.Site,
+  Orders_0.Acronym,
+  Orders_0.LocationGroup,
+  Orders_0.SiteType,
+  Orders_0.Status,
+  Orders_0.OrderType,
+  Orders_0.TankNum,
+  Orders_0.MaterialId,
+  Orders_0.MaterialDesc,
+  Orders_0.Suppl_Qty,
+  Orders_0.Suppl_Uom,
+  Orders_0.Suppl_Date,
+  Orders_0.Suppl_Time,
+  Orders_0.TotQty,
+  Orders_0.ordercount
+FROM my_roicead_Orders AS Orders_0

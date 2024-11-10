@@ -1,0 +1,14 @@
+{
+    "requires": {
+      "[hybrid]": {
+        "auth": {
+          "kind": "xsuaa"
+        }
+      },
+      "auth": {
+        "passport": {
+          "strategy": "JWT"
+        }
+      }
+    }
+  }

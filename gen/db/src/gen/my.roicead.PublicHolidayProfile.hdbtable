@@ -1,0 +1,6 @@
+COLUMN TABLE my_roicead_PublicHolidayProfile (
+  Profile NVARCHAR(10) NOT NULL,
+  Profile_Date DATE NOT NULL,
+  Description NVARCHAR(50),
+  PRIMARY KEY(Profile, Profile_Date)
+)

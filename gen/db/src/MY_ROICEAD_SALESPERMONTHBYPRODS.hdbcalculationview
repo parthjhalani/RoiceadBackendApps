@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="MY_ROICEAD_SALESPERMONTHBYPRODS" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="HOURLY" enforceSqlExecution="false">
+<descriptions defaultDescription="MY_ROICEAD_SALESPERMONTHBYPRODS"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="MY_ROICEAD_DRAWINGS">
+    <resourceUri>MY_ROICEAD_DRAWINGS</resourceUri>
+  </DataSource>
+  <DataSource id="MY_ROICEAD_TOP5PRODS">
+    <resourceUri>MY_ROICEAD_TOP5PRODS</resourceUri>
+  </DataSource>
+  <DataSource id="Aggregation_1$$$$MY_ROICEAD_TOP5PRODS$$">
+    <resourceUri>MY_ROICEAD_TOP5PRODS</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="PRODUCT"/>
+      <viewAttribute id="TRANSACTDATE"/>
+      <viewAttribute id="GROSSVALUE"/>
+      <viewAttribute id="VALUECURRENCY"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="MONTH" datatype="NVARCHAR" length="13" expressionLanguage="SQL">
+        <formula>  CONCAT(MONTHNAME(&quot;TRANSACTDATE&quot;), EXTRACT_YEAR(&quot;TRANSACTDATE&quot;))</formula>
+      </calculatedViewAttribute>
+    
+      <calculatedViewAttribute id="MONTHSBETWEEN" datatype="INTEGER" expressionLanguage="SQL">
+    
+        <formula>((MONTHS_BETWEEN(LAST_DAY(CURRENT_DATE), LAST_DAY(&quot;TRANSACTDATE&quot;) ) ) * -1 ) </formula>
+    
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="MY_ROICEAD_DRAWINGS"/>
+    <filter>MONTHS_BETWEEN(CURRENT_DATE, &quot;TRANSACTDATE&quot;) &lt;= 12</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2">
+    <viewAttributes>
+      <viewAttribute id="PRODUCT"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="MY_ROICEAD_TOP5PRODS"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_1">
+    <viewAttributes>
+      <viewAttribute id="TOTALGROSSVALUE" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Aggregation_1$$$$MY_ROICEAD_TOP5PRODS$$"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="PRODUCT"/>
+      <viewAttribute id="TRANSACTDATE" aggregationType="min"/>
+      <viewAttribute id="GROSSVALUE" aggregationType="sum"/>
+      <viewAttribute id="VALUECURRENCY"/>
+      <viewAttribute id="MONTH"/>
+    
+      <viewAttribute id="MONTHSBETWEEN"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT" source="PRODUCT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TRANSACTDATE" source="TRANSACTDATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="GROSSVALUE" source="GROSSVALUE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VALUECURRENCY" source="VALUECURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="MONTHSBETWEEN" source="MONTHSBETWEEN"/>
+    </input>
+    <input node="Projection_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT" source="PRODUCT"/>
+    </input>
+    <joinAttribute name="PRODUCT"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2">
+    <viewAttributes>
+      <viewAttribute id="TOTALGROSSVALUE" aggregationType="sum"/>
+    
+      <viewAttribute id="PRODUCT"/>
+      <viewAttribute id="GROSSVALUE" aggregationType="sum"/>
+      <viewAttribute id="VALUECURRENCY"/>
+      <viewAttribute id="MONTH"/>
+      <viewAttribute id="MONTHSBETWEEN"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Aggregation_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOTALGROSSVALUE" source="TOTALGROSSVALUE"/>
+    </input>
+  
+    <input node="Join_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT" source="PRODUCT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="GROSSVALUE" source="GROSSVALUE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VALUECURRENCY" source="VALUECURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MONTH" source="MONTH"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MONTHSBETWEEN" source="MONTHSBETWEEN"/>
+    </input>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_2">
+  <attributes>
+    <attribute id="TOTALGROSSVALUE" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TOTALGROSSVALUE"/>
+      <keyMapping columnObjectName="Join_2" columnName="TOTALGROSSVALUE"/>
+    </attribute>
+    <attribute id="PRODUCT" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCT"/>
+      <keyMapping columnObjectName="Join_2" columnName="PRODUCT"/>
+    </attribute>
+    <attribute id="VALUECURRENCY" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="VALUECURRENCY"/>
+      <keyMapping columnObjectName="Join_2" columnName="VALUECURRENCY"/>
+    </attribute>
+    <attribute id="MONTH" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MONTH"/>
+      <keyMapping columnObjectName="Join_2" columnName="MONTH"/>
+    </attribute>
+    <attribute id="MONTHSBETWEEN" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MONTHSBETWEEN"/>
+      <keyMapping columnObjectName="Join_2" columnName="MONTHSBETWEEN"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="GROSSVALUE" order="3" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="GROSSVALUE"/>
+      <measureMapping columnObjectName="Join_2" columnName="GROSSVALUE"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="328" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="-77" y="578"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="465" y="602"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Aggregation_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="395" y="356"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="118" y="356"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="183"/>
+    </shape>
+    <shape modelObjectName="Projection_2" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="140"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="328" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Aggregation_1" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="195"/>
+    </shape>
+  
+    <shape modelObjectName="Join_1" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="620" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

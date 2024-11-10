@@ -1,0 +1,444 @@
+#2.0#2024 04 26 12:43:39.901#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:42:51.083414] Added process: "web" (STDOUT, API)#
+
+#2.0#2024 04 26 12:43:39.901#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:42:51.091070] Created app with guid b0af1343-4ee1-43a4-95fa-29c8c1310ed8 (STDOUT, API)#
+
+#2.0#2024 04 26 12:43:39.901#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:42:51.301227] Updating process: "web" (STDOUT, API)#
+
+#2.0#2024 04 26 12:43:39.901#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:42:51.403452] Scaling process: "web" (STDOUT, API)#
+
+#2.0#2024 04 26 12:43:39.901#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:14.712936] Uploading app package for app with guid b0af1343-4ee1-43a4-95fa-29c8c1310ed8 (STDOUT, API)#
+
+#2.0#2024 04 26 12:43:39.901#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:14.895618] Updated app with guid b0af1343-4ee1-43a4-95fa-29c8c1310ed8 ({"environment_variables"=>"[PRIVATE DATA HIDDEN]"}) (STDOUT, API)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:29.806503] Creating build for app with guid b0af1343-4ee1-43a4-95fa-29c8c1310ed8 (STDOUT, API)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.684799] Downloading python_buildpack... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.684808] Downloading uas_dataflow_server_buildpack... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.684834] Downloading sap_java_buildpack_1_90... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.684863] Downloading sap_java_buildpack_jakarta_2_4... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.695382] Downloading staticfile_buildpack... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.706878] Downloaded sap_java_buildpack_jakarta_2_4 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.706897] Downloading java_buildpack... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.714697] Downloaded staticfile_buildpack (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.714717] Downloading nodejs_buildpack... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.721512] Downloaded uas_dataflow_server_buildpack (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.721542] Downloading go_buildpack... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.722487] Downloaded python_buildpack (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.722503] Downloading zero_trust_sidecar_buildpack_1_1... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.724270] Downloaded sap_java_buildpack_1_90 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.724287] Downloading sap_java_buildpack_jakarta_2_6... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.737349] Downloaded java_buildpack (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.737376] Downloading zero_trust_sidecar_buildpack... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.738964] Downloaded sap_java_buildpack_jakarta_2_6 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.738983] Downloading sap_java_buildpack_jakarta... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.746269] Downloaded nodejs_buildpack (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.746293] Downloading sap_java_buildpack_jakarta_2_5... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.752850] Downloaded zero_trust_sidecar_buildpack (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.752871] Downloading sap_java_buildpack_1_92... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.753381] Downloaded go_buildpack (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.753399] Downloading php_buildpack... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.758011] Downloaded sap_java_buildpack_jakarta (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.758040] Downloading zero_trust_sidecar_buildpack_1_0... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.758992] Downloaded zero_trust_sidecar_buildpack_1_1 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.759020] Downloading nginx_buildpack... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.768020] Downloaded sap_java_buildpack_1_92 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.768038] Downloading sap_java_buildpack... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.902#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.771362] Downloaded php_buildpack (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.903#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.771394] Downloading sap_java_buildpack_1_93... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.903#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.776263] Downloaded nginx_buildpack (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.903#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.776291] Downloading binary_buildpack... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.903#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.781623] Downloaded zero_trust_sidecar_buildpack_1_0 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.903#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.781646] Downloaded sap_java_buildpack_jakarta_2_5 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.903#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.783688] Downloaded sap_java_buildpack (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.903#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.807031] Downloaded sap_java_buildpack_1_93 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.903#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.808936] Downloaded binary_buildpack (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.903#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:30.808990] Cell 042d2642-5962-4da0-9b94-87e25a5ab8a4 creating container for instance 131fc238-9e54-48f8-baa9-a1c6acdeeacb (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.903#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:31.216495] Security group rules were updated (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.903#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:31.290848] Cell 042d2642-5962-4da0-9b94-87e25a5ab8a4 successfully created container for instance 131fc238-9e54-48f8-baa9-a1c6acdeeacb (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.903#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:31.567100] Downloading app package... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.903#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:32.297067] Downloaded app package (7.4M) (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.903#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:32.848948] -----> Nodejs Buildpack version 1.8.23 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.903#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:33.135322] -----> Bootstrapping python (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.903#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:33.135334] -----> Installing python 3.11.8 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.903#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:33.135407] Copy [/tmp/buildpacks/e897982aafb5bb6bda60c516cf76affe/dependencies/fa5f772263f0426e9f9558b20475e527/python_3.11.8_linux_x64_cflinuxfs4_dabff961.tgz] (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.903#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:36.760929] -----> Installing binaries (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.903#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:36.761065] engines.node (package.json): ^20.0.0 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.903#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:36.761073] engines.npm (package.json): unspecified (use default) (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.904#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:36.761157] -----> Installing node 20.11.1 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.904#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:36.761283] Copy [/tmp/buildpacks/e897982aafb5bb6bda60c516cf76affe/dependencies/d59d92ac3e54d0910565217852880caf/node_20.11.1_linux_x64_cflinuxfs4_5cb40159.tgz] (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.904#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:38.797580] Using default npm version: 10.2.4 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.904#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:38.797592] -----> Installing yarn 1.22.19 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.904#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:38.797689] Copy [/tmp/buildpacks/e897982aafb5bb6bda60c516cf76affe/dependencies/0f06052381cbcef1593bd279ca3d9458/yarn_1.22.19_linux_noarch_any-stack_32d0e82e.tgz] (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.904#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:39.125753] Installed yarn 1.22.19 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.904#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:39.125763] -----> Creating runtime environment (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.904#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:39.126874] NODE_ENV=production (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.904#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:39.126883] NODE_HOME=/tmp/contents1432579620/deps/0/node (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.904#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:39.126886] NODE_MODULES_CACHE=true (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.904#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:39.126892] NODE_VERBOSE=false (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.904#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:39.126894] NPM_CONFIG_LOGLEVEL=error (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.904#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:39.126897] NPM_CONFIG_PRODUCTION=true (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.904#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:39.126909] -----> Building dependencies (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.904#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:39.126914] Prebuild detected (node_modules already exists) (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:39.904#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-240###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:39.126919] Rebuilding any native modules (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:49.897#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-487###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:39.779238] rebuilt dependencies successfully (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:49.897#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-487###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:39.788185] Installing any new modules (package.json + package-lock.json) (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:49.897#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-487###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:40.546492] up to date in 566ms (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:49.897#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-487###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:40.546599] 18 packages are looking for funding (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:49.897#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-487###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:40.546641] run `npm fund` for details (STDOUT, STG)#
+
+#2.0#2024 04 26 12:43:49.897#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-487###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:41.367260] Contrast Security no credentials found. Will not write environment files. (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:00.087#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-150###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:50.587254] Exit status 0 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:00.088#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-150###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:50.587299] Uploading droplet, build artifacts cache... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:00.088#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-150###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:50.587344] Uploading droplet... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:00.088#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-150###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:50.587359] Uploading build artifacts cache... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:00.088#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-150###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:50.608283] Uploaded build artifacts cache (216B) (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:00.088#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-150###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:51.709932] Creating droplet for app with guid b0af1343-4ee1-43a4-95fa-29c8c1310ed8 (STDOUT, API)#
+
+#2.0#2024 04 26 12:44:00.088#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-150###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:57.890652] Uploaded droplet (52.1M) (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:00.088#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-150###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:57.902050] Uploading complete (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:00.088#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-150###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:58.249965] Cell 042d2642-5962-4da0-9b94-87e25a5ab8a4 stopping instance 131fc238-9e54-48f8-baa9-a1c6acdeeacb (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:00.088#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-150###
+[PollStageAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:58.250] Cell 042d2642-5962-4da0-9b94-87e25a5ab8a4 destroying container for instance 131fc238-9e54-48f8-baa9-a1c6acdeeacb (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:10.404#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-193###
+[PollStartAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:43:59.827477] Cell 042d2642-5962-4da0-9b94-87e25a5ab8a4 successfully destroyed container for instance 131fc238-9e54-48f8-baa9-a1c6acdeeacb (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:10.405#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-193###
+[PollStartAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:44:00.230807] Updated app with guid b0af1343-4ee1-43a4-95fa-29c8c1310ed8 ({:droplet_guid=>"cd4e69be-ccac-413d-90e8-073ea8aeb473"}) (STDOUT, API)#
+
+#2.0#2024 04 26 12:44:10.405#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-193###
+[PollStartAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:44:00.595021] Creating revision for app with guid b0af1343-4ee1-43a4-95fa-29c8c1310ed8 (STDOUT, API)#
+
+#2.0#2024 04 26 12:44:10.405#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-193###
+[PollStartAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:44:00.643887] Starting app with guid b0af1343-4ee1-43a4-95fa-29c8c1310ed8 (STDOUT, API)#
+
+#2.0#2024 04 26 12:44:10.405#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-193###
+[PollStartAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:44:01.012051] Cell 275eca76-9d51-4408-9e4a-5572e0a593ec creating container for instance 56298f12-265a-4f75-7c46-385a (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:44:10.405#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-193###
+[PollStartAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:44:01.567837] Security group rules were updated (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:44:10.405#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-193###
+[PollStartAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:44:01.629959] Cell 275eca76-9d51-4408-9e4a-5572e0a593ec successfully created container for instance 56298f12-265a-4f75-7c46-385a (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:44:10.405#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-193###
+[PollStartAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:44:01.885900] Downloading droplet... (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:44:10.405#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-193###
+[PollStartAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:44:06.077622] Downloaded droplet (52.1M) (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:44:10.405#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-193###
+[PollStartAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:44:06.077791] Starting health monitoring of container (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:44:10.406#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-193###
+[PollStartAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:44:06.149408] Invoking pre-start scripts. (STDOUT, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:44:10.406#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-193###
+[PollStartAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:44:06.373374] Invoking start command. (STDOUT, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:44:10.406#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-193###
+[PollStartAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:44:06.754483] > start (STDOUT, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:44:10.406#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-193###
+[PollStartAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:44:06.754503] > node node_modules/@sap/approuter/approuter.js (STDOUT, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:44:10.406#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-193###
+[PollStartAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:44:07.017823] {"written_at":"2024-04-26T12:44:07.014Z","written_ts":1714135447014000000,"csn_component":"-","correlation_id":"-","type":"log","logger":"nodejs-logger","layer":"/LoggingLibrary","level":"warning","container_id":"10.36.197.14","component_type":"application","component_id":"b0af1343-4ee1-43a4-95fa-29c8c1310ed8","component_name":"MyRoiceadApps","component_instance":-1,"source_instance":-1,"organization_id":"bb47c507-d2c9-4296-89b6-f217520e4f04","organization_name":"Roicead GmbH","space_id":"bfce989b-242c-4264-9e2a-21dafdfc5822","space_name":"dev","context_id":"","msg":"Dynamic log level switching not available"} (STDOUT, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:44:10.406#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-193###
+[PollStartAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:44:07.350356] {"written_at":"2024-04-26T12:44:07.349Z","written_ts":1714135447349000000,"csn_component":"-","correlation_id":"lvgnzk1i","type":"log","logger":"nodejs-logger","layer":"/approuter","level":"info","container_id":"10.36.197.14","component_type":"application","component_id":"b0af1343-4ee1-43a4-95fa-29c8c1310ed8","component_name":"MyRoiceadApps","component_instance":-1,"source_instance":-1,"organization_id":"bb47c507-d2c9-4296-89b6-f217520e4f04","organization_name":"Roicead GmbH","space_id":"bfce989b-242c-4264-9e2a-21dafdfc5822","space_name":"dev","context_id":"lvgnzk1i","msg":"Application router version 16.4.1"} (STDOUT, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:44:10.406#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-193###
+[PollStartAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:44:07.354129] {"written_at":"2024-04-26T12:44:07.353Z","written_ts":1714135447353000000,"csn_component":"-","correlation_id":"lvgnzk1l","type":"log","logger":"nodejs-logger","layer":"/Configuration","level":"info","container_id":"10.36.197.14","component_type":"application","component_id":"b0af1343-4ee1-43a4-95fa-29c8c1310ed8","component_name":"MyRoiceadApps","component_instance":-1,"source_instance":-1,"organization_id":"bb47c507-d2c9-4296-89b6-f217520e4f04","organization_name":"Roicead GmbH","space_id":"bfce989b-242c-4264-9e2a-21dafdfc5822","space_name":"dev","context_id":"lvgnzk1l","msg":"No COOKIES environment variable"} (STDOUT, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:44:10.407#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-193###
+[PollStartAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:44:07.379243] {"written_at":"2024-04-26T12:44:07.378Z","written_ts":1714135447378000000,"csn_component":"-","correlation_id":"lvgnzk1i","type":"log","logger":"nodejs-logger","layer":"/approuter","level":"info","container_id":"10.36.197.14","component_type":"application","component_id":"b0af1343-4ee1-43a4-95fa-29c8c1310ed8","component_name":"MyRoiceadApps","component_instance":-1,"source_instance":-1,"organization_id":"bb47c507-d2c9-4296-89b6-f217520e4f04","organization_name":"Roicead GmbH","space_id":"bfce989b-242c-4264-9e2a-21dafdfc5822","space_name":"dev","context_id":"lvgnzk1i","msg":"Application router is listening on port: 8080"} (STDOUT, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:44:10.407#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-193###
+[PollStartAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:44:08.644171] Container became healthy (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:44:10.407#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.MyRoiceadApps.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-193###
+[PollStartAppStatusExecution] [MyRoiceadApps] b0af1343-4ee1-43a4-95fa-29c8c1310ed8 [2024-04-26T12:44:08.674715] Process became ready with guid b0af1343-4ee1-43a4-95fa-29c8c1310ed8 payload: {"instance"=>"56298f12-265a-4f75-7c46-385a", "index"=>0, "cell_id"=>"275eca76-9d51-4408-9e4a-5572e0a593ec", "ready"=>true, "version"=>"b30ecad1-7533-4a9f-b804-98beb773d753"} (STDOUT, API)#
+

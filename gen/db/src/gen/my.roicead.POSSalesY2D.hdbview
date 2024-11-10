@@ -1,0 +1,19 @@
+VIEW my_roicead_POSSalesY2D AS SELECT
+  header_0.SiteTrnID,
+  Site_2.PrimaryNetwork,
+  Site_2.SubNetwork,
+  Site_2.Site,
+  Site_2.Acronym,
+  Site_2.LocationGroup,
+  Site_2.SiteType,
+  header_0.MOP_TYPE,
+  header_0.SYS_AUDIT_NO,
+  header_0.TRN_TIMESTAMP,
+  Items_3.MATERIAL_MaterialId,
+  MATERIAL_4.MaterialGroup,
+  trans_1.Amount
+FROM ((((my_roicead_SitePosHeader AS header_0 INNER JOIN my_roicead_AmountPerPOSTrans AS trans_1 ON header_0.SiteTrnID = trans_1.SiteTrnID) LEFT JOIN my_roicead_SiteDetails AS Site_2 ON (header_0.Site_Site = Site_2.Site) AND (header_0.Site_SiteType = Site_2.SiteType)) LEFT JOIN my_roicead_SitePosItems AS Items_3 ON Items_3.SiteTrnID = header_0.SiteTrnID) LEFT JOIN my_roicead_Materials AS MATERIAL_4 ON Items_3.MATERIAL_MaterialId = MATERIAL_4.MaterialId)
+WHERE Year(header_0.TRN_TIMESTAMP) = '2022'
+WITH ASSOCIATIONS (
+  MANY TO ONE JOIN my_roicead_Materials AS MATERIAL ON (MATERIAL.MaterialId = MATERIAL_MaterialId)
+)

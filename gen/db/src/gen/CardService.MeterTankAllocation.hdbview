@@ -1,0 +1,11 @@
+VIEW CardService_MeterTankAllocation AS SELECT
+  MeterTankAllocation_0.Site,
+  MeterTankAllocation_0.SiteType,
+  MeterTankAllocation_0.MeterNum,
+  MeterTankAllocation_0.Valid_from,
+  MeterTankAllocation_0.TankNum,
+  MeterTankAllocation_0.Reason,
+  MeterTankAllocation_0.Regdate,
+  MeterTankAllocation_0.RegTime,
+  MeterTankAllocation_0.RegUser
+FROM my_roicead_MeterTankAllocation AS MeterTankAllocation_0

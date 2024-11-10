@@ -1,0 +1,15 @@
+VIEW CardService_MeterMaterialAllocation AS SELECT
+  MeterMaterialAllocation_0.Site,
+  MeterMaterialAllocation_0.SiteType,
+  MeterMaterialAllocation_0.MeterNum,
+  MeterMaterialAllocation_0.Valid_from,
+  MeterMaterialAllocation_0.MaterialId_MaterialId,
+  MeterMaterialAllocation_0.Reason,
+  MeterMaterialAllocation_0.Regdate,
+  MeterMaterialAllocation_0.RegTime,
+  MeterMaterialAllocation_0.RegUser
+FROM my_roicead_MeterMaterialAllocation AS MeterMaterialAllocation_0
+WITH ASSOCIATIONS (
+  MANY TO ONE JOIN CardService_Materials AS MaterialId ON (MaterialId.MaterialId = MaterialId_MaterialId),
+  MANY TO MANY JOIN CardService_Meters AS MeterGrp ON (MeterGrp.Site = Site)
+)

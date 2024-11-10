@@ -1,0 +1,23 @@
+COLUMN TABLE my_roicead_TankInventory (
+  createdAt TIMESTAMP,
+  createdBy NVARCHAR(255),
+  modifiedAt TIMESTAMP,
+  modifiedBy NVARCHAR(255),
+  ID NVARCHAR(10) NOT NULL,
+  Site NVARCHAR(10) NOT NULL,
+  TankNum NVARCHAR(10) NOT NULL,
+  MDATE DATE,
+  MTIME TIME,
+  MTYPE NVARCHAR(5),
+  MTZONE NVARCHAR(4),
+  MaterialId NVARCHAR(18),
+  MaterialDesc NVARCHAR(40),
+  MFLEVEL NVARCHAR(10),
+  MFUOM NVARCHAR(3),
+  MQUAN DECIMAL(15, 2),
+  MQUOM NVARCHAR(3),
+  Regdate DATE,
+  RegTime TIME,
+  RegUser NVARCHAR(50),
+  PRIMARY KEY(ID, Site, TankNum)
+)

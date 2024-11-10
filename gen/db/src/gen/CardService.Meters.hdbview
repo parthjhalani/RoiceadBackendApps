@@ -1,0 +1,29 @@
+VIEW CardService_Meters AS SELECT
+  Meters_0.Site,
+  Meters_0.SiteType,
+  Meters_0.MeterNum,
+  Meters_0.MeterDesc,
+  Meters_0.MeterFactor,
+  Meters_0.NumOfDigits,
+  Meters_0.NumOfDecimals,
+  Meters_0.MFUOM,
+  Meters_0.Status,
+  Meters_0.EQPMT_NO,
+  Meters_0.FUNCTLOC,
+  Meters_0.Bpno,
+  Meters_0.BpType,
+  Meters_0.DRAWNO,
+  Meters_0.SERIAL,
+  Meters_0.MODEL,
+  Meters_0.CONST_MONTH,
+  Meters_0.CONST_YEAR,
+  Meters_0.RecalibDate,
+  Meters_0.Regdate,
+  Meters_0.RegTime,
+  Meters_0.RegUser
+FROM my_roicead_Meters AS Meters_0
+WITH ASSOCIATIONS (
+  MANY TO MANY JOIN CardService_MeterReadings AS Inventory ON (Inventory.Site = Site AND Inventory.MeterNum = MeterNum),
+  MANY TO MANY JOIN CardService_MeterMaterialAllocation AS Material ON (Material.Site = Site AND Material.MeterNum = MeterNum AND Material.SiteType = SiteType),
+  MANY TO MANY JOIN CardService_MeterTankAllocation AS AllotedTanks ON (AllotedTanks.Site = Site AND AllotedTanks.MeterNum = MeterNum)
+)

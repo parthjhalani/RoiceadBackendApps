@@ -1,0 +1,7 @@
+VIEW my_roicead_POSBYSITE AS SELECT
+  POSAnalytics_0.Site,
+  sum(POSAnalytics_0.Amount) AS Amount,
+  POSAnalytics_0.TOTAMOUNT,
+  POSCount_1.COUNTOFTRANSACTIONS AS CountOfTrans
+FROM (my_roicead_POSANALYTICS AS POSAnalytics_0 INNER JOIN my_roicead_NOOFPOSTRANSBYSITE AS POSCount_1 ON POSAnalytics_0.Site = POSCount_1.SITE)
+GROUP BY POSAnalytics_0.Site, POSAnalytics_0.TOTAMOUNT, POSCount_1.COUNTOFTRANSACTIONS

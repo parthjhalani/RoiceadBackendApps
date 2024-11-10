@@ -1,0 +1,812 @@
+#2.0#2024 04 26 12:44:40.687#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:42:53.803615] Added process: "web" (STDOUT, API)#
+
+#2.0#2024 04 26 12:44:40.687#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:42:53.810550] Created app with guid 89593417-8a8d-49a7-b707-686d509183b2 (STDOUT, API)#
+
+#2.0#2024 04 26 12:44:40.687#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:42:54.043547] Updating process: "web" (STDOUT, API)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:42:54.177548] Scaling process: "web" (STDOUT, API)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:12.289837] Uploading app package for app with guid 89593417-8a8d-49a7-b707-686d509183b2 (STDOUT, API)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:12.472179] Updated app with guid 89593417-8a8d-49a7-b707-686d509183b2 ({"environment_variables"=>"[PRIVATE DATA HIDDEN]"}) (STDOUT, API)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:30.813321] Creating build for app with guid 89593417-8a8d-49a7-b707-686d509183b2 (STDOUT, API)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.421036] Downloading uas_dataflow_server_buildpack... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.421043] Downloading staticfile_buildpack... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.421044] Downloading go_buildpack... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.421064] Downloading sap_java_buildpack_1_90... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.431947] Downloading sap_java_buildpack_jakarta_2_4... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.448667] Downloaded staticfile_buildpack (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.448685] Downloading sap_java_buildpack_jakarta... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.450605] Downloaded sap_java_buildpack_1_90 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.450622] Downloading sap_java_buildpack_jakarta_2_6... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.452998] Downloaded go_buildpack (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.453014] Downloading sap_java_buildpack_jakarta_2_5... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.458414] Downloaded uas_dataflow_server_buildpack (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.458431] Downloading java_buildpack... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.466721] Downloaded sap_java_buildpack_jakarta (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.466744] Downloading nodejs_buildpack... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.467184] Downloaded sap_java_buildpack_jakarta_2_4 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.467200] Downloading zero_trust_sidecar_buildpack_1_1... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.468192] Downloaded sap_java_buildpack_jakarta_2_6 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.468210] Downloading zero_trust_sidecar_buildpack... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.475789] Downloaded java_buildpack (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.475805] Downloading zero_trust_sidecar_buildpack_1_0... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.485459] Downloaded zero_trust_sidecar_buildpack (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.485493] Downloading sap_java_buildpack_1_92... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.492326] Downloaded zero_trust_sidecar_buildpack_1_1 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.492349] Downloading php_buildpack... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.494262] Downloaded zero_trust_sidecar_buildpack_1_0 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.494279] Downloading python_buildpack... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.507933] Downloaded php_buildpack (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.507959] Downloading nginx_buildpack... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.510425] Downloaded sap_java_buildpack_1_92 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.510444] Downloading sap_java_buildpack... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.688#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.513683] Downloaded sap_java_buildpack_jakarta_2_5 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.689#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.513699] Downloading binary_buildpack... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.689#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.514256] Downloaded python_buildpack (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.689#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.514271] Downloading sap_java_buildpack_1_93... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.689#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.534217] Downloaded sap_java_buildpack_1_93 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.689#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.540251] Downloaded nodejs_buildpack (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.689#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.540501] Downloaded binary_buildpack (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.689#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.546127] Downloaded sap_java_buildpack (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.689#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.550056] Downloaded nginx_buildpack (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.689#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.550109] Cell 95b05fe3-c5bb-4fe2-966d-d17421ed86ab creating container for instance 7a5688ba-4753-4374-99f1-df07f89f35ed (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.689#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:31.973431] Security group rules were updated (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.689#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:32.026458] Cell 95b05fe3-c5bb-4fe2-966d-d17421ed86ab successfully created container for instance 7a5688ba-4753-4374-99f1-df07f89f35ed (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.689#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:32.668682] Downloading app package... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.689#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:38.523725] Downloaded app package (144.1M) (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.689#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:39.106832] -----> Nodejs Buildpack version 1.8.23 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.689#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:40.168934] -----> Bootstrapping python (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.689#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:40.168953] -----> Installing python 3.11.8 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:40.689#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-641###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:40.168974] Copy [/tmp/buildpacks/e897982aafb5bb6bda60c516cf76affe/dependencies/fa5f772263f0426e9f9558b20475e527/python_3.11.8_linux_x64_cflinuxfs4_dabff961.tgz] (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.828#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:43.726729] -----> Installing binaries (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.828#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:43.726771] engines.node (package.json): ^18 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.828#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:43.726775] engines.npm (package.json): unspecified (use default) (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.828#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:43.726891] -----> Installing node 18.19.1 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.828#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:43.727025] Copy [/tmp/buildpacks/e897982aafb5bb6bda60c516cf76affe/dependencies/6ad1d161a6e829ce5f18bef71bfc72bc/node_18.19.1_linux_x64_cflinuxfs4_dec9eb81.tgz] (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:45.723957] Using default npm version: 10.2.4 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:45.723976] -----> Installing yarn 1.22.19 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:45.724025] Copy [/tmp/buildpacks/e897982aafb5bb6bda60c516cf76affe/dependencies/0f06052381cbcef1593bd279ca3d9458/yarn_1.22.19_linux_noarch_any-stack_32d0e82e.tgz] (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:46.062039] Installed yarn 1.22.19 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:46.062057] -----> Creating runtime environment (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:46.063171] NODE_ENV=production (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:46.063191] NODE_HOME=/tmp/contents2968621632/deps/0/node (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:46.063194] NODE_MODULES_CACHE=true (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:46.063196] NODE_VERBOSE=false (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:46.063199] NPM_CONFIG_LOGLEVEL=error (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:46.063206] NPM_CONFIG_PRODUCTION=true (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:46.063213] -----> Building dependencies (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:46.063216] Prebuild detected (node_modules already exists) (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:46.063245] Rebuilding any native modules (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:47.038900] rebuilt dependencies successfully (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:47.039545] npm notice (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:47.039575] npm notice New minor version of npm available! 10.2.4 -> 10.6.0 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:47.039761] npm notice Changelog: <https://github.com/npm/cli/releases/tag/v10.6.0> (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:47.039790] npm notice Run `npm install -g npm@10.6.0` to update! (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:47.039884] npm notice (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:47.048038] Installing any new modules (package.json + package-lock.json) (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:47.968107] up to date in 674ms (STDOUT, STG)#
+
+#2.0#2024 04 26 12:44:50.829#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-198###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:44:49.610784] Contrast Security no credentials found. Will not write environment files. (STDOUT, STG)#
+
+#2.0#2024 04 26 12:45:21.018#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-756###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:20.367978] Exit status 0 (STDOUT, STG)#
+
+#2.0#2024 04 26 12:45:21.018#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-756###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:20.368010] Uploading droplet, build artifacts cache... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:45:21.018#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-756###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:20.368039] Uploading droplet... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:45:21.019#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-756###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:20.368056] Uploading build artifacts cache... (STDOUT, STG)#
+
+#2.0#2024 04 26 12:45:21.019#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-756###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:20.399728] Uploaded build artifacts cache (218B) (STDOUT, STG)#
+
+#2.0#2024 04 26 12:45:31.224#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-394###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:24.106566] Creating droplet for app with guid 89593417-8a8d-49a7-b707-686d509183b2 (STDOUT, API)#
+
+#2.0#2024 04 26 12:45:41.256#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-838###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:30.798987] Uploaded droplet (184.2M) (STDOUT, STG)#
+
+#2.0#2024 04 26 12:45:41.256#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-838###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:30.837983] Uploading complete (STDOUT, STG)#
+
+#2.0#2024 04 26 12:45:41.256#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-838###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:31.573053] Cell 95b05fe3-c5bb-4fe2-966d-d17421ed86ab stopping instance 7a5688ba-4753-4374-99f1-df07f89f35ed (STDOUT, STG)#
+
+#2.0#2024 04 26 12:45:41.256#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-838###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:31.573092] Cell 95b05fe3-c5bb-4fe2-966d-d17421ed86ab destroying container for instance 7a5688ba-4753-4374-99f1-df07f89f35ed (STDOUT, STG)#
+
+#2.0#2024 04 26 12:45:41.256#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.stageAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-838###
+[PollStageAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:33.153312] Cell 95b05fe3-c5bb-4fe2-966d-d17421ed86ab successfully destroyed container for instance 7a5688ba-4753-4374-99f1-df07f89f35ed (STDOUT, STG)#
+
+#2.0#2024 04 26 12:45:51.354#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-859###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:41.361314] Updated app with guid 89593417-8a8d-49a7-b707-686d509183b2 ({:droplet_guid=>"2c86a0ec-c63a-4097-9b96-6ea8ccf2493c"}) (STDOUT, API)#
+
+#2.0#2024 04 26 12:45:51.354#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-859###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:41.649989] Creating revision for app with guid 89593417-8a8d-49a7-b707-686d509183b2 (STDOUT, API)#
+
+#2.0#2024 04 26 12:45:51.354#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-859###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:41.694288] Starting app with guid 89593417-8a8d-49a7-b707-686d509183b2 (STDOUT, API)#
+
+#2.0#2024 04 26 12:45:51.354#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-859###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:42.099411] Cell 6a69a0e2-aefd-41c9-8b6d-0e570f9132a1 creating container for instance a4b81de9-e425-4c58-654d-c2b2 (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:45:51.354#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-859###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:42.620700] Security group rules were updated (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:45:51.354#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-859###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:42.675334] Cell 6a69a0e2-aefd-41c9-8b6d-0e570f9132a1 successfully created container for instance a4b81de9-e425-4c58-654d-c2b2 (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:45:51.354#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-859###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:43.239642] Downloading droplet... (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:46:01.398#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:51.365383] Downloaded droplet (184.2M) (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:46:01.398#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:51.365519] Starting health monitoring of container (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:46:01.398#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:51.434651] Invoking pre-start scripts. (STDOUT, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.398#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:51.645236] Invoking start command. (STDOUT, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.398#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:52.099349] > countservice@1.0.1 start (STDOUT, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.398#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:52.099368] > node server.js (STDOUT, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.398#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:52.141730] node:internal/modules/cjs/loader:1137 (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.398#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:52.141744] throw err; (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.398#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:52.141748] ^ (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.398#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:52.141752] Error: Cannot find module '@sap/xsjs' (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.398#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:52.141756] Require stack: (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:52.141762] - /home/vcap/app/server.js (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:52.141769] at Module._resolveFilename (node:internal/modules/cjs/loader:1134:15) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:52.141773] at Module._load (node:internal/modules/cjs/loader:975:27) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:52.141777] at Module.require (node:internal/modules/cjs/loader:1225:19) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:52.141781] at require (node:internal/modules/helpers:177:18) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:52.141785] at Object.<anonymous> (/home/vcap/app/server.js:4:13) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:52.141788] at Module._compile (node:internal/modules/cjs/loader:1356:14) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:52.141791] at Module._extensions..js (node:internal/modules/cjs/loader:1414:10) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:52.141795] at Module.load (node:internal/modules/cjs/loader:1197:32) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:52.141798] at Module._load (node:internal/modules/cjs/loader:1013:12) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:52.141801] at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:128:12) { (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:52.141804] code: 'MODULE_NOT_FOUND', (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:52.141808] requireStack: [ '/home/vcap/app/server.js' ] (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:52.141811] } (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:52.141814] Node.js v18.19.1 (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:52.172503] Exit status 1 (STDOUT, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:58.595732] Process has crashed with type: "web" (STDOUT, API)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:58.602996] Cell 6a69a0e2-aefd-41c9-8b6d-0e570f9132a1 stopping instance a4b81de9-e425-4c58-654d-c2b2 (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:58.603032] Cell 6a69a0e2-aefd-41c9-8b6d-0e570f9132a1 destroying container for instance a4b81de9-e425-4c58-654d-c2b2 (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:58.609474] App instance exited with guid 89593417-8a8d-49a7-b707-686d509183b2 payload: {"instance"=>"a4b81de9-e425-4c58-654d-c2b2", "index"=>0, "cell_id"=>"6a69a0e2-aefd-41c9-8b6d-0e570f9132a1", "reason"=>"CRASHED", "exit_description"=>"APP/PROC/WEB: Exited with status 1", "crash_count"=>1, "crash_timestamp"=>1714135558575706654, "version"=>"348e8f1e-7190-43b7-9e81-7c0df2039f25"} (STDOUT, API)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:58.763201] Exit status 137 (STDOUT, PROXY)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:58.856690] Cell 24b2a8bb-0dde-4e89-a32c-019a2e39be04 creating container for instance d305adb8-9cb8-47d4-4382-295a (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:59.349240] Security group rules were updated (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:59.410377] Cell 24b2a8bb-0dde-4e89-a32c-019a2e39be04 successfully created container for instance d305adb8-9cb8-47d4-4382-295a (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:46:01.399#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:45:59.765692] Downloading droplet... (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:46:01.400#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-876###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:00.297730] Cell 6a69a0e2-aefd-41c9-8b6d-0e570f9132a1 successfully destroyed container for instance a4b81de9-e425-4c58-654d-c2b2 (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:07.957645] Downloaded droplet (184.2M) (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:07.957784] Starting health monitoring of container (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.027183] Invoking pre-start scripts. (STDOUT, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.244856] Invoking start command. (STDOUT, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.697324] > countservice@1.0.1 start (STDOUT, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.697340] > node server.js (STDOUT, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.739512] node:internal/modules/cjs/loader:1137 (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.739535] throw err; (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.739543] ^ (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.739547] Error: Cannot find module '@sap/xsjs' (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.739550] Require stack: (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.739554] - /home/vcap/app/server.js (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.739560] at Module._resolveFilename (node:internal/modules/cjs/loader:1134:15) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.739564] at Module._load (node:internal/modules/cjs/loader:975:27) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.739568] at Module.require (node:internal/modules/cjs/loader:1225:19) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.739571] at require (node:internal/modules/helpers:177:18) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.739575] at Object.<anonymous> (/home/vcap/app/server.js:4:13) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.739585] at Module._compile (node:internal/modules/cjs/loader:1356:14) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.739592] at Module._extensions..js (node:internal/modules/cjs/loader:1414:10) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.739600] at Module.load (node:internal/modules/cjs/loader:1197:32) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.739605] at Module._load (node:internal/modules/cjs/loader:1013:12) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.739609] at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:128:12) { (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.739613] code: 'MODULE_NOT_FOUND', (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.739616] requireStack: [ '/home/vcap/app/server.js' ] (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.739619] } (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.739632] Node.js v18.19.1 (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:11.784#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-893###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:08.769653] Exit status 1 (STDOUT, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:21.674#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-342###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:15.251696] Cell 24b2a8bb-0dde-4e89-a32c-019a2e39be04 stopping instance d305adb8-9cb8-47d4-4382-295a (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:46:21.674#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-342###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:15.251745] Cell 24b2a8bb-0dde-4e89-a32c-019a2e39be04 destroying container for instance d305adb8-9cb8-47d4-4382-295a (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:46:21.674#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-342###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:15.254820] Process has crashed with type: "web" (STDOUT, API)#
+
+#2.0#2024 04 26 12:46:21.674#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-342###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:15.266982] App instance exited with guid 89593417-8a8d-49a7-b707-686d509183b2 payload: {"instance"=>"d305adb8-9cb8-47d4-4382-295a", "index"=>0, "cell_id"=>"24b2a8bb-0dde-4e89-a32c-019a2e39be04", "reason"=>"CRASHED", "exit_description"=>"APP/PROC/WEB: Exited with status 1", "crash_count"=>2, "crash_timestamp"=>1714135575231159367, "version"=>"348e8f1e-7190-43b7-9e81-7c0df2039f25"} (STDOUT, API)#
+
+#2.0#2024 04 26 12:46:21.674#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-342###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:15.417061] Exit status 137 (STDOUT, PROXY)#
+
+#2.0#2024 04 26 12:46:21.674#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-342###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:15.505314] Cell ce8c7df4-c4f3-4734-85d8-7a7592b100e6 creating container for instance bc151a78-ea0c-4bc2-6169-9e31 (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:46:21.674#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-342###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:15.960275] Security group rules were updated (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:46:21.674#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-342###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:16.007139] Cell ce8c7df4-c4f3-4734-85d8-7a7592b100e6 successfully created container for instance bc151a78-ea0c-4bc2-6169-9e31 (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:46:21.674#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-342###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:16.317867] Downloading droplet... (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:46:21.675#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-342###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:16.817466] Cell 24b2a8bb-0dde-4e89-a32c-019a2e39be04 successfully destroyed container for instance d305adb8-9cb8-47d4-4382-295a (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:46:31.923#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:24.557051] Downloaded droplet (184.2M) (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:46:31.924#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:24.557173] Starting health monitoring of container (STDOUT, CELL)#
+
+#2.0#2024 04 26 12:46:31.924#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:24.630659] Invoking pre-start scripts. (STDOUT, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:31.924#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:24.870738] Invoking start command. (STDOUT, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:31.924#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:25.344940] > countservice@1.0.1 start (STDOUT, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:31.924#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:25.344961] > node server.js (STDOUT, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:31.924#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:25.388055] node:internal/modules/cjs/loader:1137 (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:31.924#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:25.388078] throw err; (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:31.924#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:25.388082] ^ (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:31.924#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:25.388092] Error: Cannot find module '@sap/xsjs' (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:31.924#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:25.388096] Require stack: (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:31.924#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:25.388100] - /home/vcap/app/server.js (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:31.924#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:25.388106] at Module._resolveFilename (node:internal/modules/cjs/loader:1134:15) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:31.924#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:25.388111] at Module._load (node:internal/modules/cjs/loader:975:27) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:31.924#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:25.388115] at Module.require (node:internal/modules/cjs/loader:1225:19) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:31.924#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:25.388132] at require (node:internal/modules/helpers:177:18) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:31.924#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:25.388137] at Object.<anonymous> (/home/vcap/app/server.js:4:13) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:31.924#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:25.388140] at Module._compile (node:internal/modules/cjs/loader:1356:14) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:31.924#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:25.388144] at Module._extensions..js (node:internal/modules/cjs/loader:1414:10) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:31.924#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:25.388147] at Module.load (node:internal/modules/cjs/loader:1197:32) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:31.924#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:25.388152] at Module._load (node:internal/modules/cjs/loader:1013:12) (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:31.924#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:25.388157] at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:128:12) { (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:31.924#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:25.388160] code: 'MODULE_NOT_FOUND', (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:31.924#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:25.388181] requireStack: [ '/home/vcap/app/server.js' ] (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:31.924#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:25.388186] } (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:31.925#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:25.388190] Node.js v18.19.1 (STDERR, APP/PROC/WEB)#
+
+#2.0#2024 04 26 12:46:31.925#Z#DEBUG#com.sap.cloud.lm.sl.xs2.6f85a037-03ca-11ef-8458-eeee0a8ac706.countservice.startAppTask#
+######org.cloudfoundry.multiapps.controller.persistence.services.ProcessLogger########flowable-async-job-executor-thread-435###
+[PollStartAppStatusExecution] [countservice] 89593417-8a8d-49a7-b707-686d509183b2 [2024-04-26T12:46:25.417065] Exit status 1 (STDOUT, APP/PROC/WEB)#
+

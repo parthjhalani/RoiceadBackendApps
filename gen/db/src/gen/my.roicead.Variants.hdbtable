@@ -1,0 +1,17 @@
+COLUMN TABLE my_roicead_Variants (
+  VariantId NVARCHAR(15) NOT NULL,
+  Username NVARCHAR(40),
+  appName NVARCHAR(10),
+  CardToken NVARCHAR(300),
+  Token3 NVARCHAR(300),
+  Token4 NVARCHAR(300),
+  Token5 NVARCHAR(300),
+  isDefault BOOLEAN,
+  isApplyAuto BOOLEAN,
+  VaraintName NVARCHAR(15),
+  TransToken NVARCHAR(300),
+  searchString NVARCHAR(30),
+  ConfirmedDarwings NVARCHAR(30),
+  productSearch NVARCHAR(30),
+  PRIMARY KEY(VariantId)
+)

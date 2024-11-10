@@ -1,0 +1,14 @@
+VIEW CardService_SiteTimings AS SELECT
+  SiteTimings_0.createdAt,
+  SiteTimings_0.createdBy,
+  SiteTimings_0.modifiedAt,
+  SiteTimings_0.modifiedBy,
+  SiteTimings_0.counter,
+  SiteTimings_0.Site,
+  SiteTimings_0.Hours_Type,
+  SiteTimings_0.Hours_Day,
+  SiteTimings_0.Day_no,
+  SiteTimings_0.Hours_From,
+  SiteTimings_0.Hours_To,
+  SiteTimings_0.flag_24_7
+FROM my_roicead_SiteTimings AS SiteTimings_0

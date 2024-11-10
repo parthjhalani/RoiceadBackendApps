@@ -1,0 +1,10 @@
+VIEW CardService_TankInventoryVol AS SELECT
+  VOLAGG_0.MaterialDesc,
+  VOLAGG_0.MQUAN,
+  VOLAGG_0.MQUOM,
+  VOLAGG_0.Tarlvl_vol,
+  VOLAGG_0.BTMSAF_VOL,
+  VOLAGG_0.Maxcap_vol,
+  VOLAGG_0.TargetVolPerecent,
+  VOLAGG_0.ActualVolPerecent
+FROM my_roicead_VOLAGG AS VOLAGG_0

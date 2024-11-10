@@ -1,0 +1,13 @@
+VIEW CardService_Materials AS SELECT
+  Materials_0.MaterialId,
+  Materials_0.MaterialDesc,
+  Materials_0.MaterialCode,
+  Materials_0.MaterialGroup,
+  Materials_0.MaterialCategory,
+  Materials_0.Regdate,
+  Materials_0.RegTime,
+  Materials_0.RegUser
+FROM my_roicead_Materials AS Materials_0
+WITH ASSOCIATIONS (
+  MANY TO MANY JOIN CardService_MaterialAllocation AS Materials ON (Materials.MaterialId_MaterialId = MaterialId)
+)

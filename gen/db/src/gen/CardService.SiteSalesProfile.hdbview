@@ -1,0 +1,12 @@
+VIEW CardService_SiteSalesProfile AS SELECT
+  SiteSalesProfile_0.Profile,
+  SiteSalesProfile_0.Profile_Time,
+  SiteSalesProfile_0.Monday,
+  SiteSalesProfile_0.Tuesday,
+  SiteSalesProfile_0.Wednesday,
+  SiteSalesProfile_0.Thursday,
+  SiteSalesProfile_0.Friday,
+  SiteSalesProfile_0.Saturday,
+  SiteSalesProfile_0.Sunday,
+  SiteSalesProfile_0.PublicHoliday
+FROM my_roicead_SiteSalesProfile AS SiteSalesProfile_0

@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "@sap/xsenv": "^5.1.0",
+    "@sap/async-xsjs" : "^1.0.6"
+  },
+  "description": "my description",
+  
+  "files": [],
+  "main": "server.js",
+  "name": "countservice",
+  "scripts": {
+    "start": "node --experimental-vm-modules server.js",
+    "test": "node testrun.js"
+  },
+  "engines": {
+    "node": "^18"
+  },
+  "version": "1.0.1",
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    }
+  }
+}

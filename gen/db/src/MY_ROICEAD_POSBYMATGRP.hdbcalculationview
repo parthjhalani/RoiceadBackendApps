@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="MY_ROICEAD_POSBYMATGRP" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="MY_ROICEAD_POSBYMATGRP.hdbcalculationview"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="MY_ROICEAD_SITEPOSITEMS">
+    <resourceUri>MY_ROICEAD_SITEPOSITEMS</resourceUri>
+  </DataSource>
+  <DataSource id="MY_ROICEAD_SITEPOSHEADER">
+    <resourceUri>MY_ROICEAD_SITEPOSHEADER</resourceUri>
+  </DataSource>
+  <DataSource id="MY_ROICEAD_MATERIALS">
+    <resourceUri>MY_ROICEAD_MATERIALS</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="SITETRNID"/>
+      <viewAttribute id="AMOUNT"/>
+      <viewAttribute id="CURRENCY"/>
+      <viewAttribute id="MATERIAL_MATERIALID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="MY_ROICEAD_SITEPOSITEMS"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2">
+    <viewAttributes>
+      <viewAttribute id="SITETRNID"/>
+      <viewAttribute id="TRN_TIMESTAMP"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="MY_ROICEAD_SITEPOSHEADER"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_3">
+    <viewAttributes>
+      <viewAttribute id="MATERIALID"/>
+      <viewAttribute id="MATERIALGROUP"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="MY_ROICEAD_MATERIALS"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_1" cardinality="CN_N" joinType="inner" multiJoinNode="Join_1" multiJoinCentralTable="Projection_1" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="AMOUNT" aggregationType="sum"/>
+      <viewAttribute id="CURRENCY"/>
+      <viewAttribute id="MATERIALGROUP"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="AMOUNT" source="AMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
+    </input>
+    <input node="Projection_3">
+      <mapping xsi:type="Calculation:AttributeMapping" target="MATERIALGROUP" source="MATERIALGROUP"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_2" cardinality="CN_N" joinType="inner" multiJoinNode="Join_1" multiJoinCentralTable="Projection_1" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="AMOUNT" aggregationType="sum"/>
+      <viewAttribute id="CURRENCY"/>
+      <viewAttribute id="MATERIALGROUP"/>
+      <viewAttribute id="TRN_TIMESTAMP" aggregationType="min"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="YEAROFTRANS" datatype="NVARCHAR" length="4" expressionLanguage="SQL">
+        <formula>EXTRACT_YEAR(&quot;TRN_TIMESTAMP&quot;)</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="Join_1_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="AMOUNT" source="AMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MATERIALGROUP" source="MATERIALGROUP"/>
+    </input>
+    <input node="Projection_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="TRN_TIMESTAMP" source="TRN_TIMESTAMP"/>
+    </input>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1_2">
+  <attributes>
+    <attribute id="CURRENCY" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CURRENCY"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="CURRENCY"/>
+    </attribute>
+    <attribute id="MATERIALGROUP" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MATERIALGROUP"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="MATERIALGROUP"/>
+    </attribute>
+    <attribute id="YEAROFTRANS" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="YEAROFTRANS"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="YEAROFTRANS"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="AMOUNT" order="1" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="AMOUNT"/>
+      <measureMapping columnObjectName="Join_1_2" columnName="AMOUNT"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="100" y="105"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="-28" y="372"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="245" y="372"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_3" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="303" y="283"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="79" y="283"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_2" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="178"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="211"/>
+    </shape>
+    <shape modelObjectName="Projection_3" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="315" y="126"/>
+      <rectangleSize width="180"/>
+    </shape></shapes>
+</layout>
+</Calculation:scenario>

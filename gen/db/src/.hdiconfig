@@ -1,0 +1,19 @@
+{
+    
+    "file_suffixes": {
+       
+        "hdbcalculationview": {
+            "plugin_name": "com.sap.hana.di.calculationview"
+        },
+        "hdbview": {
+            "plugin_name": "com.sap.hana.di.view"
+        },
+        "hdbmigrationtable": {
+            "plugin_name": "com.sap.hana.di.table.migration"
+        },
+        "hdbprocedure": {
+            "plugin_name": "com.sap.hana.di.procedure"
+        }
+        
+    }
+}

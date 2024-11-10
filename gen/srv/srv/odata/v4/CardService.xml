@@ -1,0 +1,2727 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Aggregation.V1.xml">
+    <edmx:Include Alias="Aggregation" Namespace="Org.OData.Aggregation.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Analytics.xml">
+    <edmx:Include Alias="Analytics" Namespace="com.sap.vocabularies.Analytics.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+    <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+    <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+    <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+  </edmx:Reference>
+  <edmx:DataServices>
+    <Schema Namespace="CardService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <EntityContainer Name="EntityContainer">
+        <EntitySet Name="Cards" EntityType="CardService.Cards">
+          <NavigationPropertyBinding Path="Drawings" Target="Drawings"/>
+        </EntitySet>
+        <EntitySet Name="Drawings" EntityType="CardService.Drawings">
+          <NavigationPropertyBinding Path="Card" Target="Cards"/>
+        </EntitySet>
+        <EntitySet Name="Variants" EntityType="CardService.Variants"/>
+        <EntitySet Name="BusinessPartner" EntityType="CardService.BusinessPartner"/>
+        <EntitySet Name="SiteDetails" EntityType="CardService.SiteDetails">
+          <NavigationPropertyBinding Path="SiteTimings" Target="SiteTimings"/>
+          <NavigationPropertyBinding Path="SiteProfileAllocation" Target="SiteProfileAllocation"/>
+          <NavigationPropertyBinding Path="Tanks" Target="Tanks"/>
+          <NavigationPropertyBinding Path="Meters" Target="Meters"/>
+        </EntitySet>
+        <EntitySet Name="Materials" EntityType="CardService.Materials">
+          <NavigationPropertyBinding Path="Materials" Target="MaterialAllocation"/>
+        </EntitySet>
+        <EntitySet Name="Tanks" EntityType="CardService.Tanks">
+          <NavigationPropertyBinding Path="Material" Target="MaterialAllocation"/>
+          <NavigationPropertyBinding Path="Inventory" Target="TankInventory"/>
+          <NavigationPropertyBinding Path="Reconciliation" Target="Reconciliation"/>
+        </EntitySet>
+        <EntitySet Name="MaterialAllocation" EntityType="CardService.MaterialAllocation">
+          <NavigationPropertyBinding Path="MaterialId" Target="Materials"/>
+          <NavigationPropertyBinding Path="TankGrp" Target="Tanks"/>
+        </EntitySet>
+        <EntitySet Name="TankInventory" EntityType="CardService.TankInventory"/>
+        <EntitySet Name="Meters" EntityType="CardService.Meters">
+          <NavigationPropertyBinding Path="Inventory" Target="MeterReadings"/>
+          <NavigationPropertyBinding Path="Material" Target="MeterMaterialAllocation"/>
+          <NavigationPropertyBinding Path="AllotedTanks" Target="MeterTankAllocation"/>
+        </EntitySet>
+        <EntitySet Name="MeterMaterialAllocation" EntityType="CardService.MeterMaterialAllocation">
+          <NavigationPropertyBinding Path="MaterialId" Target="Materials"/>
+          <NavigationPropertyBinding Path="MeterGrp" Target="Meters"/>
+        </EntitySet>
+        <EntitySet Name="MeterTankAllocation" EntityType="CardService.MeterTankAllocation"/>
+        <EntitySet Name="MeterReadings" EntityType="CardService.MeterReadings"/>
+        <EntitySet Name="Reconciliation" EntityType="CardService.Reconciliation"/>
+        <EntitySet Name="ForecastCalculation" EntityType="CardService.ForecastCalculation"/>
+        <EntitySet Name="DemandForecast" EntityType="CardService.DemandForecast">
+          <NavigationPropertyBinding Path="Site" Target="SiteDetails"/>
+          <NavigationPropertyBinding Path="Material" Target="Materials"/>
+        </EntitySet>
+        <EntitySet Name="forecastDemand" EntityType="CardService.forecastDemand"/>
+        <EntitySet Name="SitePosDetails" EntityType="CardService.SitePosDetails">
+          <NavigationPropertyBinding Path="Site" Target="SiteDetails"/>
+          <NavigationPropertyBinding Path="Items" Target="SitePosItems"/>
+        </EntitySet>
+        <EntitySet Name="SitePosItems" EntityType="CardService.SitePosItems">
+          <NavigationPropertyBinding Path="MATERIAL" Target="Materials"/>
+        </EntitySet>
+        <EntitySet Name="SiteTimings" EntityType="CardService.SiteTimings"/>
+        <EntitySet Name="SiteSalesProfile" EntityType="CardService.SiteSalesProfile"/>
+        <EntitySet Name="SiteProfileAllocation" EntityType="CardService.SiteProfileAllocation">
+          <NavigationPropertyBinding Path="SiteSalesProfile" Target="SiteSalesProfile"/>
+          <NavigationPropertyBinding Path="PublicHolidayProfile" Target="PublicHolidayProfile"/>
+        </EntitySet>
+        <EntitySet Name="PublicHolidayProfile" EntityType="CardService.PublicHolidayProfile"/>
+        <EntitySet Name="ReplenishmentOrders" EntityType="CardService.ReplenishmentOrders">
+          <NavigationPropertyBinding Path="Site" Target="SiteDetails"/>
+          <NavigationPropertyBinding Path="Suppl_Mat" Target="Materials"/>
+        </EntitySet>
+        <EntitySet Name="CreatedReplOrders" EntityType="CardService.CreatedReplOrders"/>
+        <EntitySet Name="InventoryData" EntityType="CardService.InventoryData">
+          <NavigationPropertyBinding Path="Inventory" Target="TankInventory"/>
+          <NavigationPropertyBinding Path="ForecastCalculation" Target="ForecastCalculation"/>
+        </EntitySet>
+        <EntitySet Name="TankInventoryVol" EntityType="CardService.TankInventoryVol"/>
+        <EntitySet Name="AggByVolume" EntityType="CardService.AggByVolume"/>
+        <EntitySet Name="VOLBYPROD" EntityType="CardService.VOLBYPROD"/>
+        <EntitySet Name="CRITICALTANK" EntityType="CardService.CRITICALTANK"/>
+        <EntitySet Name="CARDSANALYTICS" EntityType="CardService.CARDSANALYTICS"/>
+        <EntitySet Name="ACTIVECARDS" EntityType="CardService.ACTIVECARDS"/>
+        <EntitySet Name="SalesByProd" EntityType="CardService.SalesByProd"/>
+        <EntitySet Name="SalesByCards" EntityType="CardService.SalesByCards"/>
+        <EntitySet Name="SalesByCardNum" EntityType="CardService.SalesByCardNum"/>
+        <EntitySet Name="COUNTBYSALESNTRANS" EntityType="CardService.COUNTBYSALESNTRANS"/>
+        <EntitySet Name="SalesPerMonthByProd" EntityType="CardService.SalesPerMonthByProd"/>
+        <EntitySet Name="POSSalesY2D" EntityType="CardService.POSSalesY2D">
+          <NavigationPropertyBinding Path="MATERIAL" Target="Materials"/>
+        </EntitySet>
+        <EntitySet Name="Orders" EntityType="CardService.Orders"/>
+        <EntitySet Name="PriorityOrders" EntityType="CardService.PriorityOrders"/>
+        <EntitySet Name="POSSales" EntityType="CardService.POSSales">
+          <NavigationPropertyBinding Path="MATERIAL" Target="Materials"/>
+        </EntitySet>
+        <EntitySet Name="POSANALYTICS" EntityType="CardService.POSANALYTICS"/>
+        <EntitySet Name="POSBYMATGRPVIEW" EntityType="CardService.POSBYMATGRPVIEW"/>
+        <EntitySet Name="POSBYPRIMNW" EntityType="CardService.POSBYPRIMNW"/>
+        <EntitySet Name="POSBYPRIMNWBYYEAR" EntityType="CardService.POSBYPRIMNWBYYEAR"/>
+        <EntitySet Name="POSBYMATGRPYEARLY" EntityType="CardService.POSBYMATGRPYEARLY"/>
+        <EntitySet Name="POSBYMOP" EntityType="CardService.POSBYMOP"/>
+        <EntitySet Name="POSBYSITE" EntityType="CardService.POSBYSITE"/>
+        <ActionImport Name="UploadTableData" Action="CardService.UploadTableData"/>
+      </EntityContainer>
+      <EntityType Name="Cards">
+        <Key>
+          <PropertyRef Name="CardNum"/>
+        </Key>
+        <Property Name="CardNum" Type="Edm.String" MaxLength="20" Nullable="false"/>
+        <Property Name="SupplierName" Type="Edm.String" MaxLength="40"/>
+        <Property Name="TypeName" Type="Edm.String" MaxLength="20"/>
+        <Property Name="Driver" Type="Edm.String" MaxLength="40"/>
+        <Property Name="VehRegNum" Type="Edm.String" MaxLength="15"/>
+        <Property Name="Customer" Type="Edm.String" MaxLength="10"/>
+        <Property Name="CustomerName" Type="Edm.String" MaxLength="40"/>
+        <Property Name="SalesOrgName" Type="Edm.String" MaxLength="20"/>
+        <Property Name="SalesOffName" Type="Edm.String" MaxLength="20"/>
+        <Property Name="Status" Type="Edm.String" MaxLength="10"/>
+        <Property Name="ExpiryDate" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="BlockDate" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="BlockReason" Type="Edm.String" MaxLength="20"/>
+        <Property Name="CancelDate" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="CancelReason" Type="Edm.String" MaxLength="20"/>
+        <Property Name="IssueDate" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="OrigIssueDate" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="Bpno" Type="Edm.String" MaxLength="10"/>
+        <NavigationProperty Name="Drawings" Type="Collection(CardService.Drawings)" Partner="Card"/>
+      </EntityType>
+      <EntityType Name="Drawings">
+        <Key>
+          <PropertyRef Name="TransactId"/>
+        </Key>
+        <Property Name="TransactId" Type="Edm.String" MaxLength="20" Nullable="false"/>
+        <NavigationProperty Name="Card" Type="CardService.Cards" Partner="Drawings">
+          <ReferentialConstraint Property="Card_CardNum" ReferencedProperty="CardNum"/>
+        </NavigationProperty>
+        <Property Name="Card_CardNum" Type="Edm.String" MaxLength="20"/>
+        <Property Name="StationId" Type="Edm.String" MaxLength="10"/>
+        <Property Name="StationAddress" Type="Edm.String" MaxLength="60"/>
+        <Property Name="Pump" Type="Edm.String" MaxLength="3"/>
+        <Property Name="Terminal" Type="Edm.String" MaxLength="5"/>
+        <Property Name="AuthorizationID" Type="Edm.String" MaxLength="10"/>
+        <Property Name="ReceiptNo" Type="Edm.String" MaxLength="5"/>
+        <Property Name="IsConfirmed" Type="Edm.Boolean"/>
+        <Property Name="IsInvoiced" Type="Edm.Boolean"/>
+        <Property Name="TransactDate" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="Product" Type="Edm.String" MaxLength="20"/>
+        <Property Name="Quantity" Type="Edm.Decimal" Precision="5" Scale="2"/>
+        <Property Name="QuantityUOM" Type="Edm.String" MaxLength="3"/>
+        <Property Name="Price" Type="Edm.Decimal" Precision="5" Scale="2"/>
+        <Property Name="PriceType" Type="Edm.String" MaxLength="20"/>
+        <Property Name="PriceCurrency" Type="Edm.String" MaxLength="3"/>
+        <Property Name="NetValue" Type="Edm.Decimal" Precision="5" Scale="2"/>
+        <Property Name="GrossValue" Type="Edm.Decimal" Precision="13" Scale="2"/>
+        <Property Name="ValueCurrency" Type="Edm.String" MaxLength="3"/>
+        <Property Name="VatPercent" Type="Edm.String" MaxLength="5"/>
+        <Property Name="VatValue" Type="Edm.String" MaxLength="5"/>
+      </EntityType>
+      <EntityType Name="Variants">
+        <Key>
+          <PropertyRef Name="VariantId"/>
+        </Key>
+        <Property Name="VariantId" Type="Edm.String" MaxLength="15" Nullable="false"/>
+        <Property Name="Username" Type="Edm.String" MaxLength="40"/>
+        <Property Name="appName" Type="Edm.String" MaxLength="10"/>
+        <Property Name="CardToken" Type="Edm.String" MaxLength="300"/>
+        <Property Name="Token3" Type="Edm.String" MaxLength="300"/>
+        <Property Name="Token4" Type="Edm.String" MaxLength="300"/>
+        <Property Name="Token5" Type="Edm.String" MaxLength="300"/>
+        <Property Name="isDefault" Type="Edm.Boolean"/>
+        <Property Name="isApplyAuto" Type="Edm.Boolean"/>
+        <Property Name="VaraintName" Type="Edm.String" MaxLength="15"/>
+        <Property Name="TransToken" Type="Edm.String" MaxLength="300"/>
+        <Property Name="searchString" Type="Edm.String" MaxLength="30"/>
+        <Property Name="ConfirmedDarwings" Type="Edm.String" MaxLength="30"/>
+        <Property Name="productSearch" Type="Edm.String" MaxLength="30"/>
+      </EntityType>
+      <EntityType Name="BusinessPartner">
+        <Key>
+          <PropertyRef Name="Bpno"/>
+          <PropertyRef Name="BpType"/>
+        </Key>
+        <Property Name="Bpno" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="BpType" Type="Edm.String" MaxLength="4" Nullable="false"/>
+        <Property Name="Ext_Bp" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Acronym" Type="Edm.String" MaxLength="20"/>
+        <Property Name="Name1" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Name2" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Name3" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Name4" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Street1" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Street2" Type="Edm.String" MaxLength="35"/>
+        <Property Name="HouseNum" Type="Edm.String" MaxLength="6"/>
+        <Property Name="Floor" Type="Edm.String" MaxLength="3"/>
+        <Property Name="City" Type="Edm.String" MaxLength="35"/>
+        <Property Name="District" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Country" Type="Edm.String" MaxLength="18"/>
+        <Property Name="Langu" Type="Edm.String" MaxLength="3"/>
+        <Property Name="ZipCode" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Phone" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Mobile" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Email" Type="Edm.String" MaxLength="50"/>
+        <Property Name="ContactName" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Role" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Job" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Dptmt" Type="Edm.String" MaxLength="35"/>
+        <Property Name="ValidFrom" Type="Edm.Date"/>
+        <Property Name="ValidTo" Type="Edm.Date"/>
+        <Property Name="Status" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Regdate" Type="Edm.Date"/>
+        <Property Name="RegTime" Type="Edm.TimeOfDay"/>
+        <Property Name="RegUser" Type="Edm.String" MaxLength="50"/>
+      </EntityType>
+      <EntityType Name="SiteDetails">
+        <Key>
+          <PropertyRef Name="Site"/>
+          <PropertyRef Name="SiteType"/>
+        </Key>
+        <Property Name="Site" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="SiteType" Type="Edm.String" MaxLength="5" Nullable="false"/>
+        <Property Name="Ext_Bp" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Acronym" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Name1" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Name2" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Name3" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Name4" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Street1" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Street2" Type="Edm.String" MaxLength="35"/>
+        <Property Name="HouseNum" Type="Edm.String" MaxLength="6"/>
+        <Property Name="Floor" Type="Edm.String" MaxLength="3"/>
+        <Property Name="City" Type="Edm.String" MaxLength="35"/>
+        <Property Name="District" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Country" Type="Edm.String" MaxLength="18"/>
+        <Property Name="Langu" Type="Edm.String" MaxLength="3"/>
+        <Property Name="ZipCode" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Phone" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Mobile" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Email" Type="Edm.String" MaxLength="50"/>
+        <Property Name="ContactName" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Role" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Job" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Dptmt" Type="Edm.String" MaxLength="35"/>
+        <Property Name="ValidFrom" Type="Edm.Date"/>
+        <Property Name="ValidTo" Type="Edm.Date"/>
+        <Property Name="Latitude" Type="Edm.String" MaxLength="13"/>
+        <Property Name="Longitude" Type="Edm.String" MaxLength="13"/>
+        <Property Name="Status" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Regdate" Type="Edm.Date"/>
+        <Property Name="RegTime" Type="Edm.TimeOfDay"/>
+        <Property Name="RegUser" Type="Edm.String" MaxLength="50"/>
+        <Property Name="PrimaryNetwork" Type="Edm.String" MaxLength="50"/>
+        <Property Name="SubNetwork" Type="Edm.String" MaxLength="50"/>
+        <Property Name="LocationGroup" Type="Edm.String" MaxLength="50"/>
+        <NavigationProperty Name="SiteTimings" Type="Collection(CardService.SiteTimings)"/>
+        <NavigationProperty Name="SiteProfileAllocation" Type="Collection(CardService.SiteProfileAllocation)"/>
+        <NavigationProperty Name="Tanks" Type="Collection(CardService.Tanks)"/>
+        <NavigationProperty Name="Meters" Type="Collection(CardService.Meters)"/>
+      </EntityType>
+      <EntityType Name="Materials">
+        <Key>
+          <PropertyRef Name="MaterialId"/>
+        </Key>
+        <Property Name="MaterialId" Type="Edm.String" MaxLength="18" Nullable="false"/>
+        <Property Name="MaterialDesc" Type="Edm.String" MaxLength="40"/>
+        <Property Name="MaterialCode" Type="Edm.String" MaxLength="18"/>
+        <Property Name="MaterialGroup" Type="Edm.String" MaxLength="25"/>
+        <Property Name="MaterialCategory" Type="Edm.String" MaxLength="30"/>
+        <Property Name="Regdate" Type="Edm.Date"/>
+        <Property Name="RegTime" Type="Edm.TimeOfDay"/>
+        <Property Name="RegUser" Type="Edm.String" MaxLength="128"/>
+        <NavigationProperty Name="Materials" Type="Collection(CardService.MaterialAllocation)" Partner="MaterialId"/>
+      </EntityType>
+      <EntityType Name="Tanks">
+        <Key>
+          <PropertyRef Name="Site"/>
+          <PropertyRef Name="SiteType"/>
+          <PropertyRef Name="TankNum"/>
+        </Key>
+        <Property Name="Site" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="SiteType" Type="Edm.String" MaxLength="5" Nullable="false"/>
+        <Property Name="TankNum" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="Soc_Class" Type="Edm.String" MaxLength="20"/>
+        <Property Name="Tank_Grp" Type="Edm.String" MaxLength="5"/>
+        <Property Name="Maxcap_vol" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="Topsafe_vol" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="Tarlvl_vol" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="ORDLVL_VOL" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="BTMSAF_VOL" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="UNPCAP_VOL" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="TARLVL_HRS" Type="Edm.TimeOfDay"/>
+        <Property Name="ORDLVL_HRS" Type="Edm.TimeOfDay"/>
+        <Property Name="BTMASF_HRS" Type="Edm.TimeOfDay"/>
+        <Property Name="MAX_UTLZ" Type="Edm.String" MaxLength="7"/>
+        <Property Name="LENGTH" Type="Edm.Decimal" Precision="5" Scale="2"/>
+        <Property Name="DIAMTR" Type="Edm.Decimal" Precision="5" Scale="2"/>
+        <Property Name="WEIGHT" Type="Edm.Decimal" Precision="7" Scale="2"/>
+        <Property Name="EQPMT_NO" Type="Edm.String" MaxLength="15"/>
+        <Property Name="FUNCTLOC" Type="Edm.String" MaxLength="15"/>
+        <Property Name="Bpno" Type="Edm.String" MaxLength="10"/>
+        <Property Name="BpType" Type="Edm.String" MaxLength="4"/>
+        <Property Name="DRAWNO" Type="Edm.String" MaxLength="20"/>
+        <Property Name="SERIAL" Type="Edm.String" MaxLength="20"/>
+        <Property Name="MODEL" Type="Edm.String" MaxLength="20"/>
+        <Property Name="CONST_MONTH" Type="Edm.String" MaxLength="2"/>
+        <Property Name="CONST_YEAR" Type="Edm.String" MaxLength="4"/>
+        <Property Name="VolUOM" Type="Edm.String" MaxLength="3"/>
+        <Property Name="MassUOM" Type="Edm.String" MaxLength="3"/>
+        <Property Name="DimUOM" Type="Edm.String" MaxLength="5"/>
+        <Property Name="Status" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Regdate" Type="Edm.Date"/>
+        <Property Name="RegTime" Type="Edm.TimeOfDay"/>
+        <Property Name="RegUser" Type="Edm.String" MaxLength="50"/>
+        <NavigationProperty Name="Material" Type="Collection(CardService.MaterialAllocation)"/>
+        <NavigationProperty Name="Inventory" Type="Collection(CardService.TankInventory)"/>
+        <NavigationProperty Name="Reconciliation" Type="Collection(CardService.Reconciliation)"/>
+      </EntityType>
+      <EntityType Name="MaterialAllocation">
+        <Key>
+          <PropertyRef Name="Site"/>
+          <PropertyRef Name="SiteType"/>
+          <PropertyRef Name="TankNum"/>
+          <PropertyRef Name="Valid_from"/>
+          <PropertyRef Name="MaterialId_MaterialId"/>
+        </Key>
+        <Property Name="Site" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="SiteType" Type="Edm.String" MaxLength="5" Nullable="false"/>
+        <Property Name="TankNum" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="Valid_from" Type="Edm.Date" Nullable="false"/>
+        <NavigationProperty Name="MaterialId" Type="CardService.Materials" Partner="Materials">
+          <ReferentialConstraint Property="MaterialId_MaterialId" ReferencedProperty="MaterialId"/>
+        </NavigationProperty>
+        <Property Name="MaterialId_MaterialId" Type="Edm.String" MaxLength="18" Nullable="false"/>
+        <Property Name="Reason" Type="Edm.String" MaxLength="30"/>
+        <Property Name="Regdate" Type="Edm.Date"/>
+        <Property Name="RegTime" Type="Edm.TimeOfDay"/>
+        <Property Name="RegUser" Type="Edm.String" MaxLength="50"/>
+        <NavigationProperty Name="TankGrp" Type="Collection(CardService.Tanks)"/>
+      </EntityType>
+      <EntityType Name="TankInventory">
+        <Key>
+          <PropertyRef Name="ID"/>
+          <PropertyRef Name="Site"/>
+          <PropertyRef Name="TankNum"/>
+        </Key>
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="Site" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="TankNum" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="MDATE" Type="Edm.Date"/>
+        <Property Name="MTIME" Type="Edm.TimeOfDay"/>
+        <Property Name="MTYPE" Type="Edm.String" MaxLength="5"/>
+        <Property Name="MTZONE" Type="Edm.String" MaxLength="4"/>
+        <Property Name="MaterialId" Type="Edm.String" MaxLength="18"/>
+        <Property Name="MaterialDesc" Type="Edm.String" MaxLength="40"/>
+        <Property Name="MFLEVEL" Type="Edm.String" MaxLength="10"/>
+        <Property Name="MFUOM" Type="Edm.String" MaxLength="3"/>
+        <Property Name="MQUAN" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="MQUOM" Type="Edm.String" MaxLength="3"/>
+        <Property Name="Regdate" Type="Edm.Date"/>
+        <Property Name="RegTime" Type="Edm.TimeOfDay"/>
+        <Property Name="RegUser" Type="Edm.String" MaxLength="50"/>
+      </EntityType>
+      <EntityType Name="Meters">
+        <Key>
+          <PropertyRef Name="Site"/>
+          <PropertyRef Name="SiteType"/>
+          <PropertyRef Name="MeterNum"/>
+        </Key>
+        <Property Name="Site" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="SiteType" Type="Edm.String" MaxLength="5" Nullable="false"/>
+        <Property Name="MeterNum" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="MeterDesc" Type="Edm.String" MaxLength="20"/>
+        <Property Name="MeterFactor" Type="Edm.String" MaxLength="10"/>
+        <Property Name="NumOfDigits" Type="Edm.String" MaxLength="4"/>
+        <Property Name="NumOfDecimals" Type="Edm.String" MaxLength="5"/>
+        <Property Name="MFUOM" Type="Edm.String" MaxLength="3"/>
+        <Property Name="Status" Type="Edm.String" MaxLength="10"/>
+        <Property Name="EQPMT_NO" Type="Edm.String" MaxLength="15"/>
+        <Property Name="FUNCTLOC" Type="Edm.String" MaxLength="15"/>
+        <Property Name="Bpno" Type="Edm.String" MaxLength="10"/>
+        <Property Name="BpType" Type="Edm.String" MaxLength="4"/>
+        <Property Name="DRAWNO" Type="Edm.String" MaxLength="20"/>
+        <Property Name="SERIAL" Type="Edm.String" MaxLength="20"/>
+        <Property Name="MODEL" Type="Edm.String" MaxLength="20"/>
+        <Property Name="CONST_MONTH" Type="Edm.String" MaxLength="2"/>
+        <Property Name="CONST_YEAR" Type="Edm.String" MaxLength="4"/>
+        <Property Name="RecalibDate" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="Regdate" Type="Edm.Date"/>
+        <Property Name="RegTime" Type="Edm.TimeOfDay"/>
+        <Property Name="RegUser" Type="Edm.String" MaxLength="50"/>
+        <NavigationProperty Name="Inventory" Type="Collection(CardService.MeterReadings)"/>
+        <NavigationProperty Name="Material" Type="Collection(CardService.MeterMaterialAllocation)"/>
+        <NavigationProperty Name="AllotedTanks" Type="Collection(CardService.MeterTankAllocation)"/>
+      </EntityType>
+      <EntityType Name="MeterMaterialAllocation">
+        <Key>
+          <PropertyRef Name="Site"/>
+          <PropertyRef Name="SiteType"/>
+          <PropertyRef Name="MeterNum"/>
+          <PropertyRef Name="Valid_from"/>
+          <PropertyRef Name="MaterialId_MaterialId"/>
+        </Key>
+        <Property Name="Site" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="SiteType" Type="Edm.String" MaxLength="5" Nullable="false"/>
+        <Property Name="MeterNum" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="Valid_from" Type="Edm.Date" Nullable="false"/>
+        <NavigationProperty Name="MaterialId" Type="CardService.Materials">
+          <ReferentialConstraint Property="MaterialId_MaterialId" ReferencedProperty="MaterialId"/>
+        </NavigationProperty>
+        <Property Name="MaterialId_MaterialId" Type="Edm.String" MaxLength="18" Nullable="false"/>
+        <Property Name="Reason" Type="Edm.String" MaxLength="30"/>
+        <Property Name="Regdate" Type="Edm.Date"/>
+        <Property Name="RegTime" Type="Edm.TimeOfDay"/>
+        <Property Name="RegUser" Type="Edm.String" MaxLength="50"/>
+        <NavigationProperty Name="MeterGrp" Type="Collection(CardService.Meters)"/>
+      </EntityType>
+      <EntityType Name="MeterTankAllocation">
+        <Key>
+          <PropertyRef Name="Site"/>
+          <PropertyRef Name="SiteType"/>
+          <PropertyRef Name="MeterNum"/>
+          <PropertyRef Name="Valid_from"/>
+        </Key>
+        <Property Name="Site" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="SiteType" Type="Edm.String" MaxLength="5" Nullable="false"/>
+        <Property Name="MeterNum" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="Valid_from" Type="Edm.Date" Nullable="false"/>
+        <Property Name="TankNum" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Reason" Type="Edm.String" MaxLength="30"/>
+        <Property Name="Regdate" Type="Edm.Date"/>
+        <Property Name="RegTime" Type="Edm.TimeOfDay"/>
+        <Property Name="RegUser" Type="Edm.String" MaxLength="50"/>
+      </EntityType>
+      <EntityType Name="MeterReadings">
+        <Key>
+          <PropertyRef Name="ID"/>
+          <PropertyRef Name="Site"/>
+          <PropertyRef Name="MeterNum"/>
+        </Key>
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="Site" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="MeterNum" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="SiteType" Type="Edm.String" MaxLength="5"/>
+        <Property Name="MeasureDate" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="MTYPE" Type="Edm.String" MaxLength="5"/>
+        <Property Name="MTZONE" Type="Edm.String" MaxLength="4"/>
+        <Property Name="MaterialId" Type="Edm.String" MaxLength="18"/>
+        <Property Name="MaterialDesc" Type="Edm.String" MaxLength="40"/>
+        <Property Name="MREAD_ENTRY" Type="Edm.String" MaxLength="25"/>
+        <Property Name="MREADING" Type="Edm.String" MaxLength="25"/>
+        <Property Name="MQUANTITY" Type="Edm.String" MaxLength="25"/>
+        <Property Name="MOVERFLOW" Type="Edm.Boolean"/>
+        <Property Name="MeterFactor" Type="Edm.String" MaxLength="5"/>
+        <Property Name="MFLEVEL" Type="Edm.String" MaxLength="10"/>
+        <Property Name="MFUOM" Type="Edm.String" MaxLength="3"/>
+        <Property Name="Regdate" Type="Edm.Date"/>
+        <Property Name="RegTime" Type="Edm.TimeOfDay"/>
+        <Property Name="RegUser" Type="Edm.String" MaxLength="50"/>
+      </EntityType>
+      <EntityType Name="Reconciliation">
+        <Key>
+          <PropertyRef Name="ID"/>
+          <PropertyRef Name="Site"/>
+          <PropertyRef Name="TankNum"/>
+          <PropertyRef Name="SiteType"/>
+        </Key>
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="Site" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="TankNum" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="SiteType" Type="Edm.String" MaxLength="5" Nullable="false"/>
+        <Property Name="MaterialId" Type="Edm.String" MaxLength="18"/>
+        <Property Name="MaterialDesc" Type="Edm.String" MaxLength="40"/>
+        <Property Name="ReconcDate" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="MTZONE" Type="Edm.String" MaxLength="4"/>
+        <Property Name="MFUOM" Type="Edm.String" MaxLength="3"/>
+        <Property Name="InventoryStartQty" Type="Edm.String" MaxLength="25"/>
+        <Property Name="SupplyQty" Type="Edm.String" MaxLength="25"/>
+        <Property Name="isSupplyQtyChanged" Type="Edm.Boolean"/>
+        <Property Name="MQUANTITY" Type="Edm.String" MaxLength="25"/>
+        <Property Name="isMQUANTITYChanged" Type="Edm.Boolean"/>
+        <Property Name="InventoryEndQty" Type="Edm.String" MaxLength="25"/>
+        <Property Name="isInventoryChanged" Type="Edm.Boolean"/>
+        <Property Name="DiffQty" Type="Edm.String" MaxLength="25"/>
+        <Property Name="DiffPercent" Type="Edm.String" MaxLength="25"/>
+        <Property Name="Comments" Type="Edm.String" MaxLength="100"/>
+        <Property Name="ReconcType" Type="Edm.String" MaxLength="5"/>
+        <Property Name="Regdate" Type="Edm.Date"/>
+        <Property Name="RegTime" Type="Edm.TimeOfDay"/>
+        <Property Name="RegUser" Type="Edm.String" MaxLength="50"/>
+      </EntityType>
+      <EntityType Name="ForecastCalculation">
+        <Key>
+          <PropertyRef Name="Site"/>
+          <PropertyRef Name="Tank"/>
+          <PropertyRef Name="Forecast_date"/>
+          <PropertyRef Name="Forecast_time"/>
+          <PropertyRef Name="Entry_Type"/>
+        </Key>
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="Site" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="Tank" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="Forecast_date" Type="Edm.Date" Nullable="false"/>
+        <Property Name="Forecast_time" Type="Edm.TimeOfDay" Nullable="false"/>
+        <Property Name="Entry_Type" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="Material" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Tank_Grp" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Critical_Tank" Type="Edm.Boolean"/>
+        <Property Name="Profile_Day" Type="Edm.String" MaxLength="15"/>
+        <Property Name="Profile_PHD" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Profile" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Profile_Type" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Factor" Type="Edm.String" MaxLength="6"/>
+        <Property Name="Forecast_Qty" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="Forecast_Inv" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="Forecast_Evt" Type="Edm.String" MaxLength="5"/>
+        <Property Name="ForecastedTimestamp" Type="Edm.DateTimeOffset" Precision="7"/>
+      </EntityType>
+      <EntityType Name="DemandForecast">
+        <Key>
+          <PropertyRef Name="Site_Site"/>
+          <PropertyRef Name="Site_SiteType"/>
+          <PropertyRef Name="Tank"/>
+          <PropertyRef Name="Forecast_date"/>
+          <PropertyRef Name="Forecast_time"/>
+          <PropertyRef Name="Entry_Type"/>
+        </Key>
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+        <NavigationProperty Name="Site" Type="CardService.SiteDetails">
+          <ReferentialConstraint Property="Site_Site" ReferencedProperty="Site"/>
+          <ReferentialConstraint Property="Site_SiteType" ReferencedProperty="SiteType"/>
+        </NavigationProperty>
+        <Property Name="Site_Site" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="Site_SiteType" Type="Edm.String" MaxLength="5" Nullable="false"/>
+        <Property Name="Tank" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="Forecast_date" Type="Edm.Date" Nullable="false"/>
+        <Property Name="Forecast_time" Type="Edm.TimeOfDay" Nullable="false"/>
+        <Property Name="Entry_Type" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="Forecast_Month" Type="Edm.String" MaxLength="20"/>
+        <Property Name="Tank_Grp" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Critical_Tank" Type="Edm.Boolean"/>
+        <Property Name="Profile_Day" Type="Edm.String" MaxLength="15"/>
+        <Property Name="Profile_PHD" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Profile" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Profile_Type" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Factor" Type="Edm.String" MaxLength="6"/>
+        <Property Name="Forecast_Qty" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="Forecast_Inv" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="Forecast_Evt" Type="Edm.String" MaxLength="5"/>
+        <Property Name="ForecastedTimestamp" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="Uom" Type="Edm.String" MaxLength="5"/>
+        <NavigationProperty Name="Material" Type="CardService.Materials">
+          <ReferentialConstraint Property="Material_MaterialId" ReferencedProperty="MaterialId"/>
+        </NavigationProperty>
+        <Property Name="Material_MaterialId" Type="Edm.String" MaxLength="18"/>
+      </EntityType>
+      <EntityType Name="forecastDemand">
+        <Key>
+          <PropertyRef Name="Site"/>
+          <PropertyRef Name="PrimaryNetwork"/>
+          <PropertyRef Name="Tank"/>
+          <PropertyRef Name="Forecast_date"/>
+          <PropertyRef Name="Forecast_time"/>
+          <PropertyRef Name="Entry_Type"/>
+        </Key>
+        <Property Name="Site" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="PrimaryNetwork" Type="Edm.String" MaxLength="50" Nullable="false"/>
+        <Property Name="Tank" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="Forecast_date" Type="Edm.Date" Nullable="false"/>
+        <Property Name="Forecast_time" Type="Edm.TimeOfDay" Nullable="false"/>
+        <Property Name="Entry_Type" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="MaterialGroup" Type="Edm.String" MaxLength="25"/>
+        <Property Name="MaterialDesc" Type="Edm.String" MaxLength="40"/>
+        <Property Name="MaterialCategory" Type="Edm.String" MaxLength="30"/>
+        <Property Name="Tank_Grp" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Critical_Tank" Type="Edm.Boolean"/>
+        <Property Name="Profile_Day" Type="Edm.String" MaxLength="15"/>
+        <Property Name="Profile_PHD" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Profile" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Profile_Type" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Factor" Type="Edm.String" MaxLength="6"/>
+        <Property Name="Forecast_Qty" Type="Edm.Decimal" Precision="13" Scale="2"/>
+        <Property Name="Forecast_Inv" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="Forecast_Evt" Type="Edm.String" MaxLength="5"/>
+        <Property Name="ForecastedTimestamp" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="Forecast_Month" Type="Edm.String" MaxLength="20"/>
+        <Property Name="Uom" Type="Edm.String" MaxLength="5"/>
+      </EntityType>
+      <EntityType Name="SitePosDetails">
+        <Key>
+          <PropertyRef Name="SiteTrnID"/>
+        </Key>
+        <Property Name="SiteTrnID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <NavigationProperty Name="Site" Type="CardService.SiteDetails">
+          <ReferentialConstraint Property="Site_Site" ReferencedProperty="Site"/>
+          <ReferentialConstraint Property="Site_SiteType" ReferencedProperty="SiteType"/>
+        </NavigationProperty>
+        <Property Name="Site_Site" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Site_SiteType" Type="Edm.String" MaxLength="5"/>
+        <Property Name="SYS_AUDIT_NO" Type="Edm.String" MaxLength="10"/>
+        <Property Name="TRN_TIMESTAMP" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="TRN_TZONE" Type="Edm.String" MaxLength="5"/>
+        <Property Name="TERMINAL_ID" Type="Edm.String" MaxLength="15"/>
+        <Property Name="TERMINAL_TYPE" Type="Edm.String" MaxLength="10"/>
+        <Property Name="TRN_TYPE" Type="Edm.String" MaxLength="10"/>
+        <Property Name="TRN_APPROVED" Type="Edm.String" MaxLength="10"/>
+        <Property Name="AUTH_CODE" Type="Edm.String" MaxLength="10"/>
+        <Property Name="TRANS_AMOUNT" Type="Edm.Decimal" Precision="13" Scale="2"/>
+        <Property Name="CURRENCY" Type="Edm.String" MaxLength="6"/>
+        <Property Name="BATCH_SEQ" Type="Edm.String" MaxLength="10"/>
+        <Property Name="MOP_TYPE" Type="Edm.String" MaxLength="10"/>
+        <Property Name="CARD_TYPE" Type="Edm.String" MaxLength="10"/>
+        <Property Name="CARD_PAN" Type="Edm.String" MaxLength="20"/>
+        <Property Name="CARD_PAN_ENTRY" Type="Edm.String" MaxLength="10"/>
+        <Property Name="CARD_TRACK_DATA" Type="Edm.String" MaxLength="50"/>
+        <Property Name="Regdate" Type="Edm.Date"/>
+        <Property Name="RegTime" Type="Edm.TimeOfDay"/>
+        <Property Name="RegUser" Type="Edm.String" MaxLength="50"/>
+        <NavigationProperty Name="Items" Type="Collection(CardService.SitePosItems)"/>
+      </EntityType>
+      <EntityType Name="SitePosItems">
+        <Key>
+          <PropertyRef Name="SiteTrnID"/>
+          <PropertyRef Name="SiteTrnItem"/>
+        </Key>
+        <Property Name="SiteTrnID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="SiteTrnItem" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <NavigationProperty Name="MATERIAL" Type="CardService.Materials">
+          <ReferentialConstraint Property="MATERIAL_MaterialId" ReferencedProperty="MaterialId"/>
+        </NavigationProperty>
+        <Property Name="MATERIAL_MaterialId" Type="Edm.String" MaxLength="18"/>
+        <Property Name="QUANTITIY" Type="Edm.String" MaxLength="10"/>
+        <Property Name="UOM" Type="Edm.String" MaxLength="5"/>
+        <Property Name="UNIT_PRICE" Type="Edm.String" MaxLength="10"/>
+        <Property Name="AMOUNT" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="CURRENCY" Type="Edm.String" MaxLength="5"/>
+        <Property Name="VAT_PERC" Type="Edm.String" MaxLength="10"/>
+      </EntityType>
+      <EntityType Name="SiteTimings">
+        <Key>
+          <PropertyRef Name="counter"/>
+        </Key>
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="counter" Type="Edm.Guid" Nullable="false"/>
+        <Property Name="Site" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Hours_Type" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Hours_Day" Type="Edm.String" MaxLength="14"/>
+        <Property Name="Day_no" Type="Edm.Int32"/>
+        <Property Name="Hours_From" Type="Edm.TimeOfDay"/>
+        <Property Name="Hours_To" Type="Edm.TimeOfDay"/>
+        <Property Name="flag_24_7" Type="Edm.Boolean"/>
+      </EntityType>
+      <EntityType Name="SiteSalesProfile">
+        <Key>
+          <PropertyRef Name="Profile"/>
+          <PropertyRef Name="Profile_Time"/>
+        </Key>
+        <Property Name="Profile" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="Profile_Time" Type="Edm.String" MaxLength="12" Nullable="false"/>
+        <Property Name="Monday" Type="Edm.String" MaxLength="6"/>
+        <Property Name="Tuesday" Type="Edm.String" MaxLength="6"/>
+        <Property Name="Wednesday" Type="Edm.String" MaxLength="6"/>
+        <Property Name="Thursday" Type="Edm.String" MaxLength="6"/>
+        <Property Name="Friday" Type="Edm.String" MaxLength="6"/>
+        <Property Name="Saturday" Type="Edm.String" MaxLength="6"/>
+        <Property Name="Sunday" Type="Edm.String" MaxLength="6"/>
+        <Property Name="PublicHoliday" Type="Edm.String" MaxLength="6"/>
+      </EntityType>
+      <EntityType Name="SiteProfileAllocation">
+        <Key>
+          <PropertyRef Name="Profile"/>
+          <PropertyRef Name="Counter"/>
+        </Key>
+        <Property Name="Profile" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="Counter" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="Site" Type="Edm.String" MaxLength="10"/>
+        <Property Name="TankNum" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Profile_Type" Type="Edm.String" MaxLength="16"/>
+        <Property Name="Description" Type="Edm.String" MaxLength="50"/>
+        <Property Name="Allocat_Desc" Type="Edm.String" MaxLength="50"/>
+        <Property Name="Date_From" Type="Edm.Date"/>
+        <Property Name="Date_To" Type="Edm.Date"/>
+        <NavigationProperty Name="SiteSalesProfile" Type="Collection(CardService.SiteSalesProfile)"/>
+        <NavigationProperty Name="PublicHolidayProfile" Type="Collection(CardService.PublicHolidayProfile)"/>
+      </EntityType>
+      <EntityType Name="PublicHolidayProfile">
+        <Key>
+          <PropertyRef Name="Profile"/>
+          <PropertyRef Name="Profile_Date"/>
+        </Key>
+        <Property Name="Profile" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="Profile_Date" Type="Edm.Date" Nullable="false"/>
+        <Property Name="Description" Type="Edm.String" MaxLength="50"/>
+      </EntityType>
+      <EntityType Name="ReplenishmentOrders">
+        <Key>
+          <PropertyRef Name="OrderNo"/>
+          <PropertyRef Name="Item"/>
+          <PropertyRef Name="Status"/>
+        </Key>
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="OrderNo" Type="Edm.String" MaxLength="15" Nullable="false"/>
+        <Property Name="Item" Type="Edm.String" MaxLength="6" Nullable="false"/>
+        <Property Name="Status" Type="Edm.String" MaxLength="4" Nullable="false"/>
+        <Property Name="isStatusChgd" Type="Edm.Boolean"/>
+        <Property Name="OrderType" Type="Edm.String" MaxLength="3"/>
+        <NavigationProperty Name="Site" Type="CardService.SiteDetails">
+          <ReferentialConstraint Property="Site_Site" ReferencedProperty="Site"/>
+          <ReferentialConstraint Property="Site_SiteType" ReferencedProperty="SiteType"/>
+        </NavigationProperty>
+        <Property Name="Site_Site" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Site_SiteType" Type="Edm.String" MaxLength="5"/>
+        <Property Name="TankNum" Type="Edm.String" MaxLength="10"/>
+        <Property Name="BpType" Type="Edm.String" MaxLength="4"/>
+        <Property Name="Suppl_BP" Type="Edm.String" MaxLength="10"/>
+        <NavigationProperty Name="Suppl_Mat" Type="CardService.Materials">
+          <ReferentialConstraint Property="Suppl_Mat_MaterialId" ReferencedProperty="MaterialId"/>
+        </NavigationProperty>
+        <Property Name="Suppl_Mat_MaterialId" Type="Edm.String" MaxLength="18"/>
+        <Property Name="Suppl_Qty" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="Suppl_Uom" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Suppl_Date" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="Suppl_Time" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Suppl_TimeZone" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Suppl_Low_Tol" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Suppl_High_Tol" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Suppl_Low_Qty" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Suppl_High_Qty" Type="Edm.String" MaxLength="10"/>
+        <Property Name="CutOff_Date" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="CutOff_Time" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Regdate" Type="Edm.Date"/>
+        <Property Name="RegTime" Type="Edm.TimeOfDay"/>
+        <Property Name="RegUser" Type="Edm.String" MaxLength="50"/>
+      </EntityType>
+      <EntityType Name="CreatedReplOrders">
+        <Key>
+          <PropertyRef Name="OrderId"/>
+        </Key>
+        <Property Name="OrderId" Type="Edm.String" MaxLength="15" Nullable="false"/>
+        <Property Name="Site" Type="Edm.String" MaxLength="10"/>
+        <Property Name="OrderType" Type="Edm.String" MaxLength="3"/>
+        <Property Name="Suppl_Date" Type="Edm.DateTimeOffset" Precision="7"/>
+      </EntityType>
+      <EntityType Name="InventoryData">
+        <Key>
+          <PropertyRef Name="Site"/>
+          <PropertyRef Name="TankNum"/>
+        </Key>
+        <Property Name="Site" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="TankNum" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="ID" Type="Edm.String" MaxLength="10"/>
+        <Property Name="MDATE" Type="Edm.Date"/>
+        <Property Name="MTIME" Type="Edm.TimeOfDay"/>
+        <Property Name="MTYPE" Type="Edm.String" MaxLength="5"/>
+        <Property Name="MTZONE" Type="Edm.String" MaxLength="4"/>
+        <Property Name="MaterialId" Type="Edm.String" MaxLength="18"/>
+        <Property Name="MaterialDesc" Type="Edm.String" MaxLength="40"/>
+        <Property Name="MQUAN" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="MQUOM" Type="Edm.String" MaxLength="3"/>
+        <Property Name="Tarlvl_vol" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="ORDLVL_VOL" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="BTMSAF_VOL" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="Maxcap_vol" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="Topsafe_vol" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="UNPCAP_VOL" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="Name1" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Acronym" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Ext_Bp" Type="Edm.String" MaxLength="35"/>
+        <Property Name="SiteType" Type="Edm.String" MaxLength="5"/>
+        <NavigationProperty Name="Inventory" Type="Collection(CardService.TankInventory)"/>
+        <NavigationProperty Name="ForecastCalculation" Type="Collection(CardService.ForecastCalculation)"/>
+      </EntityType>
+      <EntityType Name="TankInventoryVol">
+        <Key>
+          <PropertyRef Name="MQUOM"/>
+        </Key>
+        <Property Name="MaterialDesc" Type="Edm.String" MaxLength="40"/>
+        <Property Name="MQUAN" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="MQUOM" Type="Edm.String" MaxLength="3" Nullable="false"/>
+        <Property Name="Tarlvl_vol" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="BTMSAF_VOL" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="Maxcap_vol" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="TargetVolPerecent" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="ActualVolPerecent" Type="Edm.Decimal" Precision="8" Scale="2"/>
+      </EntityType>
+      <EntityType Name="AggByVolume">
+        <Key>
+          <PropertyRef Name="MaterialDesc"/>
+        </Key>
+        <Property Name="MaterialDesc" Type="Edm.String" MaxLength="40" Nullable="false"/>
+        <Property Name="TargetVol" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="ActualVol" Type="Edm.Decimal" Precision="8" Scale="2"/>
+      </EntityType>
+      <EntityType Name="VOLBYPROD">
+        <Key>
+          <PropertyRef Name="MaterialId"/>
+        </Key>
+        <Property Name="MaterialId" Type="Edm.String" MaxLength="18" Nullable="false"/>
+        <Property Name="MaterialDesc" Type="Edm.String" MaxLength="40"/>
+        <Property Name="MQUOM" Type="Edm.String" MaxLength="3"/>
+        <Property Name="MQUAN" Type="Edm.Decimal" Precision="13" Scale="2"/>
+        <Property Name="Tarlvl_vol" Type="Edm.Decimal" Precision="13" Scale="2"/>
+        <Property Name="BTMSAF_VOL" Type="Edm.Decimal" Precision="13" Scale="2"/>
+        <Property Name="Maxcap_vol" Type="Edm.Decimal" Precision="13" Scale="2"/>
+        <Property Name="UNPCAP_VOL" Type="Edm.Decimal" Precision="13" Scale="2"/>
+        <Property Name="TOTAL_MEASURED_VOL" Type="Edm.Decimal" Precision="13" Scale="2"/>
+        <Property Name="TOTAL_TARLVL_VOL" Type="Edm.Decimal" Precision="13" Scale="2"/>
+        <Property Name="CALCULATEDPERCENT" Type="Edm.Decimal" Precision="5" Scale="2"/>
+        <Property Name="CURRENTUTIL_PERCENT" Type="Edm.Decimal" Precision="5" Scale="2"/>
+        <Property Name="TARGETVOL_UTIL_PERCENT" Type="Edm.Decimal" Precision="5" Scale="2"/>
+        <Property Name="CURRENT_UTIL_VOL" Type="Edm.Decimal" Precision="5" Scale="2"/>
+        <Property Name="TARGET_UTIL_VOL" Type="Edm.Decimal" Precision="5" Scale="2"/>
+      </EntityType>
+      <EntityType Name="CRITICALTANK">
+        <Key>
+          <PropertyRef Name="Site"/>
+          <PropertyRef Name="TankNum"/>
+        </Key>
+        <Property Name="Site" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="TankNum" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="MDATE" Type="Edm.Date"/>
+        <Property Name="MTIME" Type="Edm.TimeOfDay"/>
+        <Property Name="MTYPE" Type="Edm.String" MaxLength="5"/>
+        <Property Name="MTZONE" Type="Edm.String" MaxLength="4"/>
+        <Property Name="MaterialId" Type="Edm.String" MaxLength="18"/>
+        <Property Name="MaterialDesc" Type="Edm.String" MaxLength="40"/>
+        <Property Name="MQUAN" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="MQUOM" Type="Edm.String" MaxLength="3"/>
+        <Property Name="Tarlvl_vol" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="ORDLVL_VOL" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="BTMSAF_VOL" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="Maxcap_vol" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="Topsafe_vol" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="UNPCAP_VOL" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="Name1" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Acronym" Type="Edm.String" MaxLength="35"/>
+        <Property Name="Ext_Bp" Type="Edm.String" MaxLength="35"/>
+        <Property Name="SiteType" Type="Edm.String" MaxLength="5"/>
+        <Property Name="TANKANDSITE" Type="Edm.String" MaxLength="50"/>
+        <Property Name="ACTUALVSTARGETPERCENT" Type="Edm.Decimal" Precision="5" Scale="2"/>
+      </EntityType>
+      <EntityType Name="CARDSANALYTICS">
+        <Key>
+          <PropertyRef Name="TYPENAME"/>
+        </Key>
+        <Property Name="TYPENAME" Type="Edm.String" MaxLength="20" Nullable="false"/>
+        <Property Name="PRODUCT" Type="Edm.String" MaxLength="20"/>
+        <Property Name="GROSSVALUE" Type="Edm.Decimal" Precision="13" Scale="2"/>
+        <Property Name="TOTALGROSSVALUE" Type="Edm.Decimal" Precision="13" Scale="2"/>
+        <Property Name="VALUECURRENCY" Type="Edm.String" MaxLength="3"/>
+      </EntityType>
+      <EntityType Name="ACTIVECARDS">
+        <Key>
+          <PropertyRef Name="TYPENAME"/>
+        </Key>
+        <Property Name="TYPENAME" Type="Edm.String" MaxLength="20" Nullable="false"/>
+        <Property Name="COUNTOFACTIVECARDS" Type="Edm.Int32"/>
+        <Property Name="TOTACTIVECARDS" Type="Edm.Int32"/>
+      </EntityType>
+      <EntityType Name="SalesByProd">
+        <Key>
+          <PropertyRef Name="PRODUCT"/>
+        </Key>
+        <Property Name="PRODUCT" Type="Edm.String" MaxLength="20" Nullable="false"/>
+        <Property Name="VALUECURRENCY" Type="Edm.String" MaxLength="3"/>
+        <Property Name="TOTALGROSSVALUE" Type="Edm.Decimal" Precision="13" Scale="2"/>
+        <Property Name="GROSSVALUE" Type="Edm.Decimal" Precision="13" Scale="2"/>
+      </EntityType>
+      <EntityType Name="SalesByCards">
+        <Key>
+          <PropertyRef Name="TYPENAME"/>
+        </Key>
+        <Property Name="TYPENAME" Type="Edm.String" MaxLength="20" Nullable="false"/>
+        <Property Name="VALUECURRENCY" Type="Edm.String" MaxLength="3"/>
+        <Property Name="TOTALGROSSVALUE" Type="Edm.Decimal" Precision="13" Scale="2"/>
+        <Property Name="GROSSVALUE" Type="Edm.Decimal" Precision="13" Scale="2"/>
+      </EntityType>
+      <EntityType Name="SalesByCardNum">
+        <Key>
+          <PropertyRef Name="CARD_CARDNUM"/>
+        </Key>
+        <Property Name="CARD_CARDNUM" Type="Edm.String" MaxLength="20" Nullable="false"/>
+        <Property Name="GROSSVALUE" Type="Edm.Decimal" Precision="13" Scale="2"/>
+        <Property Name="TOTALGROSSVALUE" Type="Edm.Decimal" Precision="13" Scale="2"/>
+        <Property Name="VALUECURRENCY" Type="Edm.String" MaxLength="3"/>
+        <Property Name="COUNTOFTRANS" Type="Edm.Int32"/>
+      </EntityType>
+      <EntityType Name="COUNTBYSALESNTRANS">
+        <Key>
+          <PropertyRef Name="TYPENAME"/>
+        </Key>
+        <Property Name="TYPENAME" Type="Edm.String" MaxLength="20" Nullable="false"/>
+        <Property Name="GROSSVALUE" Type="Edm.Decimal" Precision="13" Scale="2"/>
+        <Property Name="TOTALGROSSVALUE" Type="Edm.Decimal" Precision="13" Scale="2"/>
+        <Property Name="VALUECURRENCY" Type="Edm.String" MaxLength="3"/>
+        <Property Name="COUNTOFACTIVECARDS" Type="Edm.Int32"/>
+        <Property Name="COUNTOFTRANS" Type="Edm.Int32"/>
+      </EntityType>
+      <EntityType Name="SalesPerMonthByProd">
+        <Key>
+          <PropertyRef Name="PRODUCT"/>
+        </Key>
+        <Property Name="PRODUCT" Type="Edm.String" MaxLength="20" Nullable="false"/>
+        <Property Name="MONTH" Type="Edm.String" MaxLength="13"/>
+        <Property Name="MONTHSBETWEEN" Type="Edm.Int32"/>
+        <Property Name="GROSSVALUE" Type="Edm.Decimal" Precision="13" Scale="2"/>
+        <Property Name="TOTALGROSSVALUE" Type="Edm.Decimal" Precision="13" Scale="2"/>
+        <Property Name="VALUECURRENCY" Type="Edm.String" MaxLength="3"/>
+      </EntityType>
+      <EntityType Name="POSSalesY2D">
+        <Key>
+          <PropertyRef Name="SiteTrnID"/>
+        </Key>
+        <Property Name="SiteTrnID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="PrimaryNetwork" Type="Edm.String" MaxLength="50"/>
+        <Property Name="SubNetwork" Type="Edm.String" MaxLength="50"/>
+        <Property Name="Site" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Acronym" Type="Edm.String" MaxLength="35"/>
+        <Property Name="LocationGroup" Type="Edm.String" MaxLength="50"/>
+        <Property Name="SiteType" Type="Edm.String" MaxLength="5"/>
+        <Property Name="MOP_TYPE" Type="Edm.String" MaxLength="10"/>
+        <Property Name="SYS_AUDIT_NO" Type="Edm.String" MaxLength="10"/>
+        <Property Name="TRN_TIMESTAMP" Type="Edm.DateTimeOffset" Precision="7"/>
+        <NavigationProperty Name="MATERIAL" Type="CardService.Materials">
+          <ReferentialConstraint Property="MATERIAL_MaterialId" ReferencedProperty="MaterialId"/>
+        </NavigationProperty>
+        <Property Name="MATERIAL_MaterialId" Type="Edm.String" MaxLength="18"/>
+        <Property Name="MaterialGroup" Type="Edm.String" MaxLength="25"/>
+        <Property Name="Amount" Type="Edm.Decimal" Precision="15" Scale="2"/>
+      </EntityType>
+      <EntityType Name="Orders">
+        <Key>
+          <PropertyRef Name="OrderNo"/>
+          <PropertyRef Name="Item"/>
+        </Key>
+        <Property Name="OrderNo" Type="Edm.String" MaxLength="15" Nullable="false"/>
+        <Property Name="Item" Type="Edm.String" MaxLength="6" Nullable="false"/>
+        <Property Name="PrimaryNetwork" Type="Edm.String" MaxLength="50"/>
+        <Property Name="SubNetwork" Type="Edm.String" MaxLength="50"/>
+        <Property Name="Site" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Acronym" Type="Edm.String" MaxLength="35"/>
+        <Property Name="LocationGroup" Type="Edm.String" MaxLength="50"/>
+        <Property Name="SiteType" Type="Edm.String" MaxLength="5"/>
+        <Property Name="Status" Type="Edm.String" MaxLength="4"/>
+        <Property Name="OrderType" Type="Edm.String" MaxLength="3"/>
+        <Property Name="TankNum" Type="Edm.String" MaxLength="10"/>
+        <Property Name="MaterialId" Type="Edm.String" MaxLength="18"/>
+        <Property Name="MaterialDesc" Type="Edm.String" MaxLength="40"/>
+        <Property Name="Suppl_Qty" Type="Edm.Decimal" Precision="13" Scale="2"/>
+        <Property Name="Suppl_Uom" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Suppl_Date" Type="Edm.Date"/>
+        <Property Name="Suppl_Time" Type="Edm.String" MaxLength="10"/>
+        <Property Name="TotQty" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="ordercount" Type="Edm.Int32"/>
+      </EntityType>
+      <EntityType Name="PriorityOrders">
+        <Key>
+          <PropertyRef Name="OrderNo"/>
+          <PropertyRef Name="Item"/>
+        </Key>
+        <Property Name="OrderNo" Type="Edm.String" MaxLength="15" Nullable="false"/>
+        <Property Name="Item" Type="Edm.String" MaxLength="6" Nullable="false"/>
+        <Property Name="PrimaryNetwork" Type="Edm.String" MaxLength="50"/>
+        <Property Name="SubNetwork" Type="Edm.String" MaxLength="50"/>
+        <Property Name="Site" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Acronym" Type="Edm.String" MaxLength="35"/>
+        <Property Name="LocationGroup" Type="Edm.String" MaxLength="50"/>
+        <Property Name="SiteType" Type="Edm.String" MaxLength="5"/>
+        <Property Name="Status" Type="Edm.String" MaxLength="4"/>
+        <Property Name="OrderType" Type="Edm.String" MaxLength="3"/>
+        <Property Name="TankNum" Type="Edm.String" MaxLength="10"/>
+        <Property Name="MaterialId" Type="Edm.String" MaxLength="18"/>
+        <Property Name="MaterialDesc" Type="Edm.String" MaxLength="40"/>
+        <Property Name="Suppl_Qty" Type="Edm.Decimal" Precision="13" Scale="2"/>
+        <Property Name="Suppl_Uom" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Suppl_Date" Type="Edm.Date"/>
+        <Property Name="Suppl_Time" Type="Edm.String" MaxLength="10"/>
+        <Property Name="TotQty" Type="Edm.Decimal" Precision="8" Scale="2"/>
+        <Property Name="ordercount" Type="Edm.Int32"/>
+      </EntityType>
+      <EntityType Name="POSSales">
+        <Key>
+          <PropertyRef Name="SiteTrnID"/>
+        </Key>
+        <Property Name="SiteTrnID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="PrimaryNetwork" Type="Edm.String" MaxLength="50"/>
+        <Property Name="TRN_TIMESTAMP" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="Site" Type="Edm.String" MaxLength="10"/>
+        <Property Name="Acronym" Type="Edm.String" MaxLength="35"/>
+        <Property Name="LocationGroup" Type="Edm.String" MaxLength="50"/>
+        <Property Name="SiteType" Type="Edm.String" MaxLength="5"/>
+        <NavigationProperty Name="MATERIAL" Type="CardService.Materials">
+          <ReferentialConstraint Property="MATERIAL_MaterialId" ReferencedProperty="MaterialId"/>
+        </NavigationProperty>
+        <Property Name="MATERIAL_MaterialId" Type="Edm.String" MaxLength="18"/>
+        <Property Name="AMOUNT" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="transcount" Type="Edm.Int32"/>
+      </EntityType>
+      <EntityType Name="POSANALYTICS">
+        <Key>
+          <PropertyRef Name="Site"/>
+        </Key>
+        <Property Name="Site" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="MaterialGroup" Type="Edm.String" MaxLength="25"/>
+        <Property Name="PrimaryNetwork" Type="Edm.String" MaxLength="50"/>
+        <Property Name="Amount" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="YearOfPay" Type="Edm.String" MaxLength="4"/>
+        <Property Name="MOP_TYPE" Type="Edm.String" MaxLength="10"/>
+        <Property Name="CURRENCY" Type="Edm.String" MaxLength="6"/>
+        <Property Name="YEARTODATEAMOUNT" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="TOTAMOUNT" Type="Edm.Decimal" Precision="15" Scale="2"/>
+      </EntityType>
+      <EntityType Name="POSBYMATGRPVIEW">
+        <Key>
+          <PropertyRef Name="MaterialGroup"/>
+        </Key>
+        <Property Name="MaterialGroup" Type="Edm.String" MaxLength="25" Nullable="false"/>
+        <Property Name="YearOfPay" Type="Edm.String" MaxLength="4"/>
+        <Property Name="Amount" Type="Edm.Decimal" Precision="15" Scale="2"/>
+      </EntityType>
+      <EntityType Name="POSBYPRIMNW">
+        <Key>
+          <PropertyRef Name="PrimaryNetwork"/>
+          <PropertyRef Name="YearOfPay"/>
+        </Key>
+        <Property Name="PrimaryNetwork" Type="Edm.String" MaxLength="50" Nullable="false"/>
+        <Property Name="YearOfPay" Type="Edm.String" MaxLength="4" Nullable="false"/>
+        <Property Name="Amount" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="TOTAMOUNT" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="YEARTODATEAMOUNT" Type="Edm.Decimal" Precision="15" Scale="2"/>
+      </EntityType>
+      <EntityType Name="POSBYPRIMNWBYYEAR">
+        <Key>
+          <PropertyRef Name="PrimaryNetwork"/>
+          <PropertyRef Name="YearOfPay"/>
+        </Key>
+        <Property Name="PrimaryNetwork" Type="Edm.String" MaxLength="50" Nullable="false"/>
+        <Property Name="YearOfPay" Type="Edm.String" MaxLength="4" Nullable="false"/>
+        <Property Name="Amount" Type="Edm.Decimal" Precision="15" Scale="2"/>
+      </EntityType>
+      <EntityType Name="POSBYMATGRPYEARLY">
+        <Key>
+          <PropertyRef Name="MaterialGroup"/>
+          <PropertyRef Name="YearOfPay"/>
+        </Key>
+        <Property Name="MaterialGroup" Type="Edm.String" MaxLength="25" Nullable="false"/>
+        <Property Name="YearOfPay" Type="Edm.String" MaxLength="4" Nullable="false"/>
+        <Property Name="Amount" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="TOTAMOUNT" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="YEARTODATEAMOUNT" Type="Edm.Decimal" Precision="15" Scale="2"/>
+      </EntityType>
+      <EntityType Name="POSBYMOP">
+        <Key>
+          <PropertyRef Name="MOP_TYPE"/>
+          <PropertyRef Name="YearOfPay"/>
+        </Key>
+        <Property Name="MOP_TYPE" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="YearOfPay" Type="Edm.String" MaxLength="4" Nullable="false"/>
+        <Property Name="TOTAMOUNT" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="Amount" Type="Edm.Decimal" Precision="15" Scale="2"/>
+      </EntityType>
+      <EntityType Name="POSBYSITE">
+        <Key>
+          <PropertyRef Name="Site"/>
+        </Key>
+        <Property Name="Site" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="Amount" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="TOTAMOUNT" Type="Edm.Decimal" Precision="15" Scale="2"/>
+        <Property Name="CountOfTrans" Type="Edm.Int32"/>
+      </EntityType>
+      <Action Name="UploadTableData" IsBound="false">
+        <Parameter Name="tablename" Type="Edm.String"/>
+        <Parameter Name="data" Type="Edm.String"/>
+      </Action>
+      <Annotations Target="CardService.EntityContainer/Materials">
+        <Annotation Term="Capabilities.SearchRestrictions">
+          <Record Type="Capabilities.SearchRestrictionsType">
+            <PropertyValue Property="Searchable" Bool="true"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="true"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.Materials/RegUser">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CardService.TankInventory/createdAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+      </Annotations>
+      <Annotations Target="CardService.TankInventory/createdBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+      </Annotations>
+      <Annotations Target="CardService.TankInventory/modifiedAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+      </Annotations>
+      <Annotations Target="CardService.TankInventory/modifiedBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+      </Annotations>
+      <Annotations Target="CardService.MeterReadings/createdAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+      </Annotations>
+      <Annotations Target="CardService.MeterReadings/createdBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+      </Annotations>
+      <Annotations Target="CardService.MeterReadings/modifiedAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+      </Annotations>
+      <Annotations Target="CardService.MeterReadings/modifiedBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+      </Annotations>
+      <Annotations Target="CardService.Reconciliation/createdAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+      </Annotations>
+      <Annotations Target="CardService.Reconciliation/createdBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+      </Annotations>
+      <Annotations Target="CardService.Reconciliation/modifiedAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+      </Annotations>
+      <Annotations Target="CardService.Reconciliation/modifiedBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+      </Annotations>
+      <Annotations Target="CardService.ForecastCalculation/createdAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+      </Annotations>
+      <Annotations Target="CardService.ForecastCalculation/createdBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+      </Annotations>
+      <Annotations Target="CardService.ForecastCalculation/modifiedAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+      </Annotations>
+      <Annotations Target="CardService.ForecastCalculation/modifiedBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+      </Annotations>
+      <Annotations Target="CardService.DemandForecast/createdAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+      </Annotations>
+      <Annotations Target="CardService.DemandForecast/createdBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+      </Annotations>
+      <Annotations Target="CardService.DemandForecast/modifiedAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+      </Annotations>
+      <Annotations Target="CardService.DemandForecast/modifiedBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+      </Annotations>
+      <Annotations Target="CardService.DemandForecast/Site_Site">
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="Label" String="SiteDetails"/>
+            <PropertyValue Property="CollectionPath" String="SiteDetails"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="Site_Site"/>
+                  <PropertyValue Property="ValueListProperty" String="Site"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Ext_Bp"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Acronym"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Name1"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Name2"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Name3"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Name4"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Street1"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Street2"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="HouseNum"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Floor"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="City"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="District"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Country"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Langu"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="ZipCode"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Phone"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Mobile"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Email"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="ContactName"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Role"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Job"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Dptmt"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Latitude"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Longitude"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Status"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="RegUser"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="PrimaryNetwork"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="SubNetwork"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="LocationGroup"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.DemandForecast/Site_SiteType">
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="Label" String="SiteDetails"/>
+            <PropertyValue Property="CollectionPath" String="SiteDetails"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="Site_SiteType"/>
+                  <PropertyValue Property="ValueListProperty" String="Site"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Ext_Bp"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Acronym"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Name1"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Name2"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Name3"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Name4"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Street1"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Street2"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="HouseNum"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Floor"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="City"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="District"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Country"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Langu"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="ZipCode"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Phone"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Mobile"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Email"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="ContactName"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Role"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Job"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Dptmt"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Latitude"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Longitude"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Status"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="RegUser"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="PrimaryNetwork"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="SubNetwork"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="LocationGroup"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.DemandForecast/Forecast_Qty">
+        <Annotation Term="Analytics.Measure" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CardService.forecastDemand">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.EntityContainer/forecastDemand">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.forecastDemand/Site">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Site"/>
+      </Annotations>
+      <Annotations Target="CardService.forecastDemand/PrimaryNetwork">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Primary Network"/>
+      </Annotations>
+      <Annotations Target="CardService.forecastDemand/Tank">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CardService.forecastDemand/MaterialGroup">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Material Group"/>
+      </Annotations>
+      <Annotations Target="CardService.forecastDemand/MaterialDesc">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Material Description"/>
+      </Annotations>
+      <Annotations Target="CardService.forecastDemand/MaterialCategory">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Material Category"/>
+      </Annotations>
+      <Annotations Target="CardService.forecastDemand/Tank_Grp">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CardService.forecastDemand/Critical_Tank">
+        <Annotation Term="Common.Label" String=""/>
+      </Annotations>
+      <Annotations Target="CardService.forecastDemand/Profile_Day">
+        <Annotation Term="Common.Label" String=""/>
+      </Annotations>
+      <Annotations Target="CardService.forecastDemand/Profile_PHD">
+        <Annotation Term="Common.Label" String=""/>
+      </Annotations>
+      <Annotations Target="CardService.forecastDemand/Profile">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Profile"/>
+      </Annotations>
+      <Annotations Target="CardService.forecastDemand/Forecast_Qty">
+        <Annotation Term="Analytics.Measure" Bool="true"/>
+        <Annotation Term="Common.Label" String="Forecast Demand"/>
+      </Annotations>
+      <Annotations Target="CardService.forecastDemand/Forecast_Inv">
+        <Annotation Term="Analytics.Measure" Bool="true"/>
+        <Annotation Term="Common.Label" String="Forecast Inventory"/>
+      </Annotations>
+      <Annotations Target="CardService.forecastDemand/Forecast_Evt">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Forecast Event"/>
+      </Annotations>
+      <Annotations Target="CardService.forecastDemand/ForecastedTimestamp">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Forecast Date Time"/>
+      </Annotations>
+      <Annotations Target="CardService.forecastDemand/Forecast_Month">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Month"/>
+      </Annotations>
+      <Annotations Target="CardService.forecastDemand/Uom">
+        <Annotation Term="Common.Label" String="Unit"/>
+      </Annotations>
+      <Annotations Target="CardService.SitePosDetails/Site_Site">
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="Label" String="SiteDetails"/>
+            <PropertyValue Property="CollectionPath" String="SiteDetails"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="Site_Site"/>
+                  <PropertyValue Property="ValueListProperty" String="Site"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Ext_Bp"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Acronym"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Name1"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Name2"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Name3"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Name4"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Street1"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Street2"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="HouseNum"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Floor"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="City"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="District"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Country"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Langu"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="ZipCode"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Phone"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Mobile"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Email"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="ContactName"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Role"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Job"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Dptmt"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Latitude"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Longitude"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Status"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="RegUser"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="PrimaryNetwork"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="SubNetwork"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="LocationGroup"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.SitePosDetails/Site_SiteType">
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="Label" String="SiteDetails"/>
+            <PropertyValue Property="CollectionPath" String="SiteDetails"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="Site_SiteType"/>
+                  <PropertyValue Property="ValueListProperty" String="Site"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Ext_Bp"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Acronym"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Name1"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Name2"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Name3"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Name4"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Street1"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Street2"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="HouseNum"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Floor"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="City"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="District"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Country"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Langu"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="ZipCode"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Phone"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Mobile"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Email"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="ContactName"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Role"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Job"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Dptmt"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Latitude"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Longitude"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Status"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="RegUser"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="PrimaryNetwork"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="SubNetwork"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="LocationGroup"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.SiteTimings/createdAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+      </Annotations>
+      <Annotations Target="CardService.SiteTimings/createdBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+      </Annotations>
+      <Annotations Target="CardService.SiteTimings/modifiedAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+      </Annotations>
+      <Annotations Target="CardService.SiteTimings/modifiedBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+      </Annotations>
+      <Annotations Target="CardService.SiteTimings/counter">
+        <Annotation Term="Core.ComputedDefaultValue" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CardService.ReplenishmentOrders/createdAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+      </Annotations>
+      <Annotations Target="CardService.ReplenishmentOrders/createdBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+      </Annotations>
+      <Annotations Target="CardService.ReplenishmentOrders/modifiedAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+      </Annotations>
+      <Annotations Target="CardService.ReplenishmentOrders/modifiedBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+      </Annotations>
+      <Annotations Target="CardService.ReplenishmentOrders/Site_Site">
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="Label" String="SiteDetails"/>
+            <PropertyValue Property="CollectionPath" String="SiteDetails"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="Site_Site"/>
+                  <PropertyValue Property="ValueListProperty" String="Site"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Ext_Bp"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Acronym"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Name1"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Name2"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Name3"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Name4"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Street1"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Street2"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="HouseNum"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Floor"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="City"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="District"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Country"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Langu"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="ZipCode"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Phone"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Mobile"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Email"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="ContactName"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Role"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Job"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Dptmt"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Latitude"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Longitude"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Status"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="RegUser"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="PrimaryNetwork"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="SubNetwork"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="LocationGroup"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.ReplenishmentOrders/Site_SiteType">
+        <Annotation Term="Common.ValueList">
+          <Record Type="Common.ValueListType">
+            <PropertyValue Property="Label" String="SiteDetails"/>
+            <PropertyValue Property="CollectionPath" String="SiteDetails"/>
+            <PropertyValue Property="Parameters">
+              <Collection>
+                <Record Type="Common.ValueListParameterInOut">
+                  <PropertyValue Property="LocalDataProperty" PropertyPath="Site_SiteType"/>
+                  <PropertyValue Property="ValueListProperty" String="Site"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Ext_Bp"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Acronym"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Name1"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Name2"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Name3"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Name4"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Street1"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Street2"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="HouseNum"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Floor"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="City"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="District"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Country"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Langu"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="ZipCode"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Phone"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Mobile"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Email"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="ContactName"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Role"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Job"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Dptmt"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Latitude"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Longitude"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="Status"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="RegUser"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="PrimaryNetwork"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="SubNetwork"/>
+                </Record>
+                <Record Type="Common.ValueListParameterDisplayOnly">
+                  <PropertyValue Property="ValueListProperty" String="LocationGroup"/>
+                </Record>
+              </Collection>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.CreatedReplOrders">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.EntityContainer/CreatedReplOrders">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.InventoryData/MQUAN"/>
+      <Annotations Target="CardService.InventoryData/Tarlvl_vol"/>
+      <Annotations Target="CardService.InventoryData/Maxcap_vol"/>
+      <Annotations Target="CardService.TankInventoryVol">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.EntityContainer/TankInventoryVol">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.TankInventoryVol/Tarlvl_vol"/>
+      <Annotations Target="CardService.TankInventoryVol/BTMSAF_VOL"/>
+      <Annotations Target="CardService.TankInventoryVol/Maxcap_vol"/>
+      <Annotations Target="CardService.TankInventoryVol/TargetVolPerecent"/>
+      <Annotations Target="CardService.TankInventoryVol/ActualVolPerecent"/>
+      <Annotations Target="CardService.AggByVolume">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.EntityContainer/AggByVolume">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.AggByVolume/TargetVol">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CardService.AggByVolume/ActualVol">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CardService.VOLBYPROD">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.EntityContainer/VOLBYPROD">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.VOLBYPROD/MaterialDesc">
+        <Annotation Term="Common.Label" String="Material"/>
+      </Annotations>
+      <Annotations Target="CardService.VOLBYPROD/MQUAN">
+        <Annotation Term="Common.Label" String="Inventory"/>
+      </Annotations>
+      <Annotations Target="CardService.VOLBYPROD/Tarlvl_vol">
+        <Annotation Term="Common.Label" String="Target Vol"/>
+      </Annotations>
+      <Annotations Target="CardService.VOLBYPROD/CALCULATEDPERCENT">
+        <Annotation Term="Common.Label" String="Inventory Percent"/>
+      </Annotations>
+      <Annotations Target="CardService.VOLBYPROD/CURRENTUTIL_PERCENT">
+        <Annotation Term="Common.Label" String="Total Current Utilization"/>
+      </Annotations>
+      <Annotations Target="CardService.VOLBYPROD/TARGETVOL_UTIL_PERCENT">
+        <Annotation Term="Common.Label" String="Total Target Utilization"/>
+      </Annotations>
+      <Annotations Target="CardService.VOLBYPROD/CURRENT_UTIL_VOL">
+        <Annotation Term="Common.Label" String="Current Utilization"/>
+      </Annotations>
+      <Annotations Target="CardService.VOLBYPROD/TARGET_UTIL_VOL">
+        <Annotation Term="Common.Label" String="Target Utilization"/>
+      </Annotations>
+      <Annotations Target="CardService.CRITICALTANK">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.EntityContainer/CRITICALTANK">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.CRITICALTANK/MQUAN"/>
+      <Annotations Target="CardService.CRITICALTANK/Tarlvl_vol"/>
+      <Annotations Target="CardService.CRITICALTANK/Maxcap_vol"/>
+      <Annotations Target="CardService.CRITICALTANK/ACTUALVSTARGETPERCENT">
+        <Annotation Term="Common.Label" String="Inventory Percent"/>
+      </Annotations>
+      <Annotations Target="CardService.CARDSANALYTICS">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.EntityContainer/CARDSANALYTICS">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.CARDSANALYTICS/TYPENAME">
+        <Annotation Term="Common.Label" String="Card Type"/>
+      </Annotations>
+      <Annotations Target="CardService.CARDSANALYTICS/GROSSVALUE">
+        <Annotation Term="Common.Label" String="Sales"/>
+      </Annotations>
+      <Annotations Target="CardService.CARDSANALYTICS/TOTALGROSSVALUE">
+        <Annotation Term="Common.Label" String="Total Sales"/>
+      </Annotations>
+      <Annotations Target="CardService.CARDSANALYTICS/VALUECURRENCY">
+        <Annotation Term="Common.Label" String="Currency"/>
+      </Annotations>
+      <Annotations Target="CardService.ACTIVECARDS">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.EntityContainer/ACTIVECARDS">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.ACTIVECARDS/TYPENAME">
+        <Annotation Term="Common.Label" String="Card Type"/>
+      </Annotations>
+      <Annotations Target="CardService.ACTIVECARDS/COUNTOFACTIVECARDS">
+        <Annotation Term="Common.Label" String="Active Cards"/>
+      </Annotations>
+      <Annotations Target="CardService.ACTIVECARDS/TOTACTIVECARDS">
+        <Annotation Term="Common.Label" String="Total Active Cards"/>
+      </Annotations>
+      <Annotations Target="CardService.SalesByProd">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.EntityContainer/SalesByProd">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.SalesByProd/VALUECURRENCY">
+        <Annotation Term="Common.Label" String="Currency"/>
+      </Annotations>
+      <Annotations Target="CardService.SalesByProd/TOTALGROSSVALUE">
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="Total Sales"/>
+      </Annotations>
+      <Annotations Target="CardService.SalesByProd/GROSSVALUE">
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="Sales"/>
+      </Annotations>
+      <Annotations Target="CardService.SalesByCards">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.EntityContainer/SalesByCards">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.SalesByCards/TYPENAME">
+        <Annotation Term="Common.Label" String="Card Type"/>
+      </Annotations>
+      <Annotations Target="CardService.SalesByCards/VALUECURRENCY">
+        <Annotation Term="Common.Label" String="Currency"/>
+      </Annotations>
+      <Annotations Target="CardService.SalesByCards/TOTALGROSSVALUE">
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="Total Sales"/>
+      </Annotations>
+      <Annotations Target="CardService.SalesByCards/GROSSVALUE">
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="Sales"/>
+      </Annotations>
+      <Annotations Target="CardService.SalesByCardNum">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.EntityContainer/SalesByCardNum">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.SalesByCardNum/CARD_CARDNUM">
+        <Annotation Term="Common.Label" String="Card"/>
+      </Annotations>
+      <Annotations Target="CardService.SalesByCardNum/GROSSVALUE">
+        <Annotation Term="Common.Label" String="Sales"/>
+      </Annotations>
+      <Annotations Target="CardService.SalesByCardNum/TOTALGROSSVALUE">
+        <Annotation Term="Common.Label" String="Total Sales"/>
+      </Annotations>
+      <Annotations Target="CardService.SalesByCardNum/VALUECURRENCY">
+        <Annotation Term="Common.Label" String="Currency"/>
+      </Annotations>
+      <Annotations Target="CardService.SalesByCardNum/COUNTOFTRANS">
+        <Annotation Term="Common.Label" String="No. of Drawings"/>
+      </Annotations>
+      <Annotations Target="CardService.COUNTBYSALESNTRANS">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.EntityContainer/COUNTBYSALESNTRANS">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.COUNTBYSALESNTRANS/TYPENAME">
+        <Annotation Term="Common.Label" String="Card Type"/>
+      </Annotations>
+      <Annotations Target="CardService.COUNTBYSALESNTRANS/GROSSVALUE">
+        <Annotation Term="Common.Label" String="Sales"/>
+      </Annotations>
+      <Annotations Target="CardService.COUNTBYSALESNTRANS/TOTALGROSSVALUE">
+        <Annotation Term="Common.Label" String="Total Sales"/>
+      </Annotations>
+      <Annotations Target="CardService.COUNTBYSALESNTRANS/VALUECURRENCY">
+        <Annotation Term="Common.Label" String="Currency"/>
+      </Annotations>
+      <Annotations Target="CardService.COUNTBYSALESNTRANS/COUNTOFACTIVECARDS">
+        <Annotation Term="Common.Label" String="Active Cards"/>
+      </Annotations>
+      <Annotations Target="CardService.COUNTBYSALESNTRANS/COUNTOFTRANS">
+        <Annotation Term="Common.Label" String="Drawings"/>
+      </Annotations>
+      <Annotations Target="CardService.SalesPerMonthByProd">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.EntityContainer/SalesPerMonthByProd">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.SalesPerMonthByProd/PRODUCT">
+        <Annotation Term="Common.Label" String="Product"/>
+      </Annotations>
+      <Annotations Target="CardService.SalesPerMonthByProd/MONTH">
+        <Annotation Term="Common.Label" String="Month"/>
+      </Annotations>
+      <Annotations Target="CardService.SalesPerMonthByProd/MONTHSBETWEEN">
+        <Annotation Term="Common.Label" String="Month Between"/>
+      </Annotations>
+      <Annotations Target="CardService.SalesPerMonthByProd/GROSSVALUE">
+        <Annotation Term="Common.Label" String="Sales"/>
+      </Annotations>
+      <Annotations Target="CardService.SalesPerMonthByProd/TOTALGROSSVALUE">
+        <Annotation Term="Common.Label" String="Total Sales"/>
+      </Annotations>
+      <Annotations Target="CardService.SalesPerMonthByProd/VALUECURRENCY">
+        <Annotation Term="Common.Label" String="Currency"/>
+      </Annotations>
+      <Annotations Target="CardService.POSSalesY2D">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.EntityContainer/POSSalesY2D">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.POSSalesY2D/SiteTrnID">
+        <Annotation Term="Common.Label" String="Transaction ID"/>
+      </Annotations>
+      <Annotations Target="CardService.POSSalesY2D/PrimaryNetwork">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Primary Network"/>
+      </Annotations>
+      <Annotations Target="CardService.POSSalesY2D/SubNetwork">
+        <Annotation Term="Common.Label" String="Sub Network"/>
+      </Annotations>
+      <Annotations Target="CardService.POSSalesY2D/Site">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Site No"/>
+      </Annotations>
+      <Annotations Target="CardService.POSSalesY2D/Acronym">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Site Acronym"/>
+      </Annotations>
+      <Annotations Target="CardService.POSSalesY2D/LocationGroup">
+        <Annotation Term="Common.Label" String="Loc Grp"/>
+      </Annotations>
+      <Annotations Target="CardService.POSSalesY2D/MOP_TYPE">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Method of Payment"/>
+      </Annotations>
+      <Annotations Target="CardService.POSSalesY2D/SYS_AUDIT_NO">
+        <Annotation Term="Common.Label" String="Sys Audit No"/>
+      </Annotations>
+      <Annotations Target="CardService.POSSalesY2D/TRN_TIMESTAMP">
+        <Annotation Term="Common.Label" String="Transaction Date"/>
+      </Annotations>
+      <Annotations Target="CardService.POSSalesY2D/MATERIAL">
+        <Annotation Term="Common.Label" String="Material"/>
+      </Annotations>
+      <Annotations Target="CardService.POSSalesY2D/MATERIAL_MaterialId">
+        <Annotation Term="Common.Label" String="Material"/>
+      </Annotations>
+      <Annotations Target="CardService.POSSalesY2D/MaterialGroup">
+        <Annotation Term="Common.Label" String="Material Group"/>
+      </Annotations>
+      <Annotations Target="CardService.POSSalesY2D/Amount">
+        <Annotation Term="Analytics.Measure" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="Gross Amount"/>
+      </Annotations>
+      <Annotations Target="CardService.Orders">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.EntityContainer/Orders">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.Orders/PrimaryNetwork">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Primary Network"/>
+      </Annotations>
+      <Annotations Target="CardService.Orders/SubNetwork">
+        <Annotation Term="Common.Label" String="Sub Network"/>
+      </Annotations>
+      <Annotations Target="CardService.Orders/Site">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Site No"/>
+      </Annotations>
+      <Annotations Target="CardService.Orders/Acronym">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Site Acronym"/>
+      </Annotations>
+      <Annotations Target="CardService.Orders/LocationGroup">
+        <Annotation Term="Common.Label" String="Loc Grp"/>
+      </Annotations>
+      <Annotations Target="CardService.Orders/Status">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CardService.Orders/TankNum">
+        <Annotation Term="Common.Label" String="Tank"/>
+      </Annotations>
+      <Annotations Target="CardService.Orders/MaterialId">
+        <Annotation Term="Common.Label" String="Material"/>
+      </Annotations>
+      <Annotations Target="CardService.Orders/MaterialDesc">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Material"/>
+      </Annotations>
+      <Annotations Target="CardService.Orders/Suppl_Qty">
+        <Annotation Term="Analytics.Measure" Bool="true"/>
+        <Annotation Term="Common.Label" String="Quantity"/>
+      </Annotations>
+      <Annotations Target="CardService.Orders/Suppl_Uom">
+        <Annotation Term="Common.Label" String="Uom"/>
+      </Annotations>
+      <Annotations Target="CardService.Orders/Suppl_Date">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Supply Date"/>
+      </Annotations>
+      <Annotations Target="CardService.Orders/Suppl_Time">
+        <Annotation Term="Common.Label" String="Supply Time"/>
+      </Annotations>
+      <Annotations Target="CardService.Orders/ordercount">
+        <Annotation Term="Analytics.Measure" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="Order Item Count"/>
+      </Annotations>
+      <Annotations Target="CardService.PriorityOrders">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.EntityContainer/PriorityOrders">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.PriorityOrders/PrimaryNetwork">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Primary Network"/>
+      </Annotations>
+      <Annotations Target="CardService.PriorityOrders/SubNetwork">
+        <Annotation Term="Common.Label" String="Sub Network"/>
+      </Annotations>
+      <Annotations Target="CardService.PriorityOrders/Site">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Site No"/>
+      </Annotations>
+      <Annotations Target="CardService.PriorityOrders/Acronym">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Site Acronym"/>
+      </Annotations>
+      <Annotations Target="CardService.PriorityOrders/LocationGroup">
+        <Annotation Term="Common.Label" String="Loc Grp"/>
+      </Annotations>
+      <Annotations Target="CardService.PriorityOrders/Status">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CardService.PriorityOrders/TankNum">
+        <Annotation Term="Common.Label" String="Tank"/>
+      </Annotations>
+      <Annotations Target="CardService.PriorityOrders/MaterialId">
+        <Annotation Term="Common.Label" String="Material"/>
+      </Annotations>
+      <Annotations Target="CardService.PriorityOrders/MaterialDesc">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Material"/>
+      </Annotations>
+      <Annotations Target="CardService.PriorityOrders/Suppl_Qty">
+        <Annotation Term="Analytics.Measure" Bool="true"/>
+        <Annotation Term="Common.Label" String="Quantity"/>
+      </Annotations>
+      <Annotations Target="CardService.PriorityOrders/Suppl_Uom">
+        <Annotation Term="Common.Label" String="Uom"/>
+      </Annotations>
+      <Annotations Target="CardService.PriorityOrders/Suppl_Date">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Supply Date"/>
+      </Annotations>
+      <Annotations Target="CardService.PriorityOrders/Suppl_Time">
+        <Annotation Term="Common.Label" String="Supply Time"/>
+      </Annotations>
+      <Annotations Target="CardService.PriorityOrders/ordercount">
+        <Annotation Term="Analytics.Measure" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="Order Item Count"/>
+      </Annotations>
+      <Annotations Target="CardService.POSSales">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.EntityContainer/POSSales">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.POSSales/SiteTrnID">
+        <Annotation Term="Common.Label" String="Tramsaction ID"/>
+      </Annotations>
+      <Annotations Target="CardService.POSSales/PrimaryNetwork">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Primary Network"/>
+      </Annotations>
+      <Annotations Target="CardService.POSSales/TRN_TIMESTAMP">
+        <Annotation Term="Common.Label" String="Transaction Date"/>
+      </Annotations>
+      <Annotations Target="CardService.POSSales/Site">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Site No"/>
+      </Annotations>
+      <Annotations Target="CardService.POSSales/Acronym">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Site Acronym"/>
+      </Annotations>
+      <Annotations Target="CardService.POSSales/LocationGroup">
+        <Annotation Term="Common.Label" String="Loc Grp"/>
+      </Annotations>
+      <Annotations Target="CardService.POSSales/MATERIAL">
+        <Annotation Term="Common.Label" String="Material No"/>
+      </Annotations>
+      <Annotations Target="CardService.POSSales/MATERIAL_MaterialId">
+        <Annotation Term="Analytics.Dimension" Bool="true"/>
+        <Annotation Term="Common.Label" String="Material No"/>
+      </Annotations>
+      <Annotations Target="CardService.POSSales/AMOUNT">
+        <Annotation Term="Analytics.Measure" Bool="true"/>
+      </Annotations>
+      <Annotations Target="CardService.POSSales/transcount">
+        <Annotation Term="Analytics.Measure" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="Transaction Count"/>
+      </Annotations>
+      <Annotations Target="CardService.POSANALYTICS">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.EntityContainer/POSANALYTICS">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.POSANALYTICS/Amount"/>
+      <Annotations Target="CardService.POSBYMATGRPVIEW">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.EntityContainer/POSBYMATGRPVIEW">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.POSBYMATGRPVIEW/MaterialGroup">
+        <Annotation Term="Common.Label" String="Material Group"/>
+      </Annotations>
+      <Annotations Target="CardService.POSBYMATGRPVIEW/YearOfPay">
+        <Annotation Term="Common.Label" String="Year"/>
+      </Annotations>
+      <Annotations Target="CardService.POSBYMATGRPVIEW/Amount">
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="Total Sales"/>
+      </Annotations>
+      <Annotations Target="CardService.POSBYPRIMNW">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.EntityContainer/POSBYPRIMNW">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.POSBYPRIMNW/PrimaryNetwork">
+        <Annotation Term="Common.Label" String="Primary Network"/>
+      </Annotations>
+      <Annotations Target="CardService.POSBYPRIMNW/YearOfPay">
+        <Annotation Term="Common.Label" String="Year"/>
+      </Annotations>
+      <Annotations Target="CardService.POSBYPRIMNW/Amount">
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="Total Sales"/>
+      </Annotations>
+      <Annotations Target="CardService.POSBYPRIMNW/TOTAMOUNT">
+        <Annotation Term="Common.Label" String="Total Sales"/>
+      </Annotations>
+      <Annotations Target="CardService.POSBYPRIMNW/YEARTODATEAMOUNT">
+        <Annotation Term="Common.Label" String="Year to Date Sales"/>
+      </Annotations>
+      <Annotations Target="CardService.POSBYPRIMNWBYYEAR">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.EntityContainer/POSBYPRIMNWBYYEAR">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.POSBYPRIMNWBYYEAR/PrimaryNetwork">
+        <Annotation Term="Common.Label" String="Primary Network"/>
+      </Annotations>
+      <Annotations Target="CardService.POSBYPRIMNWBYYEAR/YearOfPay">
+        <Annotation Term="Common.Label" String="Year"/>
+      </Annotations>
+      <Annotations Target="CardService.POSBYPRIMNWBYYEAR/Amount">
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="Total Sales"/>
+      </Annotations>
+      <Annotations Target="CardService.POSBYMATGRPYEARLY">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.EntityContainer/POSBYMATGRPYEARLY">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.POSBYMATGRPYEARLY/MaterialGroup">
+        <Annotation Term="Common.Label" String="Material Group"/>
+      </Annotations>
+      <Annotations Target="CardService.POSBYMATGRPYEARLY/YearOfPay">
+        <Annotation Term="Common.Label" String="Year"/>
+      </Annotations>
+      <Annotations Target="CardService.POSBYMATGRPYEARLY/Amount">
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="Total Sales"/>
+      </Annotations>
+      <Annotations Target="CardService.POSBYMATGRPYEARLY/TOTAMOUNT">
+        <Annotation Term="Common.Label" String="Total Sales"/>
+      </Annotations>
+      <Annotations Target="CardService.POSBYMATGRPYEARLY/YEARTODATEAMOUNT">
+        <Annotation Term="Common.Label" String="Year to Date Sales"/>
+      </Annotations>
+      <Annotations Target="CardService.POSBYMOP">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.EntityContainer/POSBYMOP">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.POSBYMOP/MOP_TYPE">
+        <Annotation Term="Common.Label" String="Method Of Payment"/>
+      </Annotations>
+      <Annotations Target="CardService.POSBYMOP/YearOfPay">
+        <Annotation Term="Common.Label" String="Year"/>
+      </Annotations>
+      <Annotations Target="CardService.POSBYMOP/TOTAMOUNT">
+        <Annotation Term="Common.Label" String="Total Sales"/>
+      </Annotations>
+      <Annotations Target="CardService.POSBYMOP/Amount">
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="Total Sales"/>
+      </Annotations>
+      <Annotations Target="CardService.POSBYSITE">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.EntityContainer/POSBYSITE">
+        <Annotation Term="Aggregation.ApplySupported">
+          <Record Type="Aggregation.ApplySupportedType">
+            <PropertyValue Property="PropertyRestrictions" Bool="true"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="CardService.POSBYSITE/Site">
+        <Annotation Term="Common.Label" String="Site"/>
+      </Annotations>
+      <Annotations Target="CardService.POSBYSITE/Amount">
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="Total Sales"/>
+      </Annotations>
+      <Annotations Target="CardService.POSBYSITE/TOTAMOUNT">
+        <Annotation Term="Common.Label" String="Total Sales"/>
+      </Annotations>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

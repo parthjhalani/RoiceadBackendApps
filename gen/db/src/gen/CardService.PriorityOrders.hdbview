@@ -1,0 +1,21 @@
+VIEW CardService_PriorityOrders AS SELECT
+  PriorityOrders_0.OrderNo,
+  PriorityOrders_0.Item,
+  PriorityOrders_0.PrimaryNetwork,
+  PriorityOrders_0.SubNetwork,
+  PriorityOrders_0.Site,
+  PriorityOrders_0.Acronym,
+  PriorityOrders_0.LocationGroup,
+  PriorityOrders_0.SiteType,
+  PriorityOrders_0.Status,
+  PriorityOrders_0.OrderType,
+  PriorityOrders_0.TankNum,
+  PriorityOrders_0.MaterialId,
+  PriorityOrders_0.MaterialDesc,
+  PriorityOrders_0.Suppl_Qty,
+  PriorityOrders_0.Suppl_Uom,
+  PriorityOrders_0.Suppl_Date,
+  PriorityOrders_0.Suppl_Time,
+  PriorityOrders_0.TotQty,
+  PriorityOrders_0.ordercount
+FROM my_roicead_PriorityOrders AS PriorityOrders_0

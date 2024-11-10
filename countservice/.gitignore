@@ -1,0 +1,7 @@
+/node_modules/
+/reports/
+
+# auto generated wildcard
+mydbtest/db/.env
+# auto generated wildcard
+mydbtest/.env

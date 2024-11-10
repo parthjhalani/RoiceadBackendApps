@@ -1,0 +1,16 @@
+VIEW CardService_Variants AS SELECT
+  Variants_0.VariantId,
+  Variants_0.Username,
+  Variants_0.appName,
+  Variants_0.CardToken,
+  Variants_0.Token3,
+  Variants_0.Token4,
+  Variants_0.Token5,
+  Variants_0.isDefault,
+  Variants_0.isApplyAuto,
+  Variants_0.VaraintName,
+  Variants_0.TransToken,
+  Variants_0.searchString,
+  Variants_0.ConfirmedDarwings,
+  Variants_0.productSearch
+FROM my_roicead_Variants AS Variants_0

@@ -1,0 +1,15 @@
+COLUMN TABLE my_roicead_SiteTimings (
+  createdAt TIMESTAMP,
+  createdBy NVARCHAR(255),
+  modifiedAt TIMESTAMP,
+  modifiedBy NVARCHAR(255),
+  counter NVARCHAR(36) NOT NULL,
+  Site NVARCHAR(10),
+  Hours_Type NVARCHAR(10),
+  Hours_Day NVARCHAR(14),
+  Day_no INTEGER,
+  Hours_From TIME,
+  Hours_To TIME,
+  flag_24_7 BOOLEAN,
+  PRIMARY KEY(counter)
+)

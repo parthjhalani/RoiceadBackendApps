@@ -1,0 +1,14 @@
+VIEW CardService_SitePosItems AS SELECT
+  SitePosItems_0.SiteTrnID,
+  SitePosItems_0.SiteTrnItem,
+  SitePosItems_0.MATERIAL_MaterialId,
+  SitePosItems_0.QUANTITIY,
+  SitePosItems_0.UOM,
+  SitePosItems_0.UNIT_PRICE,
+  SitePosItems_0.AMOUNT,
+  SitePosItems_0.CURRENCY,
+  SitePosItems_0.VAT_PERC
+FROM my_roicead_SitePosItems AS SitePosItems_0
+WITH ASSOCIATIONS (
+  MANY TO ONE JOIN CardService_Materials AS MATERIAL ON (MATERIAL.MaterialId = MATERIAL_MaterialId)
+)

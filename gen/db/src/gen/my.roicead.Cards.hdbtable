@@ -1,0 +1,23 @@
+COLUMN TABLE my_roicead_Cards (
+  CardNum NVARCHAR(20) NOT NULL,
+  SupplierName NVARCHAR(40),
+  TypeName NVARCHAR(20),
+  Driver NVARCHAR(40),
+  VehRegNum NVARCHAR(15),
+  Customer NVARCHAR(10),
+  CustomerName NVARCHAR(40),
+  SalesOrgName NVARCHAR(20),
+  SalesOffName NVARCHAR(20),
+  Status NVARCHAR(10),
+  ExpiryDate TIMESTAMP,
+  BlockDate TIMESTAMP,
+  BlockReason NVARCHAR(20),
+  CancelDate TIMESTAMP,
+  CancelReason NVARCHAR(20),
+  IssueDate TIMESTAMP,
+  OrigIssueDate TIMESTAMP,
+  Bpno NVARCHAR(10),
+  PRIMARY KEY(CardNum)
+) WITH ASSOCIATIONS (
+  MANY TO MANY JOIN my_roicead_Drawings AS Drawings ON (Drawings.Card_CardNum = CardNum)
+)

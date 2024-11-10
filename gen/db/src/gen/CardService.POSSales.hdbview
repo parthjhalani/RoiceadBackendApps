@@ -1,0 +1,15 @@
+VIEW CardService_POSSales AS SELECT
+  POSSales_0.SiteTrnID,
+  POSSales_0.PrimaryNetwork,
+  POSSales_0.TRN_TIMESTAMP,
+  POSSales_0.Site,
+  POSSales_0.Acronym,
+  POSSales_0.LocationGroup,
+  POSSales_0.SiteType,
+  POSSales_0.MATERIAL_MaterialId,
+  POSSales_0.AMOUNT,
+  POSSales_0.transcount
+FROM my_roicead_POSSales AS POSSales_0
+WITH ASSOCIATIONS (
+  MANY TO ONE JOIN CardService_Materials AS MATERIAL ON (MATERIAL.MaterialId = MATERIAL_MaterialId)
+)

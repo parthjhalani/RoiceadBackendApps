@@ -1,0 +1,23 @@
+VIEW CardService_ForecastCalculation AS SELECT
+  ForecastCalculation_0.createdAt,
+  ForecastCalculation_0.createdBy,
+  ForecastCalculation_0.modifiedAt,
+  ForecastCalculation_0.modifiedBy,
+  ForecastCalculation_0.Site,
+  ForecastCalculation_0.Tank,
+  ForecastCalculation_0.Forecast_date,
+  ForecastCalculation_0.Forecast_time,
+  ForecastCalculation_0.Entry_Type,
+  ForecastCalculation_0.Material,
+  ForecastCalculation_0.Tank_Grp,
+  ForecastCalculation_0.Critical_Tank,
+  ForecastCalculation_0.Profile_Day,
+  ForecastCalculation_0.Profile_PHD,
+  ForecastCalculation_0.Profile,
+  ForecastCalculation_0.Profile_Type,
+  ForecastCalculation_0.Factor,
+  ForecastCalculation_0.Forecast_Qty,
+  ForecastCalculation_0.Forecast_Inv,
+  ForecastCalculation_0.Forecast_Evt,
+  ForecastCalculation_0.ForecastedTimestamp
+FROM my_roicead_ForecastCalculation AS ForecastCalculation_0

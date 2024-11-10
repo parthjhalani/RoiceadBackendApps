@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="MY_ROICEAD_RECONCILIATIONQNY" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="HOURLY" enforceSqlExecution="false">
+<descriptions defaultDescription="MY_ROICEAD_RECONCILIATIONQNY"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="MY_ROICEAD_METERRECONCILIATION">
+    <resourceUri>MY_ROICEAD_METERRECONCILIATION</resourceUri>
+  </DataSource>
+  <DataSource id="YEAR$$$$MY_ROICEAD_METERRECONCILIATION$$">
+    <resourceUri>MY_ROICEAD_METERRECONCILIATION</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="QUARTER" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="SITE"/>
+      <viewAttribute id="TANKNUM"/>
+      <viewAttribute id="RECONCDATE"/>
+      <viewAttribute id="DIFFQTY_Q"/>
+      <viewAttribute id="DIFFPERCENT_Q"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="DIFF_QTYQUARTER" datatype="DECIMAL" length="15" scale="4" expressionLanguage="SQL">
+        <formula>TO_DECIMAL(&quot;DIFFQTY_Q&quot;)</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="DIFF_PERQUARTER" datatype="DECIMAL" length="15" scale="4" expressionLanguage="SQL">
+        <formula>TO_DECIMAL(&quot;DIFFPERCENT_Q&quot;)</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="MY_ROICEAD_METERRECONCILIATION">
+      <mapping xsi:type="Calculation:AttributeMapping" target="DIFFQTY_Q" source="DIFFQTY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DIFFPERCENT_Q" source="DIFFPERCENT"/>
+    </input>
+    <filter>QUARTER(&quot;RECONCDATE&quot;) = QUARTER(CURRENT_DATE)</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="YEAR" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="DIFFPERCENT_Y"/>
+      <viewAttribute id="DIFFQTY_Y"/>
+      <viewAttribute id="RECONCDATE"/>
+      <viewAttribute id="SITE"/>
+      <viewAttribute id="TANKNUM"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="DIFF_QTYYEAR" datatype="DECIMAL" length="15" scale="4" expressionLanguage="SQL">
+        <formula>TO_DECIMAL(&quot;DIFFQTY_Y&quot;)</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="DIFF_PERCYEAR" datatype="DECIMAL" length="15" scale="4" expressionLanguage="SQL">
+        <formula>TO_DECIMAL(&quot;DIFFPERCENT_Y&quot;)</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="YEAR$$$$MY_ROICEAD_METERRECONCILIATION$$">
+      <mapping xsi:type="Calculation:AttributeMapping" target="DIFFPERCENT_Y" source="DIFFPERCENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DIFFQTY_Y" source="DIFFQTY"/>
+    </input>
+    <filter>EXTRACT_YEAR(&quot;RECONCDATE&quot;) = EXTRACT_YEAR(CURRENT_DATE)</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="leftOuter">
+    <viewAttributes>
+      <viewAttribute id="SITE"/>
+      <viewAttribute id="TANKNUM"/>
+      <viewAttribute id="DIFF_QTYQUARTER" aggregationType="sum"/>
+      <viewAttribute id="DIFF_PERQUARTER" aggregationType="sum"/>
+      <viewAttribute id="DIFF_QTYYEAR" aggregationType="sum"/>
+      <viewAttribute id="DIFF_PERCYEAR" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="CCDIFF_PERQUARTER" datatype="DECIMAL" length="15" scale="4" expressionLanguage="SQL">
+        <formula>DIFF_PERQUARTER / 10</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="CCDIFF_QTYQUARTER" datatype="DECIMAL" length="15" scale="4" expressionLanguage="SQL">
+        <formula>DIFF_QTYQUARTER / 10</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="CCDIFF_QTYYEAR" datatype="DECIMAL" length="15" scale="4" expressionLanguage="SQL">
+        <formula>DIFF_QTYYEAR / 10</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="CCDIFF_PERCYEAR" datatype="DECIMAL" length="15" scale="4" expressionLanguage="SQL">
+        <formula>DIFF_PERCYEAR / 10</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="QUARTER">
+      <mapping xsi:type="Calculation:AttributeMapping" target="SITE" source="SITE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TANKNUM" source="TANKNUM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DIFF_QTYQUARTER" source="DIFF_QTYQUARTER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DIFF_PERQUARTER" source="DIFF_PERQUARTER"/>
+    </input>
+    <input node="YEAR">
+      <mapping xsi:type="Calculation:AttributeMapping" target="DIFF_QTYYEAR" source="DIFF_QTYYEAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DIFF_PERCYEAR" source="DIFF_PERCYEAR"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SITE" source="SITE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TANKNUM" source="TANKNUM"/>
+    </input>
+    <joinAttribute name="SITE"/>
+    <joinAttribute name="TANKNUM"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="SITE" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SITE"/>
+      <keyMapping columnObjectName="Join_1" columnName="SITE"/>
+    </attribute>
+    <attribute id="TANKNUM" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TANKNUM"/>
+      <keyMapping columnObjectName="Join_1" columnName="TANKNUM"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="DIFF_QTYQUARTER" order="3" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="DIFF_QTYQUARTER"/>
+      <measureMapping columnObjectName="Join_1" columnName="DIFF_QTYQUARTER"/>
+    </measure>
+    <measure id="DIFF_PERQUARTER" order="4" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="DIFF_PERQUARTER"/>
+      <measureMapping columnObjectName="Join_1" columnName="DIFF_PERQUARTER"/>
+    </measure>
+    <measure id="DIFF_QTYYEAR" order="5" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="DIFF_QTYYEAR"/>
+      <measureMapping columnObjectName="Join_1" columnName="DIFF_QTYYEAR"/>
+    </measure>
+    <measure id="DIFF_PERCYEAR" order="6" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="DIFF_PERCYEAR"/>
+      <measureMapping columnObjectName="Join_1" columnName="DIFF_PERCYEAR"/>
+    </measure>
+    <measure id="CCDIFF_PERQUARTER" order="7" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="CCDIFF_PERQUARTER"/>
+      <measureMapping columnObjectName="Join_1" columnName="CCDIFF_PERQUARTER"/>
+    </measure>
+    <measure id="CCDIFF_QTYQUARTER" order="8" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="CCDIFF_QTYQUARTER"/>
+      <measureMapping columnObjectName="Join_1" columnName="CCDIFF_QTYQUARTER"/>
+    </measure>
+    <measure id="CCDIFF_QTYYEAR" order="9" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="CCDIFF_QTYYEAR"/>
+      <measureMapping columnObjectName="Join_1" columnName="CCDIFF_QTYYEAR"/>
+    </measure>
+    <measure id="CCDIFF_PERCYEAR" order="10" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="CCDIFF_PERCYEAR"/>
+      <measureMapping columnObjectName="Join_1" columnName="CCDIFF_PERCYEAR"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="221" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="QUARTER" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="376"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="YEAR" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302" y="376"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="221" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="QUARTER" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="192"/>
+    </shape>
+    <shape modelObjectName="YEAR" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="177"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

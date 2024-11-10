@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="MY_ROICEAD_CRITICALTANK" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="HOURLY" enforceSqlExecution="false">
+<descriptions defaultDescription="MY_ROICEAD_CRITICALTANK"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="MY_ROICEAD_INVENTORYDATA1">
+    <resourceUri>MY_ROICEAD_INVENTORYDATA1</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="SITE"/>
+      <viewAttribute id="TANKNUM"/>
+      <viewAttribute id="ID"/>
+      <viewAttribute id="MDATE"/>
+      <viewAttribute id="MTIME"/>
+      <viewAttribute id="MTYPE"/>
+      <viewAttribute id="MTZONE"/>
+      <viewAttribute id="MATERIALID"/>
+      <viewAttribute id="MATERIALDESC"/>
+      <viewAttribute id="MQUAN"/>
+      <viewAttribute id="MQUOM"/>
+      <viewAttribute id="TARLVL_VOL"/>
+      <viewAttribute id="ORDLVL_VOL"/>
+      <viewAttribute id="BTMSAF_VOL"/>
+      <viewAttribute id="MAXCAP_VOL"/>
+      <viewAttribute id="TOPSAFE_VOL"/>
+      <viewAttribute id="UNPCAP_VOL"/>
+      <viewAttribute id="NAME1"/>
+      <viewAttribute id="ACRONYM"/>
+      <viewAttribute id="EXT_BP"/>
+      <viewAttribute id="SITETYPE"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="MY_ROICEAD_INVENTORYDATA1"/>
+    <filter>&quot;MQUAN&quot;&lt;&quot;BTMSAF_VOL&quot;</filter>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Projection_1">
+  <attributes>
+    <attribute id="SITE" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SITE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="SITE"/>
+    </attribute>
+    <attribute id="TANKNUM" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TANKNUM"/>
+      <keyMapping columnObjectName="Projection_1" columnName="TANKNUM"/>
+    </attribute>
+    <attribute id="ID" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ID"/>
+      <keyMapping columnObjectName="Projection_1" columnName="ID"/>
+    </attribute>
+    <attribute id="MDATE" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MDATE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="MDATE"/>
+    </attribute>
+    <attribute id="MTYPE" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MTYPE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="MTYPE"/>
+    </attribute>
+    <attribute id="MTZONE" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MTZONE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="MTZONE"/>
+    </attribute>
+    <attribute id="MATERIALID" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MATERIALID"/>
+      <keyMapping columnObjectName="Projection_1" columnName="MATERIALID"/>
+    </attribute>
+    <attribute id="MATERIALDESC" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MATERIALDESC"/>
+      <keyMapping columnObjectName="Projection_1" columnName="MATERIALDESC"/>
+    </attribute>
+    <attribute id="MQUOM" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MQUOM"/>
+      <keyMapping columnObjectName="Projection_1" columnName="MQUOM"/>
+    </attribute>
+    <attribute id="NAME1" order="19" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="NAME1"/>
+      <keyMapping columnObjectName="Projection_1" columnName="NAME1"/>
+    </attribute>
+    <attribute id="ACRONYM" order="20" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ACRONYM"/>
+      <keyMapping columnObjectName="Projection_1" columnName="ACRONYM"/>
+    </attribute>
+    <attribute id="EXT_BP" order="21" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="EXT_BP"/>
+      <keyMapping columnObjectName="Projection_1" columnName="EXT_BP"/>
+    </attribute>
+    <attribute id="SITETYPE" order="22" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SITETYPE"/>
+      <keyMapping columnObjectName="Projection_1" columnName="SITETYPE"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes>
+    <calculatedAttribute id="TANKANDSITE" order="1" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TANKANDSITE"/>
+      <keyCalculation datatype="VARCHAR" expressionLanguage="COLUMN_ENGINE" length="50">
+        <formula>&quot;ACRONYM&quot; + ' : ' + &quot;TANKNUM&quot;</formula>
+      </keyCalculation>
+    </calculatedAttribute>
+  </calculatedAttributes>
+  <baseMeasures>
+    <measure id="MTIME" order="6" aggregationType="min" measureType="simple">
+      <descriptions defaultDescription="MTIME"/>
+      <measureMapping columnObjectName="Projection_1" columnName="MTIME"/>
+    </measure>
+    <measure id="MQUAN" order="11" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="MQUAN"/>
+      <measureMapping columnObjectName="Projection_1" columnName="MQUAN"/>
+    </measure>
+    <measure id="TARLVL_VOL" order="13" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="TARLVL_VOL"/>
+      <measureMapping columnObjectName="Projection_1" columnName="TARLVL_VOL"/>
+    </measure>
+    <measure id="ORDLVL_VOL" order="14" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="ORDLVL_VOL"/>
+      <measureMapping columnObjectName="Projection_1" columnName="ORDLVL_VOL"/>
+    </measure>
+    <measure id="BTMSAF_VOL" order="15" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="BTMSAF_VOL"/>
+      <measureMapping columnObjectName="Projection_1" columnName="BTMSAF_VOL"/>
+    </measure>
+    <measure id="MAXCAP_VOL" order="16" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="MAXCAP_VOL"/>
+      <measureMapping columnObjectName="Projection_1" columnName="MAXCAP_VOL"/>
+    </measure>
+    <measure id="TOPSAFE_VOL" order="17" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="TOPSAFE_VOL"/>
+      <measureMapping columnObjectName="Projection_1" columnName="TOPSAFE_VOL"/>
+    </measure>
+    <measure id="UNPCAP_VOL" order="18" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="UNPCAP_VOL"/>
+      <measureMapping columnObjectName="Projection_1" columnName="UNPCAP_VOL"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures>
+    <measure id="ACTUALVSTARGETPERCENT" order="23" aggregationType="sum" measureType="simple" datatype="DECIMAL" length="5" scale="2" expressionLanguage="SQL">
+      <formula>(&quot;MQUAN&quot; / &quot;TARLVL_VOL&quot;) * 100</formula>
+      </measure>
+  </calculatedMeasures>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="204"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

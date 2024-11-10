@@ -1,0 +1,12 @@
+VIEW MY_ROICEAD_NOOFTRANBYCARD ("CountOfTransactions" , "CARD_CARDNUM")
+AS
+
+SELECT TOP 100
+	count(TRANSACTID) as CountOfTransactions,
+	"CARD_CARDNUM"
+FROM "MY_ROICEAD_DRAWINGS" as Drawings inner join "MY_ROICEAD_CARDS" AS Cards 
+on Drawings.Card_cardnum = Cards.Cardnum
+where Cards.Status = 'Active' and
+EXTRACT_YEAR("TRANSACTDATE") = EXTRACT_YEAR(CURRENT_DATE)
+group by "CARD_CARDNUM"
+order by CountOfTransactions desc

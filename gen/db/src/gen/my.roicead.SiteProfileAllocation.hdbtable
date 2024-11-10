@@ -1,0 +1,15 @@
+COLUMN TABLE my_roicead_SiteProfileAllocation (
+  Profile NVARCHAR(10) NOT NULL,
+  Counter NVARCHAR(10) NOT NULL,
+  Site NVARCHAR(10),
+  TankNum NVARCHAR(10),
+  Profile_Type NVARCHAR(16),
+  Description NVARCHAR(50),
+  Allocat_Desc NVARCHAR(50),
+  Date_From DATE,
+  Date_To DATE,
+  PRIMARY KEY(Profile, Counter)
+) WITH ASSOCIATIONS (
+  MANY TO MANY JOIN my_roicead_SiteSalesProfile AS SiteSalesProfile ON (SiteSalesProfile.Profile = Profile),
+  MANY TO MANY JOIN my_roicead_PublicHolidayProfile AS PublicHolidayProfile ON (PublicHolidayProfile.Profile = Profile)
+)

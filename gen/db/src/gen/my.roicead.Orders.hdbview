@@ -1,0 +1,22 @@
+VIEW my_roicead_Orders AS SELECT
+  ReplenishmentOrders_0.OrderNo,
+  ReplenishmentOrders_0.Item,
+  Site_1.PrimaryNetwork,
+  Site_1.SubNetwork,
+  Site_1.Site,
+  Site_1.Acronym,
+  Site_1.LocationGroup,
+  Site_1.SiteType,
+  ReplenishmentOrders_0.Status,
+  ReplenishmentOrders_0.OrderType,
+  ReplenishmentOrders_0.TankNum,
+  Suppl_Mat_2.MaterialId,
+  Suppl_Mat_2.MaterialDesc,
+  ReplenishmentOrders_0.Suppl_Qty,
+  ReplenishmentOrders_0.Suppl_Uom,
+  ReplenishmentOrders_0.Suppl_Date,
+  ReplenishmentOrders_0.Suppl_Time,
+  ReplenishmentOrders_0.Suppl_Qty AS TotQty,
+  1 AS ordercount
+FROM ((my_roicead_ReplenishmentOrders AS ReplenishmentOrders_0 LEFT JOIN my_roicead_SiteDetails AS Site_1 ON (ReplenishmentOrders_0.Site_Site = Site_1.Site) AND (ReplenishmentOrders_0.Site_SiteType = Site_1.SiteType)) LEFT JOIN my_roicead_Materials AS Suppl_Mat_2 ON ReplenishmentOrders_0.Suppl_Mat_MaterialId = Suppl_Mat_2.MaterialId)
+WHERE ReplenishmentOrders_0.isStatusChgd = FALSE

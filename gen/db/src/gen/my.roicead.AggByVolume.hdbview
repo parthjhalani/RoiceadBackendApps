@@ -1,0 +1,6 @@
+VIEW my_roicead_AggByVolume AS SELECT
+  VOLAGG_0.MaterialDesc,
+  sum(VOLAGG_0.Tarlvl_vol) AS TargetVol,
+  sum(VOLAGG_0.MQUAN) AS ActualVol
+FROM my_roicead_VOLAGG AS VOLAGG_0
+GROUP BY VOLAGG_0.MaterialDesc

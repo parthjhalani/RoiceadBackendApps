@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="MY_ROICEAD_C_CARDS" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="HOURLY" enforceSqlExecution="false">
+<descriptions defaultDescription="MY_ROICEAD_C_CARDS.hdbcalculationview"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="MY_ROICEAD_CARDS">
+    <resourceUri>MY_ROICEAD_CARDS</resourceUri>
+  </DataSource>
+  <DataSource id="MY_ROICEAD_DRAWINGS">
+    <resourceUri>MY_ROICEAD_DRAWINGS</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="TYPENAME"/>
+      <viewAttribute id="STATUS"/>
+      <viewAttribute id="CARDNUM"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="MY_ROICEAD_CARDS"/>
+    <filter>&quot;STATUS&quot; = 'Active'</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="PRODUCT"/>
+      <viewAttribute id="GROSSVALUE"/>
+      <viewAttribute id="VALUECURRENCY"/>
+      <viewAttribute id="CARD_CARDNUM"/>
+      <viewAttribute id="TRANSACTDATE"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="MY_ROICEAD_DRAWINGS"/>
+    <filter>EXTRACT_YEAR(&quot;TRANSACTDATE&quot;) = EXTRACT_YEAR(CURRENT_DATE)</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="VALUECURRENCY"/>
+      <viewAttribute id="GROSSVALUE" aggregationType="sum"/>
+      <viewAttribute id="PRODUCT"/>
+      <viewAttribute id="TYPENAME"/>
+      <viewAttribute hidden="true" id="JOIN$CARDNUM$CARD_CARDNUM"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="TYPENAME" source="TYPENAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CARDNUM$CARD_CARDNUM" source="CARDNUM"/>
+    </input>
+    <input node="Projection_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="VALUECURRENCY" source="VALUECURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="GROSSVALUE" source="GROSSVALUE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT" source="PRODUCT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CARDNUM$CARD_CARDNUM" source="CARD_CARDNUM"/>
+    </input>
+    <joinAttribute name="JOIN$CARDNUM$CARD_CARDNUM"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_1">
+    <viewAttributes>
+      <viewAttribute id="TOTALGROSSVALUE" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Join_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOTALGROSSVALUE" source="GROSSVALUE"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_2">
+    <viewAttributes>
+      <viewAttribute id="VALUECURRENCY"/>
+      <viewAttribute id="GROSSVALUE" aggregationType="sum"/>
+      <viewAttribute id="PRODUCT"/>
+      <viewAttribute id="TYPENAME"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Join_1"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_3">
+    <viewAttributes>
+      <viewAttribute id="TOTALGROSSVALUE" aggregationType="sum"/>
+      <viewAttribute id="VALUECURRENCY"/>
+      <viewAttribute id="GROSSVALUE" aggregationType="sum"/>
+      <viewAttribute id="PRODUCT"/>
+      <viewAttribute id="TYPENAME"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Aggregation_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOTALGROSSVALUE" source="TOTALGROSSVALUE"/>
+    </input>
+  
+    <input node="Aggregation_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="VALUECURRENCY" source="VALUECURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="GROSSVALUE" source="GROSSVALUE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT" source="PRODUCT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TYPENAME" source="TYPENAME"/>
+    </input>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_3">
+  <attributes>
+    <attribute id="VALUECURRENCY" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="VALUECURRENCY"/>
+      <keyMapping columnObjectName="Join_3" columnName="VALUECURRENCY"/>
+    </attribute>
+    <attribute id="PRODUCT" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCT"/>
+      <keyMapping columnObjectName="Join_3" columnName="PRODUCT"/>
+    </attribute>
+    <attribute id="TYPENAME" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TYPENAME"/>
+      <keyMapping columnObjectName="Join_3" columnName="TYPENAME"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="TOTALGROSSVALUE" order="1" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="TOTALGROSSVALUE"/>
+      <measureMapping columnObjectName="Join_3" columnName="TOTALGROSSVALUE"/>
+    </measure>
+    <measure id="GROSSVALUE" order="3" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="GROSSVALUE"/>
+      <measureMapping columnObjectName="Join_3" columnName="GROSSVALUE"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="266" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="646"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302" y="646"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="false" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="128" y="486"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="146"/>
+    </shape>
+    <shape modelObjectName="Projection_2" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="183"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Aggregation_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="311" y="361"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Aggregation_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="101" y="361"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_3" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="283" y="237"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Aggregation_1" modelObjectNameSpace="Join_3" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  
+    <shape modelObjectName="Aggregation_2" modelObjectNameSpace="Join_3" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="620" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

@@ -1,0 +1,27 @@
+VIEW CardService_Drawings AS SELECT
+  Drawings_0.TransactId,
+  Drawings_0.Card_CardNum,
+  Drawings_0.StationId,
+  Drawings_0.StationAddress,
+  Drawings_0.Pump,
+  Drawings_0.Terminal,
+  Drawings_0.AuthorizationID,
+  Drawings_0.ReceiptNo,
+  Drawings_0.IsConfirmed,
+  Drawings_0.IsInvoiced,
+  Drawings_0.TransactDate,
+  Drawings_0."PRODUCT",
+  Drawings_0.Quantity,
+  Drawings_0.QuantityUOM,
+  Drawings_0.Price,
+  Drawings_0.PriceType,
+  Drawings_0.PriceCurrency,
+  Drawings_0.NetValue,
+  Drawings_0.GrossValue,
+  Drawings_0.ValueCurrency,
+  Drawings_0.VatPercent,
+  Drawings_0.VatValue
+FROM my_roicead_Drawings AS Drawings_0
+WITH ASSOCIATIONS (
+  MANY TO ONE JOIN CardService_Cards AS Card ON (Card.CardNum = Card_CardNum)
+)

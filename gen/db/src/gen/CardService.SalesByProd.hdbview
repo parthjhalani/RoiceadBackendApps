@@ -1,0 +1,6 @@
+VIEW CardService_SalesByProd AS SELECT
+  SalesByProd_0."PRODUCT",
+  SalesByProd_0.VALUECURRENCY,
+  SalesByProd_0.TOTALGROSSVALUE,
+  SalesByProd_0.GROSSVALUE
+FROM my_roicead_SalesByProd AS SalesByProd_0

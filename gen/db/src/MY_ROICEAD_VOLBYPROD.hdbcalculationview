@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="MY_ROICEAD_VOLBYPROD" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="HOURLY" enforceSqlExecution="false">
+<descriptions defaultDescription="MY_ROICEAD_VOLBYPROD"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="MY_ROICEAD_INVENTORYDATA1">
+    <resourceUri>MY_ROICEAD_INVENTORYDATA1</resourceUri>
+  </DataSource>
+  <DataSource id="Projection_1$$$$MY_ROICEAD_INVENTORYDATA1$$">
+    <resourceUri>MY_ROICEAD_INVENTORYDATA1</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_1">
+    <viewAttributes>
+      <viewAttribute id="MQUAN_1" aggregationType="sum"/>
+    
+      <viewAttribute id="TARLVL_VOL" aggregationType="sum"/>
+    
+      <viewAttribute id="MAXCAP_VOL" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="MY_ROICEAD_INVENTORYDATA1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="MQUAN_1" source="MQUAN"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="MATERIALID"/>
+      <viewAttribute id="MATERIALDESC"/>
+      <viewAttribute id="MQUAN" aggregationType="sum"/>
+      <viewAttribute id="TARLVL_VOL" aggregationType="sum"/>
+      <viewAttribute id="BTMSAF_VOL" aggregationType="sum"/>
+      <viewAttribute id="MAXCAP_VOL" aggregationType="sum"/>
+      <viewAttribute id="UNPCAP_VOL" aggregationType="sum"/>
+    
+      <viewAttribute id="MQUOM"/>
+      <viewAttribute id="TOPSAFE_VOL" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Projection_1$$$$MY_ROICEAD_INVENTORYDATA1$$"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1">
+    <viewAttributes>
+      <viewAttribute id="MATERIALID"/>
+      <viewAttribute id="MATERIALDESC"/>
+      <viewAttribute id="MQUAN" aggregationType="sum"/>
+      <viewAttribute id="TARLVL_VOL" aggregationType="sum"/>
+      <viewAttribute id="BTMSAF_VOL" aggregationType="sum"/>
+      <viewAttribute id="MAXCAP_VOL" aggregationType="sum"/>
+      <viewAttribute id="UNPCAP_VOL" aggregationType="sum"/>
+      <viewAttribute id="MQUAN_1" aggregationType="sum"/>
+    
+      <viewAttribute id="TARLVL_VOL_1" aggregationType="sum"/>
+    
+      <viewAttribute id="MAXCAP_VOL_1" aggregationType="sum"/>
+    
+      <viewAttribute id="TOPSAFE_VOL" aggregationType="sum"/>
+      <viewAttribute id="MQUOM"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="MATERIALID" source="MATERIALID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MATERIALDESC" source="MATERIALDESC"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MQUAN" source="MQUAN"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TARLVL_VOL" source="TARLVL_VOL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="BTMSAF_VOL" source="BTMSAF_VOL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MAXCAP_VOL" source="MAXCAP_VOL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="UNPCAP_VOL" source="UNPCAP_VOL"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOPSAFE_VOL" source="TOPSAFE_VOL"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MQUOM" source="MQUOM"/>
+    </input>
+    <input node="Aggregation_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="MQUAN_1" source="MQUAN_1"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="TARLVL_VOL_1" source="TARLVL_VOL"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="MAXCAP_VOL_1" source="MAXCAP_VOL"/>
+    </input>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="MATERIALID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MATERIALID"/>
+      <keyMapping columnObjectName="Join_1" columnName="MATERIALID"/>
+    </attribute>
+    <attribute id="MATERIALDESC" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MATERIALDESC"/>
+      <keyMapping columnObjectName="Join_1" columnName="MATERIALDESC"/>
+    </attribute>
+  
+    <attribute id="MQUOM" order="14" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MQUOM"/>
+  
+      <keyMapping columnObjectName="Join_1" columnName="MQUOM"/>
+  
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="MQUAN" order="3" aggregationType="sum" measureType="quantity" semanticType="quantity">
+      <descriptions defaultDescription="MQUAN"/>
+      <unitCurrencyAttribute attributeName="MQUOM"/>
+      <measureMapping columnObjectName="Join_1" columnName="MQUAN"/>
+    </measure>
+    <measure id="TARLVL_VOL" order="4" aggregationType="sum" measureType="quantity" semanticType="quantity">
+      <descriptions defaultDescription="TARLVL_VOL"/>
+      <unitCurrencyAttribute attributeName="MQUOM"/>
+      <measureMapping columnObjectName="Join_1" columnName="TARLVL_VOL"/>
+    </measure>
+    <measure id="BTMSAF_VOL" order="5" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="BTMSAF_VOL"/>
+      <measureMapping columnObjectName="Join_1" columnName="BTMSAF_VOL"/>
+    </measure>
+    <measure id="MAXCAP_VOL" order="6" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="MAXCAP_VOL"/>
+      <measureMapping columnObjectName="Join_1" columnName="MAXCAP_VOL"/>
+    </measure>
+    <measure id="UNPCAP_VOL" order="7" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="UNPCAP_VOL"/>
+      <measureMapping columnObjectName="Join_1" columnName="UNPCAP_VOL"/>
+    </measure>
+    <measure id="TOTAL_MEASURED_VOL" order="8" aggregationType="sum" measureType="quantity" semanticType="quantity">
+      <descriptions defaultDescription="MQUAN"/>
+      <unitCurrencyAttribute attributeName="MQUOM"/>
+      <measureMapping columnObjectName="Join_1" columnName="MQUAN_1"/>
+    </measure>
+  
+    <measure id="TOTAL_TARLVL_VOL" order="10" aggregationType="sum" measureType="quantity" semanticType="quantity">
+      <descriptions defaultDescription="TARLVL_VOL"/>
+  
+      <unitCurrencyAttribute attributeName="MQUOM"/>
+      <measureMapping columnObjectName="Join_1" columnName="TARLVL_VOL_1"/>
+    </measure>
+  
+    <measure id="TOTAL_TANK_CAPACITY" order="12" aggregationType="sum" measureType="quantity" semanticType="quantity">
+      <descriptions defaultDescription="MAXCAP_VOL"/>
+  
+      <unitCurrencyAttribute attributeName="MQUOM"/>
+      <measureMapping columnObjectName="Join_1" columnName="MAXCAP_VOL_1"/>
+    </measure>
+  
+    <measure id="TOPSAFE_VOL" order="13" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="TOPSAFE_VOL"/>
+      <measureMapping columnObjectName="Join_1" columnName="TOPSAFE_VOL"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures>
+    <measure id="CALCULATEDPERCENT" order="9" aggregationType="sum" measureType="quantity" datatype="DECIMAL" length="5" scale="2" expressionLanguage="COLUMN_ENGINE" semanticType="quantity">
+      <fixedUnit>%</fixedUnit>
+      <formula>(&quot;MQUAN&quot; / &quot;TOTAL_MEASURED_VOL&quot;) * 100</formula>
+      
+      
+      
+      </measure>
+  
+    <measure id="CURRENTUTIL_PERCENT" order="11" aggregationType="sum" measureType="quantity" datatype="DECIMAL" length="5" scale="2" expressionLanguage="COLUMN_ENGINE" semanticType="quantity">
+  
+      <fixedUnit>%</fixedUnit>
+      <formula>(&quot;TOTAL_MEASURED_VOL&quot; / &quot;TOTAL_TANK_CAPACITY&quot;) * 100</formula>
+      
+      </measure>
+  
+    <measure id="TARGETVOL_UTIL_PERCENT" order="15" aggregationType="sum" measureType="quantity" datatype="DECIMAL" length="5" scale="2" expressionLanguage="COLUMN_ENGINE" semanticType="quantity">
+  
+      <fixedUnit>%</fixedUnit>
+      <formula>(&quot;TOTAL_TARLVL_VOL&quot; / &quot;TOTAL_TANK_CAPACITY&quot;)* 100</formula>
+      </measure>
+  
+    <measure id="CURRENT_UTIL_VOL" order="16" aggregationType="sum" measureType="quantity" datatype="DECIMAL" length="5" scale="2" expressionLanguage="SQL" semanticType="quantity">
+      <descriptions defaultDescription="CURRENT UTILIZATION"/>
+  
+      <unitCurrencyAttribute attributeName="MQUOM"/>
+      <formula>(&quot;MQUAN&quot; / &quot;MAXCAP_VOL&quot;) * 100</formula>
+    </measure>
+    <measure id="TARGET_UTIL_VOL" order="17" aggregationType="sum" measureType="quantity" datatype="DECIMAL" length="5" scale="2" expressionLanguage="SQL" semanticType="quantity">
+      <descriptions defaultDescription="TARGET UTILIZATION"/>
+      <unitCurrencyAttribute attributeName="MQUOM"/>
+      <formula>(&quot;TARLVL_VOL&quot; / &quot;MAXCAP_VOL&quot;) * 100</formula>
+    </measure>
+  </calculatedMeasures>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="221" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Aggregation_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302" y="356"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="356"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="221" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="163"/>
+    </shape>
+    <shape modelObjectName="Aggregation_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="147"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="MY_ROICEAD_COUNTBYSALESNTRANS" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="HOURLY" enforceSqlExecution="false">
+<descriptions defaultDescription="MY_ROICEAD_COUNTBYSALESNTRANS"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="MY_ROICEAD_SALESNCOUNTBYCARDTYPE">
+    <resourceUri>MY_ROICEAD_SALESNCOUNTBYCARDTYPE</resourceUri>
+  </DataSource>
+  <DataSource id="Aggregation_1$$$$MY_ROICEAD_SALESNCOUNTBYCARDTYPE$$">
+    <resourceUri>MY_ROICEAD_SALESNCOUNTBYCARDTYPE</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="TYPENAME"/>
+      <viewAttribute id="GROSSVALUE"/>
+      <viewAttribute id="COUNTOFACTIVECARDS"/>
+      <viewAttribute id="VALUECURRENCY"/>
+      <viewAttribute id="COUNTOFTRANS"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="MY_ROICEAD_SALESNCOUNTBYCARDTYPE"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_1">
+    <viewAttributes>
+      <viewAttribute id="TOTALGROSSVALUE" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Aggregation_1$$$$MY_ROICEAD_SALESNCOUNTBYCARDTYPE$$">
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOTALGROSSVALUE" source="GROSSVALUE"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1">
+    <viewAttributes>
+      <viewAttribute id="TYPENAME"/>
+      <viewAttribute id="GROSSVALUE" aggregationType="sum"/>
+      <viewAttribute id="COUNTOFACTIVECARDS" aggregationType="sum"/>
+      <viewAttribute id="VALUECURRENCY"/>
+      <viewAttribute id="COUNTOFTRANS" aggregationType="sum"/>
+      <viewAttribute id="TOTALGROSSVALUE" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="TYPENAME" source="TYPENAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="GROSSVALUE" source="GROSSVALUE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTOFACTIVECARDS" source="COUNTOFACTIVECARDS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VALUECURRENCY" source="VALUECURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTOFTRANS" source="COUNTOFTRANS"/>
+    </input>
+    <input node="Aggregation_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOTALGROSSVALUE" source="TOTALGROSSVALUE"/>
+    </input>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="TYPENAME" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TYPENAME"/>
+      <keyMapping columnObjectName="Join_1" columnName="TYPENAME"/>
+    </attribute>
+    <attribute id="COUNTOFACTIVECARDS" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COUNTOFACTIVECARDS"/>
+      <keyMapping columnObjectName="Join_1" columnName="COUNTOFACTIVECARDS"/>
+    </attribute>
+    <attribute id="VALUECURRENCY" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="VALUECURRENCY"/>
+      <keyMapping columnObjectName="Join_1" columnName="VALUECURRENCY"/>
+    </attribute>
+    <attribute id="COUNTOFTRANS" keepFlag="true" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COUNTOFTRANS"/>
+      <keyMapping columnObjectName="Join_1" columnName="COUNTOFTRANS"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="GROSSVALUE" order="2" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="GROSSVALUE"/>
+      <measureMapping columnObjectName="Join_1" columnName="GROSSVALUE"/>
+    </measure>
+    <measure id="TOTALGROSSVALUE" order="6" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="GROSSVALUE"/>
+      <measureMapping columnObjectName="Join_1" columnName="TOTALGROSSVALUE"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="221" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="356"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Aggregation_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302" y="356"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="221" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="217"/>
+    </shape>
+    <shape modelObjectName="Aggregation_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="195"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

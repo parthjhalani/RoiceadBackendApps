@@ -1,0 +1,10 @@
+VIEW MY_ROICEAD_NOOFPOSTRANSBYSITE ("COUNTOFTRANSACTIONS" , "SITE")
+AS
+
+SELECT 
+	count(item.SiteTrnID) as COUNTOFTRANSACTIONS,
+	header.SITE_SITE as SITE
+FROM "MY_ROICEAD_SITEPOSHEADER" as header inner join "MY_ROICEAD_SITEPOSITEMS" AS item 
+on header.SiteTrnID = item.SiteTrnID
+group by header.site_site
+order by COUNTOFTRANSACTIONS desc

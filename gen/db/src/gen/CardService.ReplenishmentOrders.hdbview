@@ -1,0 +1,35 @@
+VIEW CardService_ReplenishmentOrders AS SELECT
+  ReplenishmentOrders_0.createdAt,
+  ReplenishmentOrders_0.createdBy,
+  ReplenishmentOrders_0.modifiedAt,
+  ReplenishmentOrders_0.modifiedBy,
+  ReplenishmentOrders_0.OrderNo,
+  ReplenishmentOrders_0.Item,
+  ReplenishmentOrders_0.Status,
+  ReplenishmentOrders_0.isStatusChgd,
+  ReplenishmentOrders_0.OrderType,
+  ReplenishmentOrders_0.Site_Site,
+  ReplenishmentOrders_0.Site_SiteType,
+  ReplenishmentOrders_0.TankNum,
+  ReplenishmentOrders_0.BpType,
+  ReplenishmentOrders_0.Suppl_BP,
+  ReplenishmentOrders_0.Suppl_Mat_MaterialId,
+  ReplenishmentOrders_0.Suppl_Qty,
+  ReplenishmentOrders_0.Suppl_Uom,
+  ReplenishmentOrders_0.Suppl_Date,
+  ReplenishmentOrders_0.Suppl_Time,
+  ReplenishmentOrders_0.Suppl_TimeZone,
+  ReplenishmentOrders_0.Suppl_Low_Tol,
+  ReplenishmentOrders_0.Suppl_High_Tol,
+  ReplenishmentOrders_0.Suppl_Low_Qty,
+  ReplenishmentOrders_0.Suppl_High_Qty,
+  ReplenishmentOrders_0.CutOff_Date,
+  ReplenishmentOrders_0.CutOff_Time,
+  ReplenishmentOrders_0.Regdate,
+  ReplenishmentOrders_0.RegTime,
+  ReplenishmentOrders_0.RegUser
+FROM my_roicead_ReplenishmentOrders AS ReplenishmentOrders_0
+WITH ASSOCIATIONS (
+  MANY TO ONE JOIN CardService_SiteDetails AS Site ON (Site.Site = Site_Site AND Site.SiteType = Site_SiteType),
+  MANY TO ONE JOIN CardService_Materials AS Suppl_Mat ON (Suppl_Mat.MaterialId = Suppl_Mat_MaterialId)
+)

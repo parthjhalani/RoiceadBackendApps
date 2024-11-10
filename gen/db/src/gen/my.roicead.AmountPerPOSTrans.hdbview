@@ -1,0 +1,5 @@
+VIEW my_roicead_AmountPerPOSTrans AS SELECT
+  SitePosItems_0.SiteTrnID,
+  sum(SitePosItems_0.AMOUNT) AS Amount
+FROM my_roicead_SitePosItems AS SitePosItems_0
+GROUP BY SitePosItems_0.SiteTrnID

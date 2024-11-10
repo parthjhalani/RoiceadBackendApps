@@ -1,0 +1,29 @@
+COLUMN TABLE my_roicead_Meters (
+  Site NVARCHAR(10) NOT NULL,
+  SiteType NVARCHAR(5) NOT NULL,
+  MeterNum NVARCHAR(10) NOT NULL,
+  MeterDesc NVARCHAR(20),
+  MeterFactor NVARCHAR(10),
+  NumOfDigits NVARCHAR(4),
+  NumOfDecimals NVARCHAR(5),
+  MFUOM NVARCHAR(3),
+  Status NVARCHAR(10),
+  EQPMT_NO NVARCHAR(15),
+  FUNCTLOC NVARCHAR(15),
+  Bpno NVARCHAR(10),
+  BpType NVARCHAR(4),
+  DRAWNO NVARCHAR(20),
+  SERIAL NVARCHAR(20),
+  MODEL NVARCHAR(20),
+  CONST_MONTH NVARCHAR(2),
+  CONST_YEAR NVARCHAR(4),
+  RecalibDate TIMESTAMP,
+  Regdate DATE,
+  RegTime TIME,
+  RegUser NVARCHAR(50),
+  PRIMARY KEY(Site, SiteType, MeterNum)
+) WITH ASSOCIATIONS (
+  MANY TO MANY JOIN my_roicead_MeterReadings AS Inventory ON (Inventory.Site = Site AND Inventory.MeterNum = MeterNum),
+  MANY TO MANY JOIN my_roicead_MeterMaterialAllocation AS Material ON (Material.Site = Site AND Material.MeterNum = MeterNum AND Material.SiteType = SiteType),
+  MANY TO MANY JOIN my_roicead_MeterTankAllocation AS AllotedTanks ON (AllotedTanks.Site = Site AND AllotedTanks.MeterNum = MeterNum)
+)

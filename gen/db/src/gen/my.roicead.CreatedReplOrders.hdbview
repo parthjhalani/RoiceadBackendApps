@@ -1,0 +1,7 @@
+VIEW my_roicead_CreatedReplOrders AS SELECT DISTINCT
+  ReplenishmentOrders_0.OrderNo AS OrderId,
+  ReplenishmentOrders_0.Site_Site AS Site,
+  ReplenishmentOrders_0.OrderType,
+  ReplenishmentOrders_0.Suppl_Date
+FROM my_roicead_ReplenishmentOrders AS ReplenishmentOrders_0
+WHERE ReplenishmentOrders_0.isStatusChgd = FALSE AND ReplenishmentOrders_0.Status = 'CRT'

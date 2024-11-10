@@ -1,0 +1,54 @@
+{
+  "name": "MyRoiceadApps",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^7",
+    "express": "^4",
+    "@sap/xssec": "^3",
+    "@sap/cds-hana": "^2",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.9.21"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "setup": "npm i && cd app/router && npm i && cd ../countservice && npm i",
+    "build" : "mbt build",
+    "deploy" : "npm run build && npm run login && npm run dev && cf deploy mta_archives/MyRoiceadApps_1.0.0.mtar",
+    "login" : "cf login -u parth.jhalani@yahoo.com -a https://api.cf.eu10.hana.ondemand.com -p Welcome5!",
+    "dev" : "cf target -o 'Roicead GmbH' -s dev "
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "hana"
+      },
+      "auth": {
+        "kind": "mocked"
+      },
+      "destination": {
+        "kind": "destination"
+      }
+    },
+    "auth": {
+      "passport": {
+        "strategy": "JWT"
+      }
+    },
+    "hana": {
+      "deploy-format": "hdbtable",
+      "syntax": "hdi"
+    },
+    "query": {
+      "limit": {
+        "max": 1000
+      }
+    }
+  }
+}

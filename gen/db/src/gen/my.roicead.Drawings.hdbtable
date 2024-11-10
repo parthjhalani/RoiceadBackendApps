@@ -1,0 +1,27 @@
+COLUMN TABLE my_roicead_Drawings (
+  TransactId NVARCHAR(20) NOT NULL,
+  Card_CardNum NVARCHAR(20),
+  StationId NVARCHAR(10),
+  StationAddress NVARCHAR(60),
+  Pump NVARCHAR(3),
+  Terminal NVARCHAR(5),
+  AuthorizationID NVARCHAR(10),
+  ReceiptNo NVARCHAR(5),
+  IsConfirmed BOOLEAN,
+  IsInvoiced BOOLEAN,
+  TransactDate TIMESTAMP,
+  "PRODUCT" NVARCHAR(20),
+  Quantity DECIMAL(5, 2),
+  QuantityUOM NVARCHAR(3),
+  Price DECIMAL(5, 2),
+  PriceType NVARCHAR(20),
+  PriceCurrency NVARCHAR(3),
+  NetValue DECIMAL(5, 2),
+  GrossValue DECIMAL(13, 2),
+  ValueCurrency NVARCHAR(3),
+  VatPercent NVARCHAR(5),
+  VatValue NVARCHAR(5),
+  PRIMARY KEY(TransactId)
+) WITH ASSOCIATIONS (
+  MANY TO ONE JOIN my_roicead_Cards AS Card ON (Card.CardNum = Card_CardNum)
+)

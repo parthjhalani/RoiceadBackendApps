@@ -1,0 +1,15 @@
+VIEW CardService_MaterialAllocation AS SELECT
+  MaterialAllocation_0.Site,
+  MaterialAllocation_0.SiteType,
+  MaterialAllocation_0.TankNum,
+  MaterialAllocation_0.Valid_from,
+  MaterialAllocation_0.MaterialId_MaterialId,
+  MaterialAllocation_0.Reason,
+  MaterialAllocation_0.Regdate,
+  MaterialAllocation_0.RegTime,
+  MaterialAllocation_0.RegUser
+FROM my_roicead_MaterialAllocation AS MaterialAllocation_0
+WITH ASSOCIATIONS (
+  MANY TO ONE JOIN CardService_Materials AS MaterialId ON (MaterialId.MaterialId = MaterialId_MaterialId),
+  MANY TO MANY JOIN CardService_Tanks AS TankGrp ON (TankGrp.Site = Site)
+)

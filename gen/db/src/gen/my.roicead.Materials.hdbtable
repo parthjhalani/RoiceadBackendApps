@@ -1,0 +1,13 @@
+COLUMN TABLE my_roicead_Materials (
+  MaterialId NVARCHAR(18) NOT NULL,
+  MaterialDesc NVARCHAR(40),
+  MaterialCode NVARCHAR(18),
+  MaterialGroup NVARCHAR(25),
+  MaterialCategory NVARCHAR(30),
+  Regdate DATE,
+  RegTime TIME,
+  RegUser NVARCHAR(128),
+  PRIMARY KEY(MaterialId)
+) WITH ASSOCIATIONS (
+  MANY TO MANY JOIN my_roicead_MaterialAllocation AS Materials ON (Materials.MaterialId_MaterialId = MaterialId)
+)

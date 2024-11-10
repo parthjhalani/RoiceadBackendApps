@@ -1,0 +1,30 @@
+VIEW CardService_DemandForecast AS SELECT
+  DemandForecast_0.createdAt,
+  DemandForecast_0.createdBy,
+  DemandForecast_0.modifiedAt,
+  DemandForecast_0.modifiedBy,
+  DemandForecast_0.Site_Site,
+  DemandForecast_0.Site_SiteType,
+  DemandForecast_0.Tank,
+  DemandForecast_0.Forecast_date,
+  DemandForecast_0.Forecast_time,
+  DemandForecast_0.Entry_Type,
+  DemandForecast_0.Forecast_Month,
+  DemandForecast_0.Tank_Grp,
+  DemandForecast_0.Critical_Tank,
+  DemandForecast_0.Profile_Day,
+  DemandForecast_0.Profile_PHD,
+  DemandForecast_0.Profile,
+  DemandForecast_0.Profile_Type,
+  DemandForecast_0.Factor,
+  DemandForecast_0.Forecast_Qty,
+  DemandForecast_0.Forecast_Inv,
+  DemandForecast_0.Forecast_Evt,
+  DemandForecast_0.ForecastedTimestamp,
+  DemandForecast_0.Uom,
+  DemandForecast_0.Material_MaterialId
+FROM my_roicead_DemandForecast AS DemandForecast_0
+WITH ASSOCIATIONS (
+  MANY TO ONE JOIN CardService_SiteDetails AS Site ON (Site.Site = Site_Site AND Site.SiteType = Site_SiteType),
+  MANY TO ONE JOIN CardService_Materials AS Material ON (Material.MaterialId = Material_MaterialId)
+)

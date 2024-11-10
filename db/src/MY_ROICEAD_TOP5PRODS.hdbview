@@ -1,0 +1,4 @@
+VIEW MY_ROICEAD_TOP5PRODS
+AS
+
+select top 5 SUM(GrossValue) as TOTALGROSSVALUE, PRODUCT from my_roicead_drawings group by product order by TOTALGROSSVALUE desc

@@ -1,0 +1,11 @@
+VIEW MY_ROICEAD_NOOFTRANSBYCARDTYPE ("CountOfTransactions" , "TYPENAME")
+AS
+
+SELECT TOP 5
+	count(TRANSACTID) as CountOfTransactions,
+	Cards.TYPENAME
+FROM "MY_ROICEAD_DRAWINGS" as Drawings inner join "MY_ROICEAD_CARDS" AS Cards 
+on Drawings.Card_cardnum = Cards.Cardnum
+where Cards.Status = 'Active'
+group by "TYPENAME"
+order by CountOfTransactions desc

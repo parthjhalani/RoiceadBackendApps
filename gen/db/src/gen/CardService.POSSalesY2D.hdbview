@@ -1,0 +1,18 @@
+VIEW CardService_POSSalesY2D AS SELECT
+  POSSalesY2D_0.SiteTrnID,
+  POSSalesY2D_0.PrimaryNetwork,
+  POSSalesY2D_0.SubNetwork,
+  POSSalesY2D_0.Site,
+  POSSalesY2D_0.Acronym,
+  POSSalesY2D_0.LocationGroup,
+  POSSalesY2D_0.SiteType,
+  POSSalesY2D_0.MOP_TYPE,
+  POSSalesY2D_0.SYS_AUDIT_NO,
+  POSSalesY2D_0.TRN_TIMESTAMP,
+  POSSalesY2D_0.MATERIAL_MaterialId,
+  POSSalesY2D_0.MaterialGroup,
+  POSSalesY2D_0.Amount
+FROM my_roicead_POSSalesY2D AS POSSalesY2D_0
+WITH ASSOCIATIONS (
+  MANY TO ONE JOIN CardService_Materials AS MATERIAL ON (MATERIAL.MaterialId = MATERIAL_MaterialId)
+)

@@ -1,0 +1,28 @@
+VIEW CardService_SitePosDetails AS SELECT
+  SitePosHeader_0.SiteTrnID,
+  SitePosHeader_0.Site_Site,
+  SitePosHeader_0.Site_SiteType,
+  SitePosHeader_0.SYS_AUDIT_NO,
+  SitePosHeader_0.TRN_TIMESTAMP,
+  SitePosHeader_0.TRN_TZONE,
+  SitePosHeader_0.TERMINAL_ID,
+  SitePosHeader_0.TERMINAL_TYPE,
+  SitePosHeader_0.TRN_TYPE,
+  SitePosHeader_0.TRN_APPROVED,
+  SitePosHeader_0.AUTH_CODE,
+  SitePosHeader_0.TRANS_AMOUNT,
+  SitePosHeader_0.CURRENCY,
+  SitePosHeader_0.BATCH_SEQ,
+  SitePosHeader_0.MOP_TYPE,
+  SitePosHeader_0.CARD_TYPE,
+  SitePosHeader_0.CARD_PAN,
+  SitePosHeader_0.CARD_PAN_ENTRY,
+  SitePosHeader_0.CARD_TRACK_DATA,
+  SitePosHeader_0.Regdate,
+  SitePosHeader_0.RegTime,
+  SitePosHeader_0.RegUser
+FROM my_roicead_SitePosHeader AS SitePosHeader_0
+WITH ASSOCIATIONS (
+  MANY TO ONE JOIN CardService_SiteDetails AS Site ON (Site.Site = Site_Site AND Site.SiteType = Site_SiteType),
+  MANY TO MANY JOIN CardService_SitePosItems AS Items ON (Items.SiteTrnID = SiteTrnID)
+)

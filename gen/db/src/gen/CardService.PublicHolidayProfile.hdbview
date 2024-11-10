@@ -1,0 +1,5 @@
+VIEW CardService_PublicHolidayProfile AS SELECT
+  PublicHolidayProfile_0.Profile,
+  PublicHolidayProfile_0.Profile_Date,
+  PublicHolidayProfile_0.Description
+FROM my_roicead_PublicHolidayProfile AS PublicHolidayProfile_0

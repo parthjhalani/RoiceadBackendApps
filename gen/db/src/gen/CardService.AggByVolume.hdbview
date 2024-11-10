@@ -1,0 +1,5 @@
+VIEW CardService_AggByVolume AS SELECT
+  AggByVolume_0.MaterialDesc,
+  AggByVolume_0.TargetVol,
+  AggByVolume_0.ActualVol
+FROM my_roicead_AggByVolume AS AggByVolume_0

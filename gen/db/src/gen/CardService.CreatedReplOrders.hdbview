@@ -1,0 +1,6 @@
+VIEW CardService_CreatedReplOrders AS SELECT
+  CreatedReplOrders_0.OrderId,
+  CreatedReplOrders_0.Site,
+  CreatedReplOrders_0.OrderType,
+  CreatedReplOrders_0.Suppl_Date
+FROM my_roicead_CreatedReplOrders AS CreatedReplOrders_0

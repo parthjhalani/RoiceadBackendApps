@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="MY_ROICEAD_RECONCILIATIONDIFF" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="HOURLY" enforceSqlExecution="false">
+<descriptions defaultDescription="MY_ROICEAD_RECONCILIATIONDIFF"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="MY_ROICEAD_METERRECONCILIATION">
+    <resourceUri>MY_ROICEAD_METERRECONCILIATION</resourceUri>
+  </DataSource>
+  <DataSource id="Prev_Mon$$$$MY_ROICEAD_METERRECONCILIATION$$">
+    <resourceUri>MY_ROICEAD_METERRECONCILIATION</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Current" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="SITE"/>
+      <viewAttribute id="TANKNUM"/>
+      <viewAttribute id="DIFFPERCENT_CURMONTH"/>
+      <viewAttribute id="RECONCDATE"/>
+    
+      <viewAttribute id="DIFFQTY_CURRMONTH"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="DIFFQTY_CURRMON" datatype="DECIMAL" length="15" scale="4" expressionLanguage="SQL">
+        <formula>TO_DECIMAL(&quot;DIFFQTY_CURRMONTH&quot;)</formula>
+      </calculatedViewAttribute>
+    
+      <calculatedViewAttribute id="DIFFPERC_CURRMON" datatype="DECIMAL" length="15" scale="5" expressionLanguage="SQL">
+    
+        <formula>TO_DECIMAL(&quot;DIFFPERCENT_CURMONTH&quot;)</formula>
+    
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="MY_ROICEAD_METERRECONCILIATION">
+      <mapping xsi:type="Calculation:AttributeMapping" target="DIFFPERCENT_CURMONTH" source="DIFFPERCENT"/>
+    
+      <mapping xsi:type="Calculation:AttributeMapping" target="DIFFQTY_CURRMONTH" source="DIFFQTY"/>
+    </input>
+    <filter>EXTRACT_MONTH(&quot;RECONCDATE&quot;) = EXTRACT_MONTH(CURRENT_DATE)</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Prev_Mon" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="SITE"/>
+      <viewAttribute id="TANKNUM"/>
+      <viewAttribute id="RECONCDATE"/>
+    
+      <viewAttribute id="DIFFQTY_LASTMONTH"/>
+      <viewAttribute id="DIFFPERCENT_LASTMONTH"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="DIFFQTY_LASTMON" datatype="DECIMAL" length="15" scale="4" expressionLanguage="SQL">
+        <formula>TO_DECIMAL(&quot;DIFFQTY_LASTMONTH&quot;)</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="DIFFPERCENT_LASTMON" datatype="DECIMAL" length="15" scale="5" expressionLanguage="SQL">
+        <formula>TO_DECIMAL(&quot;DIFFPERCENT_LASTMONTH&quot;)</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input emptyUnionBehavior="undefined" node="Prev_Mon$$$$MY_ROICEAD_METERRECONCILIATION$$">
+      <mapping xsi:type="Calculation:AttributeMapping" target="DIFFQTY_LASTMONTH" source="DIFFQTY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DIFFPERCENT_LASTMONTH" source="DIFFPERCENT"/>
+    </input>
+    <filter>MONTHS_BETWEEN(&quot;RECONCDATE&quot;, CURRENT_DATE) = 1</filter>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Months" cardinality="CN_N" joinType="leftOuter">
+    <viewAttributes>
+      <viewAttribute id="DIFFQTY_LASTMON" aggregationType="sum"/>
+      <viewAttribute id="DIFFPERCENT_LASTMON" aggregationType="sum"/>
+      <viewAttribute id="DIFFPERC_CURRMON" aggregationType="sum"/>
+      <viewAttribute id="DIFFQTY_CURRMON" aggregationType="sum"/>
+      <viewAttribute id="SITE"/>
+      <viewAttribute id="TANKNUM"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="CCDIFFQTY_LASTMON" datatype="DECIMAL" length="15" scale="4" expressionLanguage="SQL">
+        <formula>DIFFQTY_LASTMON / 10</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="CCDIFFPERCENT_LASTMON" datatype="DECIMAL" length="15" scale="4" expressionLanguage="SQL">
+        <formula>DIFFPERCENT_LASTMON / 10</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="Current">
+      <mapping xsi:type="Calculation:AttributeMapping" target="DIFFPERC_CURRMON" source="DIFFPERC_CURRMON"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DIFFQTY_CURRMON" source="DIFFQTY_CURRMON"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SITE" source="SITE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TANKNUM" source="TANKNUM"/>
+    </input>
+    <input node="Prev_Mon">
+      <mapping xsi:type="Calculation:AttributeMapping" target="DIFFQTY_LASTMON" source="DIFFQTY_LASTMON"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DIFFPERCENT_LASTMON" source="DIFFPERCENT_LASTMON"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SITE" source="SITE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TANKNUM" source="TANKNUM"/>
+    </input>
+    <joinAttribute name="SITE"/>
+    <joinAttribute name="TANKNUM"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Months">
+  <attributes>
+    <attribute id="SITE" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SITE"/>
+      <keyMapping columnObjectName="Months" columnName="SITE"/>
+    </attribute>
+    <attribute id="TANKNUM" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TANKNUM"/>
+      <keyMapping columnObjectName="Months" columnName="TANKNUM"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="DIFFQTY_LASTMON" order="1" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="DIFFQTY_LASTMON"/>
+      <measureMapping columnObjectName="Months" columnName="DIFFQTY_LASTMON"/>
+    </measure>
+    <measure id="DIFFPERCENT_LASTMON" order="2" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="DIFFPERCENT_LASTMON"/>
+      <measureMapping columnObjectName="Months" columnName="DIFFPERCENT_LASTMON"/>
+    </measure>
+    <measure id="DIFFPERC_CURRMON" order="3" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="DIFFPERC_CURRMON"/>
+      <measureMapping columnObjectName="Months" columnName="DIFFPERC_CURRMON"/>
+    </measure>
+    <measure id="DIFFQTY_CURRMON" order="4" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="DIFFQTY_CURRMON"/>
+      <measureMapping columnObjectName="Months" columnName="DIFFQTY_CURRMON"/>
+    </measure>
+  
+    <measure id="CCDIFFQTY_LASTMON" order="7" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="CCDIFFQTY_LASTMON"/>
+      <measureMapping columnObjectName="Months" columnName="CCDIFFQTY_LASTMON"/>
+    </measure>
+    <measure id="CCDIFFPERCENT_LASTMON" order="8" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="CCDIFFPERCENT_LASTMON"/>
+      <measureMapping columnObjectName="Months" columnName="CCDIFFPERCENT_LASTMON"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="221" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Current" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="376"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Prev_Mon" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302" y="376"/>
+      <rectangleSize width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Months" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="221" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Current" modelObjectNameSpace="Months" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="233"/>
+    </shape>
+    <shape modelObjectName="Prev_Mon" modelObjectNameSpace="Months" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="236"/>
+    </shape></shapes>
+</layout>
+</Calculation:scenario>

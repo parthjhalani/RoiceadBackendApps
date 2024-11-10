@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="MY_ROICEAD_ACTIVECARDSCOUNT" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="HOURLY" enforceSqlExecution="false">
+<descriptions defaultDescription="MY_ROICEAD_ACTIVECARDSCOUNT"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="MY_ROICEAD_ACTIVECARDS">
+    <resourceUri>MY_ROICEAD_ACTIVECARDS</resourceUri>
+  </DataSource>
+  <DataSource id="Aggregation_1$$$$MY_ROICEAD_ACTIVECARDS$$">
+    <resourceUri>MY_ROICEAD_ACTIVECARDS</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="COUNTOFACTIVECARDS"/>
+      <viewAttribute id="TYPENAME"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="MY_ROICEAD_ACTIVECARDS"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_1">
+    <viewAttributes>
+      <viewAttribute id="TOTACTIVECARDS" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Aggregation_1$$$$MY_ROICEAD_ACTIVECARDS$$">
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOTACTIVECARDS" source="COUNTOFACTIVECARDS"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1">
+    <viewAttributes>
+      <viewAttribute id="COUNTOFACTIVECARDS" aggregationType="sum"/>
+      <viewAttribute id="TYPENAME"/>
+      <viewAttribute id="TOTACTIVECARDS" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTOFACTIVECARDS" source="COUNTOFACTIVECARDS"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="TYPENAME" source="TYPENAME"/>
+    </input>
+    <input node="Aggregation_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="TOTACTIVECARDS" source="TOTACTIVECARDS"/>
+    </input>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="COUNTOFACTIVECARDS" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COUNTOFACTIVECARDS"/>
+      <keyMapping columnObjectName="Join_1" columnName="COUNTOFACTIVECARDS"/>
+    </attribute>
+    <attribute id="TYPENAME" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="TYPENAME"/>
+      <keyMapping columnObjectName="Join_1" columnName="TYPENAME"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="TOTACTIVECARDS" order="3" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="COUNTOFACTIVECARDS"/>
+      <measureMapping columnObjectName="Join_1" columnName="TOTACTIVECARDS"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="512" y="171"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="171"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Aggregation_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302" y="171"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="275" y="32"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="217"/>
+    </shape>
+    <shape modelObjectName="Aggregation_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="217"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

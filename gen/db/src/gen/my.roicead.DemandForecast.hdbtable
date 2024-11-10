@@ -1,0 +1,30 @@
+COLUMN TABLE my_roicead_DemandForecast (
+  createdAt TIMESTAMP,
+  createdBy NVARCHAR(255),
+  modifiedAt TIMESTAMP,
+  modifiedBy NVARCHAR(255),
+  Site_Site NVARCHAR(10) NOT NULL,
+  Site_SiteType NVARCHAR(5) NOT NULL,
+  Tank NVARCHAR(10) NOT NULL,
+  Forecast_date DATE NOT NULL,
+  Forecast_time TIME NOT NULL,
+  Entry_Type NVARCHAR(10) NOT NULL,
+  Forecast_Month NVARCHAR(20),
+  Tank_Grp NVARCHAR(10),
+  Critical_Tank BOOLEAN,
+  Profile_Day NVARCHAR(15),
+  Profile_PHD NVARCHAR(10),
+  Profile NVARCHAR(10),
+  Profile_Type NVARCHAR(10),
+  Factor NVARCHAR(6),
+  Forecast_Qty DECIMAL(8, 2),
+  Forecast_Inv DECIMAL(8, 2),
+  Forecast_Evt NVARCHAR(5),
+  ForecastedTimestamp TIMESTAMP,
+  Uom NVARCHAR(5),
+  Material_MaterialId NVARCHAR(18),
+  PRIMARY KEY(Site_Site, Site_SiteType, Tank, Forecast_date, Forecast_time, Entry_Type)
+) WITH ASSOCIATIONS (
+  MANY TO ONE JOIN my_roicead_SiteDetails AS Site ON (Site.Site = Site_Site AND Site.SiteType = Site_SiteType),
+  MANY TO ONE JOIN my_roicead_Materials AS Material ON (Material.MaterialId = Material_MaterialId)
+)
