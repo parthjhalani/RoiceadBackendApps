@@ -21,7 +21,7 @@
     "setup": "npm i && cd app/router && npm i && cd ../countservice && npm i",
     "build" : "mbt build",
     "deploy" : "npm run build && npm run login && npm run dev && cf deploy mta_archives/MyRoiceadApps_1.0.0.mtar",
-    "login" : "cf login -u parth.jhalani@yahoo.com -a https://api.cf.eu10.hana.ondemand.com -p Welcome5!",
+    "login" : "cf login -u parth.jhalani@yahoo.com -a https://api.cf.eu10.hana.ondemand.com -p Welcome10!",
     "dev" : "cf target -o 'Roicead GmbH' -s dev "
   },
   "cds": {

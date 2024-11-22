@@ -1,28 +1,28 @@
-var connectn = $.hdb.getConnection();
-function updateTableRecords(content){
-try{
-	var record = JSON.parse(content);
-    if(record.tablename === 'Drawings'){
-        insertInDrawings(JSON.parse(record.data));
+var connectn = await $.hdb.getConnection();
+var TableUpdate = {
+updateTableRecords : async function (content) {
+    try {
+        var record = JSON.parse(content);
+        if (record.tablename === 'Drawings') {
+            await TableUpdate.insertInDrawings(JSON.parse(record.data));
+        }
+        if (record.tablename === 'SitePosHeader') {
+            await TableUpdate.insertPosHeader(JSON.parse(record.data));
+        }
+        if (record.tablename === 'SitePOSItems') {
+            await TableUpdate.insertPosItems(JSON.parse(record.data));
+        }
+        if (record.tablename === 'TankInventory') {
+            await TableUpdate.insertTankInventoryData(JSON.parse(record.data));
+        }
+        return "Data Record is successfully Saved";
+    } catch (oErr) {
+        console.log(oErr);
+        return oErr.message;
     }
-	if(record.tablename === 'SitePosHeader'){
-        insertPosHeader(JSON.parse(record.data));
-    }
-    if(record.tablename === 'SitePOSItems'){
-        insertPosItems(JSON.parse(record.data));
-    }
-    if(record.tablename === 'TankInventory'){
-        insertTankInventoryData(JSON.parse(record.data));
-    }
-	return "Data Record is successfully Saved";
- }
- catch(oErr){
- 	console.log(oErr)
- 	return oErr.message;
- }
-}
+},
 
-function insertPosItems (data) {
+insertPosItems : async function  (data) {
 	for(var i=0; i< data.length; i++){
             let item = data[i];
             let AMOUNT = convertToFloat(item.AMOUNT);
@@ -41,15 +41,15 @@ function insertPosItems (data) {
 			)` ;
 				let querydel = `delete from MY_ROICEAD_SITEPOSITEMS where SiteTrnID = '${item.SiteTrnID}' and SiteTrnItem = '${item.SiteTrnItem}'`;
 				insertq =  insertq.replace(/undefined/g, "");
-				connectn.executeUpdate(querydel);
-				connectn.executeUpdate(insertq);
+				await connectn.executeUpdate(querydel);
+				await connectn.executeUpdate(insertq);
 	}    
-     connectn.commit();    
-}
-function insertPosHeader(data) {
+    await connectn.commit();    
+},
+insertPosHeader : async function (data) {
 	for(var i=0; i< data.length; i++){
             let item = data[i];
-            item.TransactDate = timestampConverter(new Date(item.TransactDate));
+            item.TransactDate = TableUpdate.timestampConverter(new Date(item.TransactDate));
             item.IsConfirmed = convertStrToBool(item.IsConfirmed);
             item.IsInvoiced = convertStrToBool(item.IsInvoiced);
             // let delquery = `delete from ${tabName} where TransactId = '${item.TransactId}'`;
@@ -81,20 +81,20 @@ function insertPosHeader(data) {
 				)` ;
 				let querydel = `delete from MY_ROICEAD_SITEPOSHEADER where SiteTrnID = '${item.SiteTrnID}'`;
 				insertq =  insertq.replace(/undefined/g, "");
-				connectn.executeUpdate(querydel);
-				connectn.executeUpdate(insertq);
+				await connectn.executeUpdate(querydel);
+				await connectn.executeUpdate(insertq);
        }
-       connectn.commit();
-}
-function insertInDrawings(data){
+       await connectn.commit();
+},
+insertInDrawings : async function (data){
     for(var i=0; i<data.length; i++){
         let item = data[i];
         let IsConfirmed = convertStrToBool(item.IsConfirmed);
         let IsInvoiced = convertStrToBool(item.IsInvoiced);
-        let transactDate = timestampConverter(new Date(item["TransactDate (UTC)"]));//; timestampConverter(item["TransactDate (UTC)"]);
+        let transactDate = TableUpdate.timestampConverter(new Date(item["TransactDate (UTC)"]));//; TableUpdate.timestampConverter(item["TransactDate (UTC)"]);
         let Quantity = convertToFloat(item.Quantity);
         let querydel = `delete from MY_ROICEAD_DRAWINGS where TransactId = '${item.TransactId}'`;
-        connectn.executeUpdate(querydel);
+        await connectn.executeUpdate(querydel);
         if(!item["Pump"]){
         	item["Pump"] = '';
         }
@@ -123,23 +123,23 @@ function insertInDrawings(data){
             '${item["Card/CardNum"]}'
         )`;
         insertq =  insertq.replace(/undefined/g, "");
-        connectn.executeUpdate(insertq);
+        await connectn.executeUpdate(insertq);
     }
-    connectn.commit();
-}
+    await connectn.commit();
+},
 
-function insertTankInventoryData(data){
+insertTankInventoryData : async function (data){
     for(var i=0; i<data.length; i++){
         let item = data[i];
-        let currtimestamp = timestampConverter(new Date());
-        let Mdate = formatDate(new Date(item.MDATE));
-        let MTime = formatTime(new Date(item.MTIME));
+        let currtimestamp = TableUpdate.timestampConverter(new Date());
+        let Mdate = TableUpdate.formatDate(new Date(item.MDATE));
+        let MTime = TableUpdate.formatTime(new Date(item.MTIME));
         //let IsInvoiced = convertStrToBool(item.IsInvoiced);
-        //let transactDate = timestampConverter(new Date(item["TransactDate (UTC)"]));//; timestampConverter(item["TransactDate (UTC)"]);
+        //let transactDate = TableUpdate.timestampConverter(new Date(item["TransactDate (UTC)"]));//; TableUpdate.timestampConverter(item["TransactDate (UTC)"]);
         let Quantity = convertToFloat(item.MQUAN);
         
         let querydel = `delete from MY_ROICEAD_TANKINVENTORY where ID = '${item.ID}' and Site = '${item["Site"]}' and TankNum = '${item["TankNum"]}'`;
-        connectn.executeUpdate(querydel);
+        await connectn.executeUpdate(querydel);
         
         let insertq = `INSERT INTO MY_ROICEAD_TANKINVENTORY VALUES(
             '${currtimestamp}',
@@ -164,12 +164,12 @@ function insertTankInventoryData(data){
             'dimitris.pagonis'
         )`;
         insertq =  insertq.replace(/undefined/g, "");
-        connectn.executeUpdate(insertq);
+        await connectn.executeUpdate(insertq);
     }
     connectn.commit();
-}
+},
 
- function formatDate(date) {
+formatDate :  function (date) {
 		var dd = (date.getDate() < 10 ? '0' : '') + date.getDate();
 
 		var MM = ((date.getMonth() + 1) < 10 ? '0' : '') + (date.getMonth() + 1);
@@ -180,29 +180,31 @@ function insertTankInventoryData(data){
         //let hours = "0" + Math.floor(Math.random() * 10);
  	
 		return ( yy + "-" + MM + "-" + dd );
-	}
-  function	formatTime (date){
+	},
+formatTime :   function	 (date){
 		 var hh = (date.getHours() < 10 ? '0' : '') + date.getHours();
 
 		var min = ((date.getMinutes() + 1) < 10 ? '0' : '') + (date.getMinutes() + 1);
 		var sec = '00';//((date.getSeconds()() + 1) < 10 ? '0' : '') + (date.getSeconds() + 1);
 		return ( hh + ":" + min + ":" + sec );
-	}
- function timestampConverter(date){
- 	let formatteddate = formatDate(date);
- 	let time = formatTime(date);
+	},
+timestampConverter : function (date){
+ 	let formatteddate = TableUpdate.formatDate(date);
+ 	let time = TableUpdate.formatTime(date);
  	//date.setTime("00");
  //	let datenum = date.get
     return ( formatteddate + "T" + time )  ;
-  }
+  },
 
-  function convertStrToBool(stringval) {
+ convertStrToBool : function (stringval) {
       if(stringval === '1')
       {
         return true;
       } else   {return false;}
       
-  }
-  function convertToFloat(val){
+  },
+ convertToFloat : function (val){
       return parseFloat(val).toFixed(2);
   }
+}
+export default TableUpdate;

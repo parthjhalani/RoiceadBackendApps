@@ -1,8 +1,9 @@
 var connectn = await $.hdb.getConnection();
-function getForecastOrder(site,tankgrp) {
+var ProposeOrder = {
+getForecastOrder : async function (site,tankgrp) {
 	
-		var tankDetails = getSiteTankDetails(site,tankgrp);	
-		var lastInventory = getTanksWithLatestInventory(site,tankgrp);
+		var tankDetails = await ProposeOrder.getSiteTankDetails(site,tankgrp);	
+		var lastInventory = await ProposeOrder.getTanksWithLatestInventory(site,tankgrp);
 		
 		for (var i = 0; i < tankDetails.length; i++) {
 			for(var j=0; j<lastInventory.length ; j++){
@@ -20,29 +21,29 @@ function getForecastOrder(site,tankgrp) {
 			}
 			
 		}
-		var forecastOrderDetails = getForecastOrderDetail(tankDetails);
+		var forecastOrderDetails = await ProposeOrder.getForecastOrderDetail(tankDetails);
 		if(forecastOrderDetails.length > 0){
-			var orderno = getReplenishmentOrder();
+			var orderno = await ProposeOrder.getReplenishmentOrder();
 			for(var i=0;i<forecastOrderDetails.length;i++){
 				forecastOrderDetails[i].OrderNo = orderno;
 			}
 		}
 		return forecastOrderDetails;
-}
-function getReplenishmentOrder() {
-		var connectn = $.hdb.getConnection();
+},
+getReplenishmentOrder : async function () {
+		var connectn = await $.hdb.getConnection();
 	var query = 'SELECT GETORDERNUMBER.NEXTVAL FROM DUMMY';
-	var result = connectn.executeQuery(query);
+	var result = await connectn.executeQuery(query);
 	var count = result[0]['GETORDERNUMBER.NEXTVAL']._val;
 	connectn.close(); //Close the  connections
 	return count;
-}
-function getForecastOrderDetail(tankinfo){
-	var conn = $.db.getConnection();
+},
+getForecastOrderDetail : async function (tankinfo){
+	var conn = await $.hdb.getConnection();
 		
 		var orderNumber = 0;
 		var currTimestampQuery = 'SELECT CURRENT_TIMESTAMP  FROM DUMMY';
-		var currTstmpResult = connectn.executeQuery(currTimestampQuery);
+		var currTstmpResult = await connectn.executeQuery(currTimestampQuery);
 		var currTstmp = currTstmpResult[0].CURRENT_TIMESTAMP;
 		var hitSFBInPrevLoop = false;
 		var stopForecast = false;
@@ -66,7 +67,7 @@ function getForecastOrderDetail(tankinfo){
 					"MATERIALDESC": tankdetails.MATERIALDESC
 
 				}
-				if (formatDate(tankdetails.currInvDate) >= formatDate(currTstmp) ) {
+				if (ProposeOrder.formatDate(tankdetails.currInvDate) >= ProposeOrder.formatDate(currTstmp) ) {
 					replOrder.push(orderdetails);
 					//orderNumber = orderNumber + 1;
 				}
@@ -77,7 +78,7 @@ function getForecastOrderDetail(tankinfo){
 				
 				critical_tank = 1;
 				hitSFBInPrevLoop = x + 1;
-				if (formatDate(tankdetails.currInvDate) >= formatDate(currTstmp)) {
+				if (ProposeOrder.formatDate(tankdetails.currInvDate) >= ProposeOrder.ProposeOrder.formatDate(currTstmp)) {
 					
 					orderNumber = orderNumber + 1;
 				}
@@ -97,15 +98,15 @@ function getForecastOrderDetail(tankinfo){
 		}else{
 			return "Please enter the latest Tank Inventory and Retry";
 		}
-}
-function formatDate(date) {
+},
+formatDate : function (date) {
 		var dd = (date.getDate() < 10 ? '0' : '') + date.getDate();
 
 		var MM = ((date.getMonth() + 1) < 10 ? '0' : '') + (date.getMonth() + 1);
 
 		return (date.getFullYear() + "-" + MM + "-" + dd + "T00:00:00");
-	}
-function getSiteTankDetails(site,tankgrp) {
+	},
+getSiteTankDetails : async function (site,tankgrp) {
 		var tankgrpcond = '';
 			if(tankgrp === "null"){
 			tankgrpcond = "and tank_grp is NULL";
@@ -113,11 +114,11 @@ function getSiteTankDetails(site,tankgrp) {
 				tankgrpcond = "and tank_grp = '" + tankgrp + "'";
 			}
 		var getTankDetailsQuery = "SELECT * FROM MY_ROICEAD_TANKS where site = '" + site + "' " + tankgrpcond + " order by tank_grp";
-		var tankdetails = connectn.executeQuery(getTankDetailsQuery);
+		var tankdetails = await connectn.executeQuery(getTankDetailsQuery);
 		return tankdetails;
-	}
-function getTanksWithLatestInventory(Site,tankgrp) {
-		var connectn = $.hdb.getConnection();
+	},
+getTanksWithLatestInventory : async function (Site,tankgrp) {
+		var connectn = await $.hdb.getConnection();
 		var tankgrpcond = '';
 			if(tankgrp === "null"){
 			tankgrpcond = "and tank_grp is NULL";
@@ -127,7 +128,7 @@ function getTanksWithLatestInventory(Site,tankgrp) {
 		/*var tankQuery = "select * from MY_ROICEAD_TANKS AS TANKS LEFT OUTER JOIN MY_ROICEAD_TANKINVENTORY AS TI ON TANKS.SITE = TI.SITE AND TANKS.TANKNUM = TI.TANKNUM WHERE " +
 						"TI.MDATE = (SELECT MAX(TI.MDATE) FROM MY_ROICEAD_TANKINVENTORY AS TI WHERE  TI.Site = '" + Site +"' AND TI.TANKNUM = TANKS.TANKNUM) ORDER BY TI.TANKNUM,TI.MDATE, TI.MTIME DESC " ;*/
 		var tankQuery = "Select * from MY_ROICEAD_TANKS where SITE = '" + Site + "' " + tankgrpcond + " and status = 'ACTIVE'";
-		var result = connectn.executeQuery(tankQuery);
+		var result = await connectn.executeQuery(tankQuery);
 		for (var i = 0; i < result.length; i++) {
 			result[i].MaterialDesc = "";
 			result[i].MaterialId = "";
@@ -136,14 +137,14 @@ function getTanksWithLatestInventory(Site,tankgrp) {
 			var inventoryQuery = "select * from MY_ROICEAD_TANKINVENTORY AS TI WHERE  TI.Site = '" + Site + "' AND TI.TANKNUM = '" + result[i].TANKNUM +
 				"' AND TI.MDATE = (SELECT MAX(MDATE) FROM MY_ROICEAD_TANKINVENTORY  WHERE Site = '" + Site + "' and TankNum = '" + result[i].TANKNUM +
 				"') ORDER BY TI.TANKNUM,TI.MDATE, TI.MTIME DESC ";
-			var inventoryRes = connectn.executeQuery(inventoryQuery);
+			var inventoryRes = await connectn.executeQuery(inventoryQuery);
 			var materialQuery =
 				'SELECT TOP 1 * FROM MY_ROICEAD_MATERIALALLOCATION WHERE Valid_from < (SELECT CURRENT_DATE "current date" FROM DUMMY) and site = ' +
 				"'" + Site + "' and TankNum = '" + result[i].TANKNUM + "' ORDER BY Valid_from DESC";
 			/*var materialQuery = 'SELECT * FROM MY_ROICEAD_MATERIALALLOCATION as MatAll  WHERE  site = '
 								+ "'" + Site + "' and TankNum = '" + result[i].TANKNUM + "' ORDER BY Valid_from DESC" */
 
-			var matRes = connectn.executeQuery(materialQuery);
+			var matRes = await connectn.executeQuery(materialQuery);
 			if (inventoryRes.length >= 1) {
 				result[i].MQUAN = inventoryRes[inventoryRes.length - 1].MQUAN;
 				result[i].MDATE = inventoryRes[inventoryRes.length - 1].MDATE;
@@ -159,7 +160,7 @@ function getTanksWithLatestInventory(Site,tankgrp) {
 			}
 			if (result[i].MaterialId !== "") {
 				var matDesc = "Select Top 1 materialid,  materialdesc from MY_ROICEAD_MATERIALS where materialid='" + result[i].MaterialId + "'";
-				var matDscRes = connectn.executeQuery(matDesc);
+				var matDscRes = await connectn.executeQuery(matDesc);
 				if (matDscRes[0]) {
 					result[i].MaterialDesc = matDscRes[0].MATERIALDESC;
 				}
@@ -169,4 +170,6 @@ function getTanksWithLatestInventory(Site,tankgrp) {
 		connectn.close();
 		return result;
 	}
+}
+export default ProposeOrder;
 	

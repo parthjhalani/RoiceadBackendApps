@@ -1,5 +1,5 @@
 var connectn;
-$.hdb.getConnection({}, function(err, client) {
+await $.hdb.getConnection({}, function(err, client) {
     if (err) {
         // Handle error
         console.error("Error getting HANA DB connection:", err);
@@ -8,13 +8,14 @@ $.hdb.getConnection({}, function(err, client) {
     connectn = client;
     
 });
-async function adjustMeterReading(content){
+var MeterReadingAdjustment = {
+adjustMeterReading : async function (content){
 	var record = JSON.parse(content);
 	await insertRecord(record);
 	var resp = await updateMeterReadings(record);
 	return "Data Record is successfully Saved";
-}
-async function updateMeterReadings(record){
+},
+updateMeterReadings : async function (record){
 	var meterReadingsQuery =	"SELECT * FROM MY_ROICEAD_METERREADINGS AS TI  WHERE TI.Site = '" + record.Site + "' and TI.MeterNum = '" + record.MeterNum  + "'" + " and TI.MeasureDate >= '" + record.MeasureDate + "' " + " ORDER BY TI.MeasureDate"		;			
 		var meterReadingsRes = 	await connectn.executeQuery(meterReadingsQuery);	
 		
@@ -42,13 +43,13 @@ async function updateMeterReadings(record){
 					
 		}
 		
-}
-async function updRecord (record){
+},
+updRecord : async function  (record){
 	var sql = "UPDATE MY_ROICEAD_METERREADINGS SET MQUANTITY = '" + record.MQUANTITY + "', MOVERFLOW = " + record.MOVERFLOW + " WHERE ID = '" + record.ID + "'" ;
 	await connectn.executeUpdate(sql);
 	await connectn.commit(); 
-}
-function formatDateTime(date) {
+},
+formatDateTime : function (date) {
 		var dd = (date.getDate() < 10 ? '0' : '') + date.getDate();
 
 		var MM = ((date.getMonth() + 1) < 10 ? '0' : '') + (date.getMonth() + 1);
@@ -58,8 +59,8 @@ function formatDateTime(date) {
 		var time = (HH + ":" + Min + ":" + SS);
 		var dateformatted = date.getFullYear() + "-" + MM + "-" + dd + "T" + time;
 		return (dateformatted);
-	}
-async function insertRecord (record){
+	},
+insertRecord : async function  (record){
 	var currTimestampQuery = 'SELECT CURRENT_TIMESTAMP  FROM DUMMY';
 		var currTstmpResult = await connectn.executeQuery(currTimestampQuery);
 		var currTstmp = formatDateTime(currTstmpResult[0].CURRENT_TIMESTAMP);
@@ -91,3 +92,5 @@ async function insertRecord (record){
 
 
 }
+};
+export default MeterReadingAdjustment;

@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "@sap/xsenv": "^5.1.0",
-    "@sap/async-xsjs" : "^1.0.6"
+    "@sap/async-xsjs" : "^2.0.3"
   },
   "description": "my description",
   
@@ -10,6 +10,7 @@
   "name": "countservice",
   "scripts": {
     "start": "node --experimental-vm-modules server.js",
+    "start-local": "node --experimental-vm-modules server.js",
     "test": "node testrun.js"
   },
   "engines": {

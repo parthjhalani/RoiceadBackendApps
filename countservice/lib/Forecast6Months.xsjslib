@@ -9,7 +9,7 @@
 
 */
 var connectn;
-$.hdb.getConnection({}, function(err, client) {
+await $.hdb.getConnection({}, function(err, client) {
     if (err) {
         // Handle error
         console.error("Error getting HANA DB connection:", err);
@@ -20,14 +20,14 @@ $.hdb.getConnection({}, function(err, client) {
 });
 
 var replOrder = [];
-
-async function getSiteTanksAndExecuteForecast(sites){
+var Forecast6Months = {
+getSiteTanksAndExecuteForecast : async function (sites){
 	var selectedSites = sites.split(",");
-	await deleteForecastedInventoriesAll();
+	await Forecast6Months.deleteForecastedInventoriesAll();
 	for(var i=0; i<selectedSites.length; i++){
 	  var site = selectedSites[i].trim();
        
-	  var tanks = 	await getSiteTankDetails(site);
+	  var tanks = 	await Forecast6Months.getSiteTankDetails(site);
 	  var alltanks = '';
 	  for(var j=0 ; j<tanks.length; j++){
 	  	if(alltanks !== ''){
@@ -35,19 +35,19 @@ async function getSiteTanksAndExecuteForecast(sites){
 	  	}
 	  	alltanks = alltanks + tanks[j].TANKNUM ;
 	  }
-	  executeForecast(site, alltanks);
+	  Forecast6Months.executeForecast(site, alltanks);
 	}
 	await connectn.commit();
-	await deleteForecastedInventoriesOlderByAll();
+	await Forecast6Months.deleteForecastedInventoriesOlderByAll();
 	await connectn.close();
 	return "Forecast executed successfully."
-}
-async function executeForecast(site, tankfilter) {
+},
+executeForecast : async function (site, tankfilter) {
 	var selectedTanks = tankfilter.split(",");
-	var sitedetail = await getSiteDetails(site);
-	var groupedTanks = await getGroupedTanksWithSFBHit(site, selectedTanks);
+	var sitedetail = await Forecast6Months.getSiteDetails(site);
+	var groupedTanks = await Forecast6Months.getGroupedTanksWithSFBHit(site, selectedTanks);
 	var noOfOrders = 0;
-	await deleteFutureOrders(site);
+	await Forecast6Months.deleteFutureOrders(site);
 	for (var j = 0; j < groupedTanks.length; j++) {
 		if (groupedTanks[j].isSelected) {
 			var tanks = groupedTanks[j].Tanks;
@@ -56,7 +56,7 @@ async function executeForecast(site, tankfilter) {
 				var tank = tanks[i].TANKNUM;
 				var firstTimeForecast = false;
 				var lastForecastDateTime;
-				var lastForecasted = await getTankLastForecastDetails(site, tank);
+				var lastForecasted = await Forecast6Months.getTankLastForecastDetails(site, tank);
 				var tankdetails = tanks[i];
 				if (lastForecasted === null) {
 					lastForecastDateTime = '1990-01-01T00:00:00.000Z';
@@ -64,50 +64,50 @@ async function executeForecast(site, tankfilter) {
 				} else {
 					lastForecastDateTime = lastForecasted.MODIFIEDAT;
 				}
-				var deltaInventories = await getDeltaInventories(site, tank, lastForecastDateTime, firstTimeForecast);
-				//var orders = getReplenishmentOrders(site,tank);
+				var deltaInventories = await Forecast6Months.getDeltaInventories(site, tank, lastForecastDateTime, firstTimeForecast);
+				//var orders = Forecast6Months.getReplenishmentOrders(site,tank);
 				if (!(deltaInventories.length === 0 && firstTimeForecast)) {
 						if (deltaInventories.length > 0) {
 							//getTankDetails(site, tank);
 							
-							var saveInventories = await saveInventoryInForecastTable(deltaInventories, tankdetails, sitedetail);
-							await deleteForecastedInventories(site, tank);
-							//noOfOrders = await runForecastForNext5Days(deltaInventories[0], tankdetails, groupedTanks[j]);
+							var saveInventories = await Forecast6Months.saveInventoryInForecastTable(deltaInventories, tankdetails, sitedetail);
+							await Forecast6Months.deleteForecastedInventories(site, tank);
+							//noOfOrders = await Forecast6Months.runForecastForNext5Days(deltaInventories[0], tankdetails, groupedTanks[j]);
 							var currInvDate = new Date(deltaInventories[0].MDATE);
 							currInvDate = new Date(currInvDate.setHours(deltaInventories[0].MTIME.getHours()));
-							var orders = await getReplenishmentOrders(site,tank,currInvDate);
+							var orders = await Forecast6Months.getReplenishmentOrders(site,tank,currInvDate);
 							groupedTanks[j].Tanks[i].Inventory = deltaInventories[0];
 							groupedTanks[j].Tanks[i].MQUAN = deltaInventories[0].MQUAN;
 							groupedTanks[j].Tanks[i].Inventory.currInvDate = currInvDate;
 							groupedTanks[j].Tanks[i].Orders = orders;
 							groupedTanks[j].Tanks[i].SITE_SITE = sitedetail[0].SITE;
 							groupedTanks[j].Tanks[i].SITE_SITETYPE = sitedetail[0].SITETYPE;
-							await saveOldRORD(groupedTanks[j].Tanks[i]);
+							await Forecast6Months.saveOldRORD(groupedTanks[j].Tanks[i]);
 							//groupedTanks[j].tankdetails = tankdetails;
 						} else {
 							//Take Forecasted Inventory as CurrTime Inventory and Start forecasting, Delete Older Forecasted Entries
-							var inventory = await getForecastedInventoryCurrTime(site, tank);
+							var inventory = await Forecast6Months.getForecastedInventoryCurrTime(site, tank);
 
 							if (inventory && inventory !== null) {
-								inventory = mapFItoTI(inventory);
-								await deleteForecastedInventoriesOlderThanCurrTime(site, tank);
-								//noOfOrders = runForecastForNext5Days(inventory, tankdetails, groupedTanks[j]);
+								inventory = Forecast6Months.mapFItoTI(inventory);
+								await Forecast6Months.deleteForecastedInventoriesOlderThanCurrTime(site, tank);
+								//noOfOrders = Forecast6Months.runForecastForNext5Days(inventory, tankdetails, groupedTanks[j]);
 								var currInvDate = new Date(inventory.MDATE);
-								var orders = await getReplenishmentOrders(site,tank,currInvDate);
+								var orders = await Forecast6Months.getReplenishmentOrders(site,tank,currInvDate);
 								currInvDate = new Date(currInvDate.setHours(inventory.MTIME.getHours()));
 								groupedTanks[j].Tanks[i].Inventory = inventory;
 								groupedTanks[j].Tanks[i].Inventory.currInvDate = currInvDate;
 								groupedTanks[j].Tanks[i].Orders = orders;
 								groupedTanks[j].Tanks[i].SITE_SITE = sitedetail[0].SITE;
 								groupedTanks[j].Tanks[i].SITE_SITETYPE = sitedetail[0].SITETYPE;
-								await saveOldRORD(groupedTanks[j].Tanks[i]);
+								await Forecast6Months.saveOldRORD(groupedTanks[j].Tanks[i]);
 								//groupedTanks[j].tankdetails = tankdetails;
 
 							}
 						}
 					} else{
 						//create dummy date as no records exists
-						// let dummyInv = getDummyInventory(site,tanks[i]);
+						// let dummyInv = Forecast6Months.getDummyInventory(site,tanks[i]);
 						// var currInvDate = new Date(dummyInv.MDATE);
 						// groupedTanks[j].Tanks[i].Inventory = dummyInv;
 						// groupedTanks[j].Tanks[i].Inventory.currInvDate = currInvDate;
@@ -115,27 +115,27 @@ async function executeForecast(site, tankfilter) {
 						// groupedTanks[j].Tanks[i].Orders = [];
 						return("No inventory found error");
 					}
-					await deleteInventoriesOlderThanTenDays(site, tank);
+					await Forecast6Months.deleteInventoriesOlderThanTenDays(site, tank);
 				} //tanks loop ends
-				var noOfOrders = await executeForecastSimultaneously(groupedTanks[j]);
+				var noOfOrders = await Forecast6Months.executeForecastSimultaneously(groupedTanks[j]);
 			} //ifSelectedEnds
 			
 			// Create Replenishment Orders
-			//createReplenishmentOrder(noOfOrders);
+			//Forecast6Months.createReplenishmentOrder(noOfOrders);
 		} //Tankgrp loop ends
 		//connectn.commit();
 		//connectn.close();
 
 		return true;
 
-	}
-	function getDummyInventory(site,tank){
+	},
+	getDummyInventory : function (site,tank){
 	 let data = 	{
 			ID           : 'DUMMY101' ,
 	    	SITE         : site,
 	        TANKNUM      : tank.TANKNUM, 
-	        MDATE        : formatDate(new Date()),
-	        MTIME        : formatTime(new Date()),
+	        MDATE        : Forecast6Months.formatDate(new Date()),
+	        MTIME        : Forecast6Months.formatTime(new Date()),
 	        MTYPE        : 'MAN',
 	        MTZONE       : 'CET',
 	        MATERIALID   : '1000007',
@@ -144,8 +144,8 @@ async function executeForecast(site, tankfilter) {
 	        MFUOM        : 'L',
 	        MQUAN        : 5000.00,
 	        MQUOM        : 'L',
-	        Regdate      : formatDate(new Date()),
-	        RegTime      : formatTime(new Date()),
+	        Regdate      : Forecast6Months.formatDate(new Date()),
+	        RegTime      : Forecast6Months.formatTime(new Date()),
 	        RegUser      : 'D.Pagonis'
         
 		};
@@ -154,23 +154,23 @@ async function executeForecast(site, tankfilter) {
 			data.MATERIALDESC = tank.MATERIALDESC;
 		}
 		return data;
-	}
+	},
 	/* Order Creation */
-	function getReplenishmentOrderNumber() {
+	getReplenishmentOrderNumber : function () {
 		var connectn = $.hdb.getConnection();
 		var query = 'SELECT GETORDERNUMBER.NEXTVAL FROM DUMMY';
 		var result = connectn.executeQuery(query);
 		var order = result[0]['GETORDERNUMBER.NEXTVAL']._val;
 
 		return order;
-	}
-	async function getReplenishmentOrders(site,tank,date){
+	},
+	getReplenishmentOrders :async function (site,tank,date){
 		var connectn = await $.hdb.getConnection();
-		var orderquery = "SELECT * FROM MY_ROICEAD_REPLENISHMENTORDERS where status='RLSD' and isStatusChgd=false and site_site ='" + site + "' and tanknum='" + tank + "' and suppl_date >='" + formatDate(date) + "'" ;
+		var orderquery = "SELECT * FROM MY_ROICEAD_REPLENISHMENTORDERS where status='RLSD' and isStatusChgd=false and site_site ='" + site + "' and tanknum='" + tank + "' and suppl_date >='" + Forecast6Months.formatDate(date) + "'" ;
 		var orders = await connectn.executeQuery(orderquery);
 		return orders;
-	}
-	function createReplenishmentOrder(noOfOrders) {
+	},
+	createReplenishmentOrder :function (noOfOrders) {
 		var conn = $.db.getConnection();
 		var so = conn.prepareStatement(
 			'INSERT INTO MY_ROICEAD_REPLENISHMENTORDERS VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
@@ -178,7 +178,7 @@ async function executeForecast(site, tankfilter) {
 			so.setBatchSize(replOrder.length);
 			var orders = [];
 			for (var k = 0; k < noOfOrders; k++) {
-				var sonumber = "A" + getReplenishmentOrderNumber();
+				var sonumber = "A" + Forecast6Months.getReplenishmentOrderNumber();
 				orders.push(sonumber.toString());
 			}
 			replOrder.sort(function (a, b) {
@@ -213,17 +213,17 @@ async function executeForecast(site, tankfilter) {
 				so.setDecimal(9, orderitems[i].ORDERQTY); /*SUPPL_QTY <DECIMAL>*/
 				so.setString(10, 'L'); /*SUPPL_UOM <NVARCHAR(10)>*/
 
-				so.setTimestamp(11, formatDate(orderitems[i].Suppl_Date)); /*11SUPPL_DATE <TIMESTAMP>*/
-				so.setTime(12, formatTime(orderitems[i].Suppl_Time), 'HH:MI:SS'); /*12SUPPL_TIME <NVARCHAR(10)>*/
+				so.setTimestamp(11, Forecast6Months.formatDate(orderitems[i].Suppl_Date)); /*11SUPPL_DATE <TIMESTAMP>*/
+				so.setTime(12, Forecast6Months.formatTime(orderitems[i].Suppl_Time), 'HH:MI:SS'); /*12SUPPL_TIME <NVARCHAR(10)>*/
 				so.setString(13, 'UTC'); /*SUPPL_TIMEZONE <NVARCHAR(10)>*/
 				so.setString(14, '2:00:00'); /*SUPPL_LOW_TOL <NVARCHAR(10)>*/
 				so.setString(15, '2:00:00'); /*SUPPL_HIGH_TOL <NVARCHAR(10)>*/
 				so.setString(16, ('500')); /*SUPPL_LOW_QTY <NVARCHAR(10)>*/
 				so.setString(17, '500'); /*SUPPL_HIGH_QTY <NVARCHAR(10)>*/
-				so.setTimestamp(18, calculateCutOffDate(orderitems[i].Cutoff_Date)); /*CUTOFF_DATE <TIMESTAMP>*/
-				so.setTime(19, formatTime(orderitems[i].Suppl_Time), 'HH:MI:SS'); /*CUTOFF_TIME <NVARCHAR(10)>*/
-				so.setDate(20, formatDate(currTstmp)); /*REGDATE <DATE>*/
-				so.setTime(21, formatTime(currTstmp), 'HH:MI:SS'); /*REGTIME <TIME>*/
+				so.setTimestamp(18, Forecast6Months.calculateCutOffDate(orderitems[i].Cutoff_Date)); /*CUTOFF_DATE <TIMESTAMP>*/
+				so.setTime(19, Forecast6Months.formatTime(orderitems[i].Suppl_Time), 'HH:MI:SS'); /*CUTOFF_TIME <NVARCHAR(10)>*/
+				so.setDate(20, Forecast6Months.formatDate(currTstmp)); /*REGDATE <DATE>*/
+				so.setTime(21, Forecast6Months.formatTime(currTstmp), 'HH:MI:SS'); /*REGTIME <TIME>*/
 				so.setString(22, 'D.Pagonis'); /*REGUSER <NVARCHAR(50)>*/
 				so.setString(23, orderitems[i].SITE); /*SITE_SITE <NVARCHAR(10)>*/
 				so.setString(24, 'FUELS'); /*SITE_SITETYPE <NVARCHAR(5)>*/
@@ -241,38 +241,38 @@ async function executeForecast(site, tankfilter) {
 		}
 		replOrder = [];
 
-	}
+	},
 
-	async function deleteInventoriesOlderThanTenDays(site, tank) {
+	deleteInventoriesOlderThanTenDays : async function (site, tank) {
 		var currTimestampQuery = 'SELECT CURRENT_TIMESTAMP  FROM DUMMY';
 		var currTstmpResult = await connectn.executeQuery(currTimestampQuery);
 		var currTstmp = currTstmpResult[0].CURRENT_TIMESTAMP;
 		currTstmp = new Date(currTstmp.setDate(currTstmp.getDate() - 10));
-		currTstmp = formatDateTime(currTstmp);
+		currTstmp = Forecast6Months.formatDateTime(currTstmp);
 		var delQ = "delete from MY_ROICEAD_DEMANDFORECAST where site_site ='" + site + "' and tank ='" + tank +
 			"' and Entry_Type='INV' and ForecastedTimestamp  <='" + currTstmp + "'";
 		var deleted = await connectn.executeUpdate(delQ);
 		await connectn.commit();
 		return true;
-	}
+	},
 
-async function deleteForecastedInventoriesOlderByAll() {
+deleteForecastedInventoriesOlderByAll : async function () {
 		//var delQ = "delete from MY_ROICEAD_DEMANDFORECAST where site='" + site + "' and tank ='" + tank + "' and Entry_Type='DMF' and ForecastedTimestamp  >= ( select current_timestamp from dummy) " ;
 		var delQ = "delete from MY_ROICEAD_DEMANDFORECAST where ForecastedTimestamp  < ( select current_timestamp from dummy) " ;
 		var deleted = await connectn.executeUpdate(delQ);
 		await connectn.commit();
 		return true;
-	}
-	async function deleteForecastedInventoriesOlderThanCurrTime(site, tank) {
+	},
+deleteForecastedInventoriesOlderThanCurrTime :	async function (site, tank) {
 		//var delQ = "delete from MY_ROICEAD_DEMANDFORECAST where site='" + site + "' and tank ='" + tank + "' and Entry_Type='DMF' and ForecastedTimestamp  >= ( select current_timestamp from dummy) " ;
 		var delQ = "delete from MY_ROICEAD_DEMANDFORECAST where site_site ='" + site + "' and tank ='" + tank +
 			"' and (Entry_Type='DMF' or Entry_Type='SDMF' or Entry_Type='ORD' or Entry_Type='RORD')";
 		var deleted = await connectn.executeUpdate(delQ);
 		await connectn.commit();
 		return true;
-	}
+	},
 
-	async function getForecastedInventoryCurrTime(site, tank) {
+getForecastedInventoryCurrTime :	async function (site, tank) {
 		var lastForecastQuery = 'SELECT TOP 1 * FROM MY_ROICEAD_DEMANDFORECAST WHERE Site_Site = ' +
 			"'" + site + "' and Tank = '" + tank +
 			"' and Entry_Type = 'DMF' and ForecastedTimestamp  <= ( select current_timestamp from dummy)  ORDER BY MODIFIEDAT DESC";
@@ -282,47 +282,47 @@ async function deleteForecastedInventoriesOlderByAll() {
 		} else {
 			return null;
 		}
-	}
-	async	function deleteFutureOrders(site) {
+	},
+	deleteFutureOrders : async	function (site) {
 			var currTimestampQuery = 'SELECT CURRENT_TIMESTAMP  FROM DUMMY';
 			var currTstmpResult = await connectn.executeQuery(currTimestampQuery);
 			var currTstmp = (currTstmpResult[0].CURRENT_TIMESTAMP);
 			currTstmp = new Date(currTstmp.setMinutes(currTstmp.getMinutes() - 3 ));
-			var createdAt = formatDateTime(currTstmp);
+			var createdAt = Forecast6Months.formatDateTime(currTstmp);
 			var delQ = "delete FROM MY_ROICEAD_REPLENISHMENTORDERS where Site_Site = '" + site + "' and SUPPL_DATE >= (Select current_date from dummy) and STATUS = 'CRT' and isStatusChgd = false and CREATEDAT < '" + createdAt + "'" ;
 			var deleted = await connectn.executeUpdate(delQ);
 			await connectn.commit();
 			return true;
-	}
-	async function deleteForecastedInventories(site, tank) {
+	},
+	deleteForecastedInventories : async function (site, tank) {
 		var delQ = "delete from MY_ROICEAD_DEMANDFORECAST where  (Entry_Type='DMF' or  Entry_Type='SDMF' or Entry_Type='ORD' or Entry_Type='RORD'  ) and site_site ='" +
 			site + "' and tank ='" + tank + "'";
 		var deleted = await connectn.executeUpdate(delQ);
 		await connectn.commit();
 		return true;
-	}
-	async function deleteForecastedInventoriesAll() {
+	},
+	deleteForecastedInventoriesAll : async function () {
 			var delQ = "delete from MY_ROICEAD_DEMANDFORECAST ";
 			var deleted = await connectn.executeUpdate(delQ);
 			await connectn.commit();
 			return true;
-	}
-    async function deleteForecastedInventoriesBySite(site) {
+	},
+    deleteForecastedInventoriesBySite : async function (site) {
 		var delQ = "delete from MY_ROICEAD_DEMANDFORECAST where site_site ='" + site + "'";
 		var deleted = await connectn.executeUpdate(delQ);
 		connectn.commit();
 		return true;
-	}
+	},
 
-	async function getTankDetails(site, tank) {
+	getTankDetails : async function (site, tank) {
 		var getTankDetailsQuery = "SELECT * FROM MY_ROICEAD_TANKS where site = '" + site + "' and tanknum ='" + tank + "'";
 		var tankdetails = await connectn.executeQuery(getTankDetailsQuery);
 		return tankdetails[0];
-	}
+	},
 
-	async function getGroupedTanksWithSFBHit(site, seltanks) {
-		var tankDetails = await getSiteTankDetails(site);
-		var lastInventory = await getTanksWithLatestInventory(site);
+	getGroupedTanksWithSFBHit : async function (site, seltanks) {
+		var tankDetails = await Forecast6Months.getSiteTankDetails(site);
+		var lastInventory = await Forecast6Months.getTanksWithLatestInventory(site);
 		var groupedTanks = [];
 		var lastTankGrp = "";
 		for (var i = 0; i < tankDetails.length; i++) {
@@ -409,7 +409,7 @@ async function deleteForecastedInventoriesOlderByAll() {
 			groupedTanks[i].criticalTankAfterOrder = groupedTanks[i].Tanks[0].TANKNUM;
 		}
 		return groupedTanks;
-	}
+	},
 
 	// function getReplenishmentOrder() {
 
@@ -419,7 +419,7 @@ async function deleteForecastedInventoriesOlderByAll() {
 	// 	return count;
 	// }
 
-	function mapFItoTI(inventory) {
+	mapFItoTI : function (inventory) {
 		return {
 			"MDATE": inventory.FORECAST_DATE,
 			"MTIME": inventory.FORECAST_TIME,
@@ -429,8 +429,8 @@ async function deleteForecastedInventoriesOlderByAll() {
 			"MATERIALID": inventory.MATERIAL
 
 		}
-	}
-	async function saveOldRORD(tank){
+	},
+	saveOldRORD : async function (tank){
 		var conn = await $.db.getConnection();
 		var currTimestampQuery = 'SELECT CURRENT_TIMESTAMP  FROM DUMMY';
 		var currTstmpResult = await connectn.executeQuery(currTimestampQuery);
@@ -457,8 +457,8 @@ async function deleteForecastedInventoriesOlderByAll() {
 				st.setString(4, "D.Pagonis");
 				
 				st.setString(5, tank.Inventory.TANKNUM);
-				st.setDate(6, formatDate(suppl_date)); //ForecastDate
-				st.setTime(7, formatTime(suppl_date), 'HH:MI:SS'); //ForecastTinme
+				st.setDate(6, Forecast6Months.formatDate(suppl_date)); //ForecastDate
+				st.setTime(7, Forecast6Months.formatTime(suppl_date), 'HH:MI:SS'); //ForecastTinme
 				st.setString(8, 'RORD'); //ENTRY_TYPE
 				
 				st.setString(9, ' '); // Tankgrp
@@ -471,8 +471,8 @@ async function deleteForecastedInventoriesOlderByAll() {
 				st.setDecimal(16, parseFloat(order.SUPPL_QTY )); //Forecast Qty
 				st.setDecimal(17, order.SUPPL_QTY); //Forecast Inv
 				st.setString(18, ''); //FORECAST_EVT
-				st.setTimestamp(19, formatDateTime(currInvDate)); //ForecastedDateTime
-                st.setString(20, getMonthName(currInvDate)); //Forecast_Month
+				st.setTimestamp(19, Forecast6Months.formatDateTime(currInvDate)); //ForecastedDateTime
+                st.setString(20, Forecast6Months.getMonthName(currInvDate)); //Forecast_Month
                 st.setString(21, tank.Inventory.MATERIALID); //MATERIAL
                 st.setString(22, tank.SITE_SITE);
                 st.setString(23, tank.SITE_SITETYPE);
@@ -486,12 +486,12 @@ async function deleteForecastedInventoriesOlderByAll() {
 		}
 				await conn.close();
 		
-	}
-	function calculateCutOffDate(date) {
+	},
+	calculateCutOffDate : function (date) {
 		var cutoffdate = new Date(date.setDate(date.getDate() - 1));
-		return formatDate(cutoffdate);
-	}
-	async function executeForecastSimultaneously(groupedTanks){
+		return Forecast6Months.formatDate(cutoffdate);
+	},
+	executeForecastSimultaneously : async function (groupedTanks){
 		var conn = await $.db.getConnection();
 		var currTimestampQuery = 'SELECT CURRENT_TIMESTAMP  FROM DUMMY';
 		var currTstmpResult = await connectn.executeQuery(currTimestampQuery);
@@ -534,7 +534,7 @@ async function deleteForecastedInventoriesOlderByAll() {
 					"MATERIALDESC": tankdetails.MATERIALDESC
 
 				}
-				if (formatDate(groupedTanks.Tanks[i].Inventory.currInvDate) >= formatDate(currTstmp) && orderNumber !== 0) {
+				if (Forecast6Months.formatDate(groupedTanks.Tanks[i].Inventory.currInvDate) >= Forecast6Months.formatDate(currTstmp) && orderNumber !== 0) {
 					replOrder.push(orderdetails);
 					//orderNumber = orderNumber + 1;
 				}
@@ -546,8 +546,8 @@ async function deleteForecastedInventoriesOlderByAll() {
 				st.setString(4, "D.Pagonis");
 				//st.setString(5, groupedTanks.Tanks[i].Inventory.SITE);
 				st.setString(5, groupedTanks.Tanks[i].Inventory.TANKNUM);
-				st.setDate(6, formatDate(curInvDateT)); //ForecastDate
-				st.setTime(7, formatTime(curInvDateT), 'HH:MI:SS'); //ForecastTinme
+				st.setDate(6, Forecast6Months.formatDate(curInvDateT)); //ForecastDate
+				st.setTime(7, Forecast6Months.formatTime(curInvDateT), 'HH:MI:SS'); //ForecastTinme
 				st.setString(8, 'ORD'); //ENTRY_TYPE
 				
 				
@@ -562,8 +562,8 @@ async function deleteForecastedInventoriesOlderByAll() {
 				st.setDecimal(16, parseFloat(orderdetails.ORDERQTY)); //Forecast Qty
 				st.setDecimal(17, tankdetails.MQUAN); //Forecast Inv
 				st.setString(18, forecast_event); //FORECAST_EVT
-				st.setTimestamp(19, formatDateTime(curInvDateT)); //ForecastedDateTime
-                st.setString(20, getMonthName(curInvDateT)); //Forecast_Month
+				st.setTimestamp(19, Forecast6Months.formatDateTime(curInvDateT)); //ForecastedDateTime
+                st.setString(20, Forecast6Months.getMonthName(curInvDateT)); //Forecast_Month
                 st.setString(21, groupedTanks.Tanks[i].MATERIALID); //MATERIAL
                 st.setString(22,groupedTanks.Tanks[i].SITE_SITE);
                 st.setString(23, groupedTanks.Tanks[i].SITE_SITETYPE);
@@ -590,8 +590,8 @@ async function deleteForecastedInventoriesOlderByAll() {
 				st.setString(4, "D.Pagonis");
 				
 				st.setString(5, groupedTanks.Tanks[i].Inventory.TANKNUM);
-				st.setDate(6, formatDate(currInvDate)); //ForecastDate
-				st.setTime(7, formatTime(currInvDate), 'HH:MI:SS'); //ForecastTinme
+				st.setDate(6, Forecast6Months.formatDate(currInvDate)); //ForecastDate
+				st.setTime(7, Forecast6Months.formatTime(currInvDate), 'HH:MI:SS'); //ForecastTinme
 				st.setString(8, 'RORD'); //ENTRY_TYPE
 				
 				st.setString(9, ' '); // Tankgrp
@@ -604,8 +604,8 @@ async function deleteForecastedInventoriesOlderByAll() {
 				st.setDecimal(16, parseFloat(order.SUPPL_QTY )); //Forecast Qty
 				st.setDecimal(17, tankdetails.MQUAN); //Forecast Inv
 				st.setString(18, forecast_event); //FORECAST_EVT
-				st.setTimestamp(19, formatDateTime(currInvDate)); //ForecastedDateTime
-                st.setString(20, getMonthName(currInvDate)); //Forecast_Month
+				st.setTimestamp(19, Forecast6Months.formatDateTime(currInvDate)); //ForecastedDateTime
+                st.setString(20, Forecast6Months.getMonthName(currInvDate)); //Forecast_Month
                 st.setString(21, groupedTanks.Tanks[i].MATERIALID); //MATERIAL
                 st.setString(22,groupedTanks.Tanks[i].SITE_SITE);
                 st.setString(23, groupedTanks.Tanks[i].SITE_SITETYPE);
@@ -619,7 +619,7 @@ async function deleteForecastedInventoriesOlderByAll() {
 				
 				critical_tank = 1;
 				hitSFBInPrevLoop = x + 1;
-				if (formatDate(groupedTanks.Tanks[i].Inventory.currInvDate) >= formatDate(currTstmp)) {
+				if (Forecast6Months.formatDate(groupedTanks.Tanks[i].Inventory.currInvDate) >= Forecast6Months.formatDate(currTstmp)) {
 					
 					orderNumber = orderNumber + 1;
 				}
@@ -642,8 +642,8 @@ async function deleteForecastedInventoriesOlderByAll() {
 				st.setString(4, "D.Pagonis");
 				
 				st.setString(5, groupedTanks.Tanks[i].Inventory.TANKNUM);
-				st.setDate(6, formatDate(groupedTanks.Tanks[i].Inventory.currInvDate)); //ForecastDate
-				st.setTime(7, formatTime(groupedTanks.Tanks[i].Inventory.currInvDate), 'HH:MI:SS'); //ForecastTinme
+				st.setDate(6, Forecast6Months.formatDate(groupedTanks.Tanks[i].Inventory.currInvDate)); //ForecastDate
+				st.setTime(7, Forecast6Months.formatTime(groupedTanks.Tanks[i].Inventory.currInvDate), 'HH:MI:SS'); //ForecastTinme
 				st.setString(8, entry_type); //ENTRY_TYPE
 				
 				st.setString(9, ' '); // Tankgrp
@@ -656,8 +656,8 @@ async function deleteForecastedInventoriesOlderByAll() {
 				st.setDecimal(16, 0.0); //Forecast Qty
 				st.setDecimal(17, tankdetails.MQUAN); //Forecast Inv
 				st.setString(18, forecast_event); //FORECAST_EVT
-				st.setTimestamp(19, formatDateTime(groupedTanks.Tanks[i].Inventory.currInvDate)); //ForecastedDateTime
-                st.setString(20, getMonthName(groupedTanks.Tanks[i].Inventory.currInvDate)); //Forecast_Month
+				st.setTimestamp(19, Forecast6Months.formatDateTime(groupedTanks.Tanks[i].Inventory.currInvDate)); //ForecastedDateTime
+                st.setString(20, Forecast6Months.getMonthName(groupedTanks.Tanks[i].Inventory.currInvDate)); //Forecast_Month
                 st.setString(21, groupedTanks.Tanks[i].MATERIALID); //MATERIAL
                 st.setString(22,groupedTanks.Tanks[i].SITE_SITE);
                 st.setString(23, groupedTanks.Tanks[i].SITE_SITETYPE);
@@ -677,8 +677,8 @@ async function deleteForecastedInventoriesOlderByAll() {
 		await conn.close();
 
 		return (orderNumber );
-	}
-	async function runForecastForNext5Days(inventory, tankdetails, tankGrp) {
+	},
+	runForecastForNext5Days : async function (inventory, tankdetails, tankGrp) {
 		// var currInvDate = (inventory.MDATE);
 		// currInvDate = new Date(currInvDate.setHours(inventory.MTIME.getHours()));
 		// //currInvDate = currInvDate.setMinutes(inventory.MTIME.getMinutes());
@@ -713,8 +713,8 @@ async function deleteForecastedInventoriesOlderByAll() {
 				st.setString(4, "D.Pagonis");
 				
 				st.setString(5, inventory.TANKNUM);
-				st.setDate(6, formatDate(currInvDate)); //ForecastDate
-				st.setTime(7, formatTime(currInvDate), 'HH:MI:SS'); //ForecastTinme
+				st.setDate(6, Forecast6Months.formatDate(currInvDate)); //ForecastDate
+				st.setTime(7, Forecast6Months.formatTime(currInvDate), 'HH:MI:SS'); //ForecastTinme
 				st.setString(8, 'ORD'); //ENTRY_TYPE
 				
 				st.setString(9, ' '); // Tankgrp
@@ -727,8 +727,8 @@ async function deleteForecastedInventoriesOlderByAll() {
 				st.setDecimal(16, parseFloat(orderdetails.ORDERQTY)); //Forecast Qty
 				st.setDecimal(17, mquan); //Forecast Inv
 				st.setString(18, forecast_event); //FORECAST_EVT
-				st.setTimestamp(19, formatDateTime(currInvDate)); //ForecastedDateTime
-                st.setString(20, getMonthName(currInvDate)); //Forecast_Month
+				st.setTimestamp(19, Forecast6Months.formatDateTime(currInvDate)); //ForecastedDateTime
+                st.setString(20, Forecast6Months.getMonthName(currInvDate)); //Forecast_Month
                 st.setString(21, inventory.MATERIALID); //MATERIAL
                 st.setString(22,inventory.SITE_SITE);
                 st.setString(23, inventory.SITE_SITETYPE);
@@ -758,7 +758,7 @@ async function deleteForecastedInventoriesOlderByAll() {
 				volToHitSFB = volToHitSFB + tankGrp.minHoursToReachSFBAfterOrder;
 				criticalTank = tankGrp.criticalTankAfterOrder;
 				hitSFBInPrevLoop = true;
-				if (formatDate(currInvDate) >= formatDate(currTstmp)) {
+				if (Forecast6Months.formatDate(currInvDate) >= Forecast6Months.formatDate(currTstmp)) {
 					replOrder.push(orderdetails);
 					orderNumber = orderNumber + 1;
 				}
@@ -781,8 +781,8 @@ async function deleteForecastedInventoriesOlderByAll() {
 				st.setString(4, "D.Pagonis");
 			
 				st.setString(5, inventory.TANKNUM);
-				st.setDate(6, formatDate(currInvDate)); //ForecastDate
-				st.setTime(7, formatTime(currInvDate), 'HH:MI:SS'); //ForecastTinme
+				st.setDate(6, Forecast6Months.formatDate(currInvDate)); //ForecastDate
+				st.setTime(7, Forecast6Months.formatTime(currInvDate), 'HH:MI:SS'); //ForecastTinme
 				st.setString(8, entry_type); //ENTRY_TYPE
 				
 				st.setString(9, ' '); // Tankgrp
@@ -795,8 +795,8 @@ async function deleteForecastedInventoriesOlderByAll() {
 				st.setDecimal(16, 0.0); //Forecast Qty
 				st.setDecimal(17, mquan); //Forecast Inv
 				st.setString(18, forecast_event); //FORECAST_EVT
-				st.setTimestamp(19, formatDateTime(currInvDate)); //ForecastedDateTime
-                st.setString(20, getMonthName(currInvDate)); //Forecast_Month
+				st.setTimestamp(19, Forecast6Months.formatDateTime(currInvDate)); //ForecastedDateTime
+                st.setString(20, Forecast6Months.getMonthName(currInvDate)); //Forecast_Month
                 st.setString(21, inventory.MATERIALID); //MATERIAL
                 st.setString(22,inventory.SITE_SITE);
                 st.setString(23, inventory.SITE_SITETYPE);
@@ -813,9 +813,9 @@ async function deleteForecastedInventoriesOlderByAll() {
 		await conn.close();
 
 		return (orderNumber + 1);
-	}
+	},
 
-	async function saveInventoryInForecastTable(inventories, tankdetails,sitedetails) {
+	saveInventoryInForecastTable : async function (inventories, tankdetails,sitedetails) {
 		var conn = await $.db.getConnection();
 		var currTimestampQuery = 'SELECT CURRENT_TIMESTAMP  FROM DUMMY';
 		var currTstmpResult = await connectn.executeQuery(currTimestampQuery);
@@ -848,8 +848,8 @@ async function deleteForecastedInventoriesOlderByAll() {
 			st.setDecimal(16, 0.0); //Forecast Qty
 			st.setDecimal(17, inventories[x].MQUAN); //Forecast Inv
 			st.setString(18, ''); //FORECAST_EVT
-			st.setTimestamp(19, formatDateTime(currInvDate)); //ForecastedDateTime
-            st.setString(20, getMonthName(currInvDate)); //Forecast_Month
+			st.setTimestamp(19, Forecast6Months.formatDateTime(currInvDate)); //ForecastedDateTime
+            st.setString(20, Forecast6Months.getMonthName(currInvDate)); //Forecast_Month
             st.setString(21, inventories[x].MATERIALID); //MATERIAL
             st.setString(22,sitedetails[0].SITE);
             st.setString(23, sitedetails[0].SITETYPE);
@@ -861,35 +861,35 @@ async function deleteForecastedInventoriesOlderByAll() {
 		await st.executeBatch();
 		await conn.commit();
 		await conn.close();
-	}
-	async function getSiteDetails(site){
+	},
+	getSiteDetails : async function (site){
 		var getSiteDetQ = `select * from MY_ROICEAD_SITEDETAILS where site = '${site}'`;
 		var sites = await connectn.executeQuery(getSiteDetQ);
 		return sites;
-	}
-	async function getDeltaInventories(site, tank, lastForecastDateTime, firstTimeForecast) {
+	},
+	getDeltaInventories : async function (site, tank, lastForecastDateTime, firstTimeForecast) {
 		var getInventoriesQuery;
 		var currTimestampQuery = 'SELECT CURRENT_DATE  FROM DUMMY';
 		var currTstmpResult = await connectn.executeQuery(currTimestampQuery);
 		var currTstmp = currTstmpResult[0].CURRENT_DATE;
 		currTstmp = new Date(currTstmp.setDate(currTstmp.getDate() - 10));
-		currTstmp = formatDateNew(currTstmp);
+		currTstmp = Forecast6Months.formatDateNew(currTstmp);
 		/*if (!firstTimeForecast) {
 			getInventoriesQuery = 'SELECT * FROM MY_ROICEAD_TANKINVENTORY as _TI inner join  MY_ROICEAD_sitedetails as site on _TI.Site = site.site  WHERE _TI.Site = ' +
-				"'" + site + "' and _TI.TankNum = '" + tank + "' and _TI.MODIFIEDAT >='" + formatDateTime(lastForecastDateTime) + "' order by _TI.MODIFIEDAT desc";
+				"'" + site + "' and _TI.TankNum = '" + tank + "' and _TI.MODIFIEDAT >='" + Forecast6Months.formatDateTime(lastForecastDateTime) + "' order by _TI.MODIFIEDAT desc";
 		} else {
 			getInventoriesQuery = `SELECT * FROM MY_ROICEAD_TANKINVENTORY  as _TI inner join  MY_ROICEAD_sitedetails as site on _TI.Site = site.site  WHERE _TI.Site = '${site}' and _TI.TankNum = '${tank}' and _TI.MDATE >= '${currTstmp}' order by _TI.regdate desc, _TI.regtime desc`;
 		}*/
 		if (!firstTimeForecast) {
 			getInventoriesQuery = 'SELECT * FROM MY_ROICEAD_TANKINVENTORY WHERE Site = ' +
-				"'" + site + "' and TankNum = '" + tank + "' and MODIFIEDAT >='" + formatDateTime(lastForecastDateTime) + "' order by MODIFIEDAT desc";
+				"'" + site + "' and TankNum = '" + tank + "' and MODIFIEDAT >='" + Forecast6Months.formatDateTime(lastForecastDateTime) + "' order by MODIFIEDAT desc";
 		} else {
 			getInventoriesQuery = 'SELECT * FROM MY_ROICEAD_TANKINVENTORY WHERE Site = ' +
 				"'" + site + "' and TankNum = '" + tank + "' and MDATE >= '" + currTstmp + "' order by regdate desc, regtime desc";
 		}
 		// if (!firstTimeForecast) {
 		// 	getInventoriesQuery = 'SELECT * FROM MY_ROICEAD_TANKINVENTORY WHERE Site = ' +
-		// 		"'" + site + "' and TankNum = '" + tank + "' and MODIFIEDAT >='" + formatDateTime(lastForecastDateTime) + "' order by mdate desc, mtime desc";
+		// 		"'" + site + "' and TankNum = '" + tank + "' and MODIFIEDAT >='" + Forecast6Months.formatDateTime(lastForecastDateTime) + "' order by mdate desc, mtime desc";
 		// } else {
 		// 	getInventoriesQuery = 'SELECT * FROM MY_ROICEAD_TANKINVENTORY WHERE Site = ' +
 		// 		"'" + site + "' and TankNum = '" + tank + "' and MDATE >= '" + currTstmp + "' order by mdate desc, mtime desc";
@@ -897,9 +897,9 @@ async function deleteForecastedInventoriesOlderByAll() {
 		var deltaInventories = await connectn.executeQuery(getInventoriesQuery);
 		return deltaInventories;
 
-	}
+	},
 
-	async function getTankLastForecastDetails(site, tank) {
+	getTankLastForecastDetails : async function (site, tank) {
 		var lastForecastQuery = 'SELECT TOP 1 * FROM MY_ROICEAD_DEMANDFORECAST WHERE Site_Site = ' +
 			"'" + site + "' and Tank = '" + tank + "' and Entry_Type = 'DMF' ORDER BY MODIFIEDAT DESC";
 		var lastForecastRes = await connectn.executeQuery(lastForecastQuery);
@@ -908,9 +908,9 @@ async function deleteForecastedInventoriesOlderByAll() {
 		} else {
 			return null;
 		}
-	}
+	}, 
 
-	function formatDateTime(date) {
+	formatDateTime : function (date) {
 		var dd = (date.getDate() < 10 ? '0' : '') + date.getDate();
 
 		var MM = ((date.getMonth() + 1) < 10 ? '0' : '') + (date.getMonth() + 1);
@@ -920,8 +920,8 @@ async function deleteForecastedInventoriesOlderByAll() {
 		var time = (HH + ":" + Min + ":" + SS);
 		var dateformatted = date.getFullYear() + "-" + MM + "-" + dd + "T" + time;
 		return (dateformatted);
-	}
-    function getMonthName(date){
+	},
+    getMonthName : function (date){
         const monthNames = ["January", "February", "March", "April", "May", "June",
                              "July", "August", "September", "October", "November", "December"];
 
@@ -929,30 +929,30 @@ async function deleteForecastedInventoriesOlderByAll() {
         let MonthName =  monthNames[d.getMonth()] ;
         var MM = ((date.getMonth() + 1) < 10 ? '0' : '') + (date.getMonth() + 1);
         return (MM + "/" + MonthName) ;
-    }
-	function formatTime(date) {
+    },
+	formatTime : function (date) {
 		var HH = (date.getHours() < 10 ? '0' : '') + date.getHours();
 		var MM = (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
 		var time = (HH + ":" + MM + ":00.00");
 		return time;
-	}
+	},
 
-	function formatDate(date) {
+	formatDate : function (date) {
 		var dd = (date.getDate() < 10 ? '0' : '') + date.getDate();
 
 		var MM = ((date.getMonth() + 1) < 10 ? '0' : '') + (date.getMonth() + 1);
 
 		return (date.getFullYear() + "-" + MM + "-" + dd + "T00:00:00");
-	}
-	function formatDateNew(date) {
+	},
+	formatDateNew : function (date) {
 		var dd = (date.getDate() < 10 ? '0' : '') + date.getDate();
 
 		var MM = ((date.getMonth() + 1) < 10 ? '0' : '') + (date.getMonth() + 1);
 
 		return (date.getFullYear() + "-" + MM + "-" + dd );
-	}
+	},
 
-	async function getTanksWithLatestInventory(Site) {
+	getTanksWithLatestInventory : async function (Site) {
 		//var connectn = $.hdb.getConnection();
 		/*var tankQuery = "select * from MY_ROICEAD_TANKS AS TANKS LEFT OUTER JOIN MY_ROICEAD_TANKINVENTORY AS TI ON TANKS.SITE = TI.SITE AND TANKS.TANKNUM = TI.TANKNUM WHERE " +
 						"TI.MDATE = (SELECT MAX(TI.MDATE) FROM MY_ROICEAD_TANKINVENTORY AS TI WHERE  TI.Site = '" + Site +"' AND TI.TANKNUM = TANKS.TANKNUM) ORDER BY TI.TANKNUM,TI.MDATE, TI.MTIME DESC " ;*/
@@ -998,10 +998,13 @@ async function deleteForecastedInventoriesOlderByAll() {
 		}
 		//connectn.close();
 		return result;
-	}
+	},
 
-	async function getSiteTankDetails(site) {
+	getSiteTankDetails : async function (site) {
 		var getTankDetailsQuery = "SELECT * FROM MY_ROICEAD_TANKS where site = '" + site + "' order by tank_grp";
 		var tankdetails = await connectn.executeQuery(getTankDetailsQuery);
 		return tankdetails;
 	}
+};
+
+export default Forecast6Months;
