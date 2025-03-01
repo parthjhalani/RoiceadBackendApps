@@ -38,6 +38,7 @@ var Forecast = {
 					if (!(deltaInventories.length === 0 && firstTimeForecast)) {
 						if (deltaInventories.length > 0) {
 							await Forecast.saveInventoryInForecastTable(deltaInventories, tankdetails);
+							console.log("deleteForecastedInventories");
 							await Forecast.deleteForecastedInventories(site, tank);
 							var currInvDate = new Date(deltaInventories[0].MDATE);
 							currInvDate = new Date(currInvDate.setHours(deltaInventories[0].MTIME.getHours()));
@@ -68,7 +69,7 @@ var Forecast = {
 			}
 			await Forecast.createReplenishmentOrder(noOfOrders);
 		}
-		connectn.close();
+		await connectn.close();
 		return true;
 	},
 
@@ -89,77 +90,78 @@ var Forecast = {
 		var orders = await connectn.executeQuery(orderquery);
 		return orders;
 	},
-	createReplenishmentOrder : async function (noOfOrders) {
-		var conn = await $.db.getConnection();
-		var so = conn.prepareStatement(
-			'INSERT INTO MY_ROICEAD_REPLENISHMENTORDERS VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
-		if (noOfOrders > 0) {
-			so.setBatchSize(replOrder.length);
-			var orders = [];
-			for (var k = 0; k < noOfOrders; k++) {
-				var sonumber = "A" + await Forecast.getReplenishmentOrderNumber();
-				orders.push(sonumber.toString());
-			}
-			replOrder.sort(function (a, b) {
-				return a.orderNumber - b.orderNumber;
-			});
-			var orderitems = replOrder;
-			var currTimestampQuery = 'SELECT CURRENT_TIMESTAMP  FROM DUMMY';
-			var currTstmpResult = await conn.executeQuery(currTimestampQuery);
-			var currTstmp = currTstmpResult[0].CURRENT_TIMESTAMP;
-			var x = 1
-			var prevOrderNumber = 0;
-			for (var i = 0; i < orderitems.length; i++) {
-				var itemno = 0;
-				if (prevOrderNumber !== orderitems[i].orderNumber) {
-					x = 1;
-					prevOrderNumber = orderitems[i].orderNumber;
-				}
-				if (x < 10) {
-					itemno = "00" + x * 10;
-				} else {
-					itemno = "00" + x;
-				}
-
-				so.setString(1, orders[(parseInt(orderitems[i].orderNumber) - 1)]); /*ORDERNO <NVARCHAR(15)>*/
-				so.setString(2, itemno); /*ITEM <NVARCHAR(6)>*/
-				so.setString(3, 'CRT'); /*STATUS <NVARCHAR(4)>*/
-				so.setInteger(4, 0); /*ISSTATUSCHGD <BOOLEAN>*/
-				so.setString(5, 'ASR'); /*ORDERTYPE <NVARCHAR(3)>*/
-				so.setString(6, orderitems[i].TANKNUM); /*TANKNUM <NVARCHAR(10)>*/
-				so.setString(7, ''); /*BPTYPE <NVARCHAR(4)>*/
-				so.setString(8, ''); /*SUPPL_BP <NVARCHAR(10)>*/
-				so.setDecimal(9, orderitems[i].ORDERQTY); /*SUPPL_QTY <DECIMAL>*/
-				so.setString(10, 'L'); /*SUPPL_UOM <NVARCHAR(10)>*/
-
-				so.setTimestamp(11, Forecast.formatDate(orderitems[i].Suppl_Date)); /*11SUPPL_DATE <TIMESTAMP>*/
-				so.setTime(12, Forecast.formatTime(orderitems[i].Suppl_Time), 'HH:MI:SS'); /*12SUPPL_TIME <NVARCHAR(10)>*/
-				so.setString(13, 'UTC'); /*SUPPL_TIMEZONE <NVARCHAR(10)>*/
-				so.setString(14, '2:00:00'); /*SUPPL_LOW_TOL <NVARCHAR(10)>*/
-				so.setString(15, '2:00:00'); /*SUPPL_HIGH_TOL <NVARCHAR(10)>*/
-				so.setString(16, ('500')); /*SUPPL_LOW_QTY <NVARCHAR(10)>*/
-				so.setString(17, '500'); /*SUPPL_HIGH_QTY <NVARCHAR(10)>*/
-				so.setTimestamp(18, Forecast.calculateCutOffDate(orderitems[i].Cutoff_Date)); /*CUTOFF_DATE <TIMESTAMP>*/
-				so.setTime(19, Forecast.formatTime(orderitems[i].Suppl_Time), 'HH:MI:SS'); /*CUTOFF_TIME <NVARCHAR(10)>*/
-				so.setDate(20, Forecast.formatDate(currTstmp)); /*REGDATE <DATE>*/
-				so.setTime(21, Forecast.formatTime(currTstmp), 'HH:MI:SS'); /*REGTIME <TIME>*/
-				so.setString(22, 'D.Pagonis'); /*REGUSER <NVARCHAR(50)>*/
-				so.setString(23, orderitems[i].SITE); /*SITE_SITE <NVARCHAR(10)>*/
-				so.setString(24, 'FUELS'); /*SITE_SITETYPE <NVARCHAR(5)>*/
-				so.setString(25, orderitems[i].MATERIALID); /*SUPPL_MAT_MATERIALID <NVARCHAR(18)>*/
-				so.setTimestamp(26, currTstmp); /*CREATEDAT <TIMESTAMP>*/
-				so.setString(27, 'D.Pagonis'); /*CREATEDBY <NVARCHAR(255)>*/
-				so.setTimestamp(28, currTstmp); /*MODIFIEDAT <TIMESTAMP>*/
-				so.setString(29, 'D.Pagonis'); /*MODIFIEDBY <NVARCHAR(255)>*/
-				x = x + 1;
-				so.addBatch();
-			}
-			await so.executeBatch();
-			await conn.commit();
-			await conn.close();
-		}
+	createReplenishmentOrder: async function(noOfOrders) {
+    var conn = await $.hdb.getConnection();
+    try {
+        if (noOfOrders > 0) {
+            var orders = [];
+            for (var k = 0; k < noOfOrders; k++) {
+                var sonumber = "A" + await Forecast.getReplenishmentOrderNumber();
+                orders.push(sonumber.toString());
+            }
+            
+            replOrder.sort((a, b) => a.orderNumber - b.orderNumber);
+            
+            var currTstmpResult = await conn.executeQuery('SELECT CURRENT_TIMESTAMP FROM DUMMY');
+            var currTstmp = currTstmpResult[0].CURRENT_TIMESTAMP;
+            
+            var x = 1;
+            var prevOrderNumber = 0;
+            
+            for (var i = 0; i < replOrder.length; i++) {
+                if (prevOrderNumber !== replOrder[i].orderNumber) {
+                    x = 1;
+                    prevOrderNumber = replOrder[i].orderNumber;
+                }
+                
+                var itemno = x < 10 ? "00" + (x * 10) : "00" + x;
+                
+                var sql = `INSERT INTO MY_ROICEAD_REPLENISHMENTORDERS VALUES(
+                    '${currTstmp}',                          /*CREATEDAT <TIMESTAMP>*/
+                    'D.Pagonis',                            /*CREATEDBY <NVARCHAR(255)>*/
+                    '${currTstmp}',                         /*MODIFIEDAT <TIMESTAMP>*/
+                    'D.Pagonis',                            /*MODIFIEDBY <NVARCHAR(255)>*/
+                    '${orders[(parseInt(replOrder[i].orderNumber) - 1)]}', /*ORDERNO <NVARCHAR(15)>*/
+                    '${itemno}',                            /*ITEM <NVARCHAR(6)>*/
+                    'CRT',                                  /*STATUS <NVARCHAR(4)>*/
+                    0,                                      /*ISSTATUSCHGD <BOOLEAN>*/
+                    'ASR',                                  /*ORDERTYPE <NVARCHAR(3)>*/
+                    '${replOrder[i].SITE}',                 /*SITE_SITE <NVARCHAR(10)>*/
+                    'FUELS',                                /*SITE_SITETYPE <NVARCHAR(5)>*/
+                    '${replOrder[i].TANKNUM}',              /*TANKNUM <NVARCHAR(10)>*/
+                    '',                                     /*BPTYPE <NVARCHAR(4)>*/
+                    '',                                     /*SUPPL_BP <NVARCHAR(10)>*/
+                    '${replOrder[i].MATERIALID}',           /*SUPPL_MAT_MATERIALID <NVARCHAR(18)>*/
+                    ${replOrder[i].ORDERQTY},               /*SUPPL_QTY <DECIMAL>*/
+                    'L',                                    /*SUPPL_UOM <NVARCHAR(10)>*/
+                    '${Forecast.formatDate(replOrder[i].Suppl_Date)}', /*SUPPL_DATE <TIMESTAMP>*/
+                    '${Forecast.formatTime(replOrder[i].Suppl_Time)}', /*SUPPL_TIME <NVARCHAR(10)>*/
+                    'UTC',                                  /*SUPPL_TIMEZONE <NVARCHAR(10)>*/
+                    '2:00:00',                             /*SUPPL_LOW_TOL <NVARCHAR(10)>*/
+                    '2:00:00',                             /*SUPPL_HIGH_TOL <NVARCHAR(10)>*/
+                    '500',                                  /*SUPPL_LOW_QTY <NVARCHAR(10)>*/
+                    '500',                                  /*SUPPL_HIGH_QTY <NVARCHAR(10)>*/
+                    '${Forecast.calculateCutOffDate(replOrder[i].Cutoff_Date)}', /*CUTOFF_DATE <TIMESTAMP>*/
+                    '${Forecast.formatTime(replOrder[i].Suppl_Time)}', /*CUTOFF_TIME <NVARCHAR(10)>*/
+                    '${Forecast.formatDate(currTstmp)}',    /*REGDATE <DATE>*/
+                    '${Forecast.formatTime(currTstmp)}',    /*REGTIME <TIME>*/
+                    'D.Pagonis'                            /*REGUSER <NVARCHAR(50)>*/
+                )`;
+                
+                await conn.executeUpdate(sql);
+                x++;
+            }
+            await conn.commit();
+        }
+        replOrder = [];
+    } catch (error) {
+        await conn.rollback();
+        throw error;
+    } finally {
+        await conn.close();
+    }
 		replOrder = [];
-	},
+},
 	
 	deleteInventoriesOlderThanTenDays : async function (site, tank) {
 		var currTimestampQuery = 'SELECT CURRENT_TIMESTAMP  FROM DUMMY';
@@ -332,356 +334,340 @@ var Forecast = {
 		}
 	},
 
-	saveOldRORD : async function (tank) {
-		var conn = await $.db.getConnection();
-		var currTimestampQuery = 'SELECT CURRENT_TIMESTAMP  FROM DUMMY';
-		var currTstmpResult = await connectn.executeQuery(currTimestampQuery);
-		var currTstmp = currTstmpResult[0].CURRENT_TIMESTAMP;
+	saveOldRORD: async function (tank) {
+    var conn = await $.hdb.getConnection();
+    var currTimestampQuery = 'SELECT CURRENT_TIMESTAMP FROM DUMMY';
+    var currTstmpResult = await conn.executeQuery(currTimestampQuery);
+    var currTstmp = currTstmpResult[0].CURRENT_TIMESTAMP;
 
-		var orderNumber = 0;
+    var orderNumber = 0;
 
-		for (var k = 0; k < tank.Orders.length; k++) {
-			var st = conn.prepareStatement('INSERT INTO MY_ROICEAD_FORECASTCALCULATION VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
-			var order = tank.Orders[k];
-			var currInvDate = tank.Inventory.currInvDate;
-			var suppl_date = new Date(order.SUPPL_DATE);
-			var suppl_time = order.SUPPL_TIME.split(":");
-			suppl_date = new Date(suppl_date.setHours(suppl_time[0]));
-			if (currInvDate.getDate() >= suppl_date.getDate() && currInvDate.getMonth() >= suppl_date.getMonth() &&
-				currInvDate.getFullYear() >= suppl_date.getFullYear() && currInvDate.getHours() > parseInt(suppl_time[0])) {
+    for (var k = 0; k < tank.Orders.length; k++) {
+        var order = tank.Orders[k];
+        var currInvDate = tank.Inventory.currInvDate;
+        var suppl_date = new Date(order.SUPPL_DATE);
+        var suppl_time = order.SUPPL_TIME.split(":");
+        suppl_date.setHours(suppl_time[0]);
 
-				st.setTimestamp(1, currTstmp); //crtd at
-				st.setString(2, "D.Pagonis"); //crtdby
-				st.setTimestamp(3, currTstmp);
-				st.setString(4, "D.Pagonis");
-				st.setString(5, tank.Inventory.SITE);
-				st.setString(6, tank.Inventory.TANKNUM);
-				st.setDate(7, Forecast.formatDate(suppl_date)); //ForecastDate
-				st.setTime(8, Forecast.formatTime(suppl_date), 'HH:MI:SS'); //ForecastTinme
-				st.setString(9, 'RORD'); //ENTRY_TYPE
-				st.setString(10, tank.Inventory.MATERIALID); //MATERIAL
-				st.setString(11, ' '); // Tankgrp
-				st.setInteger(12, 0); //0==false, 1 ==true CRITICAL_TANK
-				st.setString(13, ''); //PROFILE_DAY
-				st.setString(14, ''); //PROFILE_PHD
-				st.setString(15, ''); //PROFILE
-				st.setString(16, ''); //PROFILE_TYPE
-				st.setString(17, ''); // FACTOR
-				st.setDecimal(18, parseFloat(order.SUPPL_QTY)); //Forecast Qty
-				st.setDecimal(19, order.SUPPL_QTY); //Forecast Inv
-				st.setString(20, ''); //FORECAST_EVT
-				st.setTimestamp(21, Forecast.formatDateTime(currInvDate)); //ForecastedDateTime
-				await st.executeUpdate();
-				await conn.commit();
-			}
-		}
-		await conn.close();
-	},
+        if (currInvDate >= suppl_date && currInvDate.getHours() > parseInt(suppl_time[0])) {
+            var insertQuery = ` INSERT INTO MY_ROICEAD_FORECASTCALCULATION (
+                    CRTD_AT, CRTD_BY, CHGD_AT, CHGD_BY, SITE, TANKNUM, FORECASTDATE,
+                    FORECASTTIME, ENTRY_TYPE, MATERIAL, TANKGRP, CRITICAL_TANK,
+                    PROFILE_DAY, PROFILE_PHD, PROFILE, PROFILE_TYPE, FACTOR,
+                    FORECAST_QTY, FORECAST_INV, FORECAST_EVT, FORECASTEDDATETIME
+                ) VALUES (
+                    '${currTstmp.toISOString()}', 'D.Pagonis', '${currTstmp.toISOString()}', 'D.Pagonis',
+                    '${tank.Inventory.SITE}', '${tank.Inventory.TANKNUM}', '${Forecast.formatDate(suppl_date)}',
+                    '${Forecast.formatTime(suppl_date)}', 'RORD', '${tank.Inventory.MATERIALID}', ' ',
+                    0, '', '', '', '', '', ${parseFloat(order.SUPPL_QTY)},
+                    ${order.SUPPL_QTY}, '', '${Forecast.formatDateTime(currInvDate)}'
+                )
+            `;
+
+            await conn.executeUpdate(insertQuery);
+            await conn.commit();
+        }
+    }
+
+    await conn.close();
+},
+
 	calculateCutOffDate : function (date) {
 		var cutoffdate = new Date(date.setDate(date.getDate() - 1));
 		return Forecast.formatDate(cutoffdate);
 	},
-	executeForecastSimultaneously : async function (groupedTanks) {
-		var conn = await $.db.getConnection();
-		var currTimestampQuery = 'SELECT CURRENT_TIMESTAMP  FROM DUMMY';
-		var currTstmpResult = await connectn.executeQuery(currTimestampQuery);
-		var currTstmp = currTstmpResult[0].CURRENT_TIMESTAMP;
-		var st = conn.prepareStatement('INSERT INTO MY_ROICEAD_FORECASTCALCULATION VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
+	executeForecastSimultaneously: async function (groupedTanks) {
+    var conn = await $.hdb.getConnection();
+    var currTimestampQuery = 'SELECT CURRENT_TIMESTAMP FROM DUMMY';
+    var currTstmpResult = await conn.executeQuery(currTimestampQuery);
+    var currTstmp = currTstmpResult[0].CURRENT_TIMESTAMP;
 
-		var orderNumber = 0;
-		st.setBatchSize(1000);
-		var currDate = new Date(currTstmpResult[0].CURRENT_TIMESTAMP);
-		var forecastLastDate = new Date();
-		forecastLastDate = forecastLastDate.setDate(forecastLastDate.getDate() + 5);
-		var hitSFBInPrevLoop = false;
-		var stopForecast = false;
-		var x = 0;
+    var orderNumber = 0;
+    var currDate = new Date(currTstmp);
+    var forecastLastDate = new Date();
+    forecastLastDate.setDate(forecastLastDate.getDate() + 5);
+    var hitSFBInPrevLoop = false;
+    var stopForecast = false;
+    var x = 0;
 
-		while (!stopForecast) {
-			var entry_type = 'FCT';
-			var forecast_event = '';
-			var critical_tank = 0;
-			for (var i = 0; i < groupedTanks.Tanks.length; i++) {
-				var tankdetails = groupedTanks.Tanks[i];
-				var inventory = groupedTanks.Tanks[i].Inventory;
-				if (hitSFBInPrevLoop === x) {
-					var orderdetails = {};
-					var curInvDateT = new Date(groupedTanks.Tanks[i].Inventory.currInvDate.setHours(groupedTanks.Tanks[i].Inventory.currInvDate.getHours()));
-					orderdetails = {
-						"SITE": groupedTanks.Tanks[i].Inventory.SITE,
-						"TANKNUM": groupedTanks.Tanks[i].Inventory.TANKNUM,
-						"ORDERQTY": (parseFloat(tankdetails.TARLVL_VOL) - (tankdetails.MQUAN)),
-						"Suppl_Date": curInvDateT,
-						"Suppl_Time": curInvDateT,
-						"Cutoff_Date": curInvDateT,
-						"orderNumber": orderNumber,
-						"MATERIALID": tankdetails.MATERIALID,
-						"MATERIALDESC": tankdetails.MATERIALDESC
-					}
-					if (Forecast.formatDate(groupedTanks.Tanks[i].Inventory.currInvDate) >= Forecast.formatDate(currTstmp) && orderNumber !== 0) {
-						replOrder.push(orderdetails);
-					}
-					tankdetails.MQUAN = tankdetails.MQUAN + orderdetails.ORDERQTY;
+    while (!stopForecast) {
+        var entry_type = 'FCT';
+        var forecast_event = '';
+        var critical_tank = 0;
 
-					st.setTimestamp(1, currTstmp);
-					st.setString(2, "D.Pagonis");
-					st.setTimestamp(3, currTstmp);
-					st.setString(4, "D.Pagonis");
-					st.setString(5, groupedTanks.Tanks[i].Inventory.SITE);
-					st.setString(6, groupedTanks.Tanks[i].Inventory.TANKNUM);
-					st.setDate(7, Forecast.formatDate(curInvDateT));
-					st.setTime(8, Forecast.formatTime(curInvDateT), 'HH:MI:SS');
-					st.setString(9, 'ORD');
-					st.setString(10, groupedTanks.Tanks[i].Inventory.MATERIALID);
-					st.setString(11, ' ');
-					st.setInteger(12, critical_tank);
-					st.setString(13, '');
-					st.setString(14, '');
-					st.setString(15, '');
-					st.setString(16, '');
-					st.setString(17, '');
-					st.setDecimal(18, parseFloat(orderdetails.ORDERQTY));
-					st.setDecimal(19, tankdetails.MQUAN);
-					st.setString(20, forecast_event);
-					st.setTimestamp(21, Forecast.formatDateTime(curInvDateT));
-					st.addBatch();
-				}
-				groupedTanks.Tanks[i].Inventory.currInvDate = new Date(groupedTanks.Tanks[i].Inventory.currInvDate.setHours(groupedTanks.Tanks[i].Inventory.currInvDate.getHours() + 1));
-				for (var k = 0; k < groupedTanks.Tanks[i].Orders.length; k++) {
-					var order = groupedTanks.Tanks[i].Orders[k];
-					var currInvDate = groupedTanks.Tanks[i].Inventory.currInvDate;
-					var suppl_date = new Date(order.SUPPL_DATE);
-					var suppl_time = order.SUPPL_TIME.split(":");
-					suppl_date = new Date(suppl_date.setHours(suppl_time[0]));
-					if (currInvDate.getDate() === suppl_date.getDate() && currInvDate.getMonth() === suppl_date.getMonth() &&
-						currInvDate.getFullYear() === suppl_date.getFullYear() && currInvDate.getHours() === suppl_time[0]) {
-						tankdetails.MQUAN = tankdetails.MQUAN + parseFloat(order.SUPPL_QTY);
-						st.setTimestamp(1, currTstmp);
-						st.setString(2, "D.Pagonis");
-						st.setTimestamp(3, currTstmp);
-						st.setString(4, "D.Pagonis");
-						st.setString(5, groupedTanks.Tanks[i].Inventory.SITE);
-						st.setString(6, groupedTanks.Tanks[i].Inventory.TANKNUM);
-						st.setDate(7, Forecast.formatDate(currInvDate));
-						st.setTime(8, Forecast.formatTime(currInvDate), 'HH:MI:SS');
-						st.setString(9, 'RORD');
-						st.setString(10, groupedTanks.Tanks[i].Inventory.MATERIALID);
-						st.setString(11, ' ');
-						st.setInteger(12, critical_tank);
-						st.setString(13, '');
-						st.setString(14, '');
-						st.setString(15, '');
-						st.setString(16, '');
-						st.setString(17, '');
-						st.setDecimal(18, parseFloat(order.SUPPL_QTY));
-						st.setDecimal(19, tankdetails.MQUAN);
-						st.setString(20, forecast_event);
-						st.setTimestamp(21, Forecast.formatDateTime(currInvDate));
-						st.addBatch();
-						break;
-					}
-				}
-				if (tankdetails.MQUAN <= parseFloat(tankdetails.BTMSAF_VOL)) {
-					critical_tank = 1;
-					hitSFBInPrevLoop = x + 1;
-					if (Forecast.formatDate(groupedTanks.Tanks[i].Inventory.currInvDate) >= Forecast.formatDate(currTstmp)) {
-						orderNumber = orderNumber + 1;
-					}
-				}
-				if (tankdetails.MQUAN <= parseFloat(tankdetails.BTMSAF_VOL)) {
-					forecast_event = 'SFB';
-				}
-				if (x === 0) {
-					entry_type = 'SFCT';
-				}
-				if ((currDate.getTime() < groupedTanks.Tanks[i].Inventory.currInvDate.getTime()) || x === 0) {
-					st.setTimestamp(1, currTstmp);
-					st.setString(2, "D.Pagonis");
-					st.setTimestamp(3, currTstmp);
-					st.setString(4, "D.Pagonis");
-					st.setString(5, groupedTanks.Tanks[i].Inventory.SITE);
-					st.setString(6, groupedTanks.Tanks[i].Inventory.TANKNUM);
-					st.setDate(7, Forecast.formatDate(groupedTanks.Tanks[i].Inventory.currInvDate));
-					st.setTime(8, Forecast.formatTime(groupedTanks.Tanks[i].Inventory.currInvDate), 'HH:MI:SS');
-					st.setString(9, entry_type);
-					st.setString(10, groupedTanks.Tanks[i].Inventory.MATERIALID);
-					st.setString(11, ' ');
-					st.setInteger(12, critical_tank);
-					st.setString(13, '');
-					st.setString(14, '');
-					st.setString(15, '');
-					st.setString(16, '');
-					st.setString(17, '');
-					st.setDecimal(18, 0.0);
-					st.setDecimal(19, tankdetails.MQUAN);
-					st.setString(20, forecast_event);
-					st.setTimestamp(21, Forecast.formatDateTime(groupedTanks.Tanks[i].Inventory.currInvDate));
-					st.addBatch();
+        for (var i = 0; i < groupedTanks.Tanks.length; i++) {
+            var tankdetails = groupedTanks.Tanks[i];
+            var inventory = tankdetails.Inventory;
+
+            if (hitSFBInPrevLoop === x) {
+                var orderdetails = {};
+                var curInvDateT = new Date(inventory.currInvDate);
+                curInvDateT.setHours(inventory.currInvDate.getHours());
+                orderdetails = {
+                    "SITE": inventory.SITE,
+                    "TANKNUM": inventory.TANKNUM,
+                    "ORDERQTY": (parseFloat(tankdetails.TARLVL_VOL) - tankdetails.MQUAN),
+                    "Suppl_Date": curInvDateT,
+                    "Suppl_Time": curInvDateT,
+                    "Cutoff_Date": curInvDateT,
+                    "orderNumber": orderNumber,
+                    "MATERIALID": tankdetails.MATERIALID,
+                    "MATERIALDESC": tankdetails.MATERIALDESC
+                };
+                if (Forecast.formatDate(inventory.currInvDate) >= Forecast.formatDate(currTstmp) && orderNumber !== 0) {
+                    replOrder.push(orderdetails);
+                }
+                tankdetails.MQUAN += orderdetails.ORDERQTY;
+
+                var insertOrderSQL = ` INSERT INTO MY_ROICEAD_FORECASTCALCULATION (
+                        CRTD_AT, CRTD_BY, CHGD_AT, CHGD_BY, SITE, TANKNUM, MDATE, MTIME,
+                        ENTRY_TYPE, MATERIAL, TANK_GRP, CRITICAL_TANK, PROFILE_DAY,
+                        PROFILE_PHD, PROFILE, PROFILE_TYPE, FACTOR, FORECAST_QTY,
+                        FORECAST_INV, FORECAST_EVT, FORECASTEDDATETIME
+                    ) VALUES (
+                        '${currTstmp}', 'D.Pagonis', '${currTstmp}', 'D.Pagonis',
+                        '${inventory.SITE}', '${inventory.TANKNUM}', '${Forecast.formatDate(curInvDateT)}',
+                        '${Forecast.formatTime(curInvDateT)}', 'ORD', '${inventory.MATERIALID}', ' ',
+                        ${critical_tank}, '', '', '', '', '', ${parseFloat(orderdetails.ORDERQTY)},
+                        ${tankdetails.MQUAN}, '${forecast_event}', '${Forecast.formatDateTime(curInvDateT)}'
+                    )
+                `;
+                await conn.executeUpdate(insertOrderSQL);
+            }
+
+            inventory?.currInvDate.setHours(inventory.currInvDate.getHours() + 1);
+
+            for (var k = 0; k < tankdetails?.Orders?.length; k++) {
+                var order = tankdetails.Orders[k];
+                var currInvDate = inventory.currInvDate;
+                var suppl_date = new Date(order.SUPPL_DATE);
+                var suppl_time = order.SUPPL_TIME.split(":");
+                suppl_date.setHours(suppl_time[0]);
+
+                if (
+                    currInvDate.getDate() === suppl_date.getDate() &&
+                    currInvDate.getMonth() === suppl_date.getMonth() &&
+                    currInvDate.getFullYear() === suppl_date.getFullYear() &&
+                    currInvDate.getHours() === parseInt(suppl_time[0])
+                ) {
+                    tankdetails.MQUAN += parseFloat(order.SUPPL_QTY);
+
+                    var insertReceivedOrderSQL = `INSERT INTO MY_ROICEAD_FORECASTCALCULATION (
+                            CRTD_AT, CRTD_BY, CHGD_AT, CHGD_BY, SITE, TANKNUM, MDATE, MTIME,
+                            ENTRY_TYPE, MATERIAL, TANK_GRP, CRITICAL_TANK, PROFILE_DAY,
+                            PROFILE_PHD, PROFILE, PROFILE_TYPE, FACTOR, FORECAST_QTY,
+                            FORECAST_INV, FORECAST_EVT, FORECASTEDDATETIME
+                        ) VALUES (
+                            '${currTstmp}', 'D.Pagonis', '${currTstmp}', 'D.Pagonis',
+                            '${inventory.SITE}', '${inventory.TANKNUM}', '${Forecast.formatDate(currInvDate)}',
+                            '${Forecast.formatTime(currInvDate)}', 'RORD', '${inventory.MATERIALID}', ' ',
+                            ${critical_tank}, '', '', '', '', '', ${parseFloat(order.SUPPL_QTY)},
+                            ${tankdetails.MQUAN}, '${forecast_event}', '${Forecast.formatDateTime(currInvDate)}'
+                        )
+                    `;
+                    await conn.executeUpdate(insertReceivedOrderSQL);
+                    break;
+                }
+            }
+
+            if (tankdetails.MQUAN <= parseFloat(tankdetails.BTMSAF_VOL)) {
+                critical_tank = 1;
+                hitSFBInPrevLoop = x + 1;
+                if (Forecast.formatDate(inventory.currInvDate) >= Forecast.formatDate(currTstmp)) {
+                    orderNumber += 1;
+                }
+            }
+
+            if (tankdetails.MQUAN <= parseFloat(tankdetails.BTMSAF_VOL)) {
+                forecast_event = 'SFB';
+            }
+
+            if (x === 0) {
+                entry_type = 'SFCT';
+            }
+
+            if (currDate.getTime() < inventory?.currInvDate.getTime() || x === 0) {
+                var insertForecastSQL = `INSERT INTO MY_ROICEAD_FORECASTCALCULATION (
+					CRTD_AT, CRTD_BY, CHGD_AT, CHGD_BY, SITE, TANKNUM, MDATE, MTIME,
+					ENTRY_TYPE, MATERIAL, TANK_GRP, CRITICAL_TANK, PROFILE_DAY,
+					PROFILE_PHD, PROFILE, PROFILE_TYPE, FACTOR, FORECAST_QTY,
+					FORECAST_INV, FORECAST_EVT, FORECASTEDDATETIME
+				) VALUES (
+					'${currTstmp}', 'D.Pagonis', '${currTstmp}', 'D.Pagonis',
+					'${inventory.SITE}', '${inventory.TANKNUM}', '${Forecast.formatDate(inventory.currInvDate)}',
+					'${Forecast.formatTime(inventory.currInvDate)}', '${entry_type}', '${inventory.MATERIALID}', ' ',
+					${critical_tank}, '', '', '', '', 0.0, ${tankdetails.MQUAN}, '${forecast_event}', 
+					'${Forecast.formatDateTime(groupedTanks.Tanks[i].Inventory.currInvDate)}'
+				);`;  
+
+				await conn.executeUpdate(insertForecastSQL);  // <-- Changed from executeQuery to executeUpdate
+
 				}
 				tankdetails.MQUAN = tankdetails.MQUAN - 500;
 			}
-			if (groupedTanks.Tanks[0].Inventory.currInvDate >= forecastLastDate) {
+			if (groupedTanks.Tanks[0].Inventory?.currInvDate >= forecastLastDate) {
 				stopForecast = true;
 			}
 			x = x + 1;
 		}
-		await st.executeBatch();
+		
 		await conn.commit();
 		await conn.close();
 
 		return orderNumber;
 	},
-	runForecastForNext5Days : async function (inventory, tankdetails, tankGrp) {
-		var mquan = parseFloat(tankdetails.MQUAN);
-		var conn = await $.db.getConnection();
-		var currTimestampQuery = 'SELECT CURRENT_TIMESTAMP  FROM DUMMY';
-		var currTstmpResult = await connectn.executeQuery(currTimestampQuery);
-		var currTstmp = currTstmpResult[0].CURRENT_TIMESTAMP;
-		var st = conn.prepareStatement('INSERT INTO MY_ROICEAD_FORECASTCALCULATION VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
+	runForecastForNext5Days: async function (inventory, tankdetails, tankGrp) {
+    var mquan = parseFloat(tankdetails.MQUAN);
+    var conn = await $.hdb.getConnection();
+    var currTimestampQuery = 'SELECT CURRENT_TIMESTAMP FROM DUMMY';
+    var currTstmpResult = await conn.executeQuery(currTimestampQuery);
+    var currTstmp = currTstmpResult[0].CURRENT_TIMESTAMP;
 
-		var orderNumber = 0;
-		st.setBatchSize(135);
-		var currDate = new Date(currTstmpResult[0].CURRENT_TIMESTAMP);
-		var currInvDate = new Date(inventory.MDATE);
-		currInvDate = new Date(currInvDate.setHours(inventory.MTIME.getHours()));
-		var hoursDiff = Math.abs(currDate.getTime() - currInvDate.getTime()) / 3600000;
-		var forecastLoop = hoursDiff + 120;
-		var volToHitSFB = tankGrp.minHoursToReachSFB;
-		var criticalTank = tankGrp.criticalTank;
-		var hitSFBInPrevLoop = false;
-		for (var x = 0; x < forecastLoop; x++) {
-			var entry_type = 'FCT';
-			var forecast_event = '';
-			var critical_tank = 0;
-			if (hitSFBInPrevLoop) {
-				mquan = mquan + orderdetails.ORDERQTY + 500;
-				hitSFBInPrevLoop = false;
-				st.setTimestamp(1, currTstmp); //crtd at
-				st.setString(2, "D.Pagonis"); //crtdby
-				st.setTimestamp(3, currTstmp);
-				st.setString(4, "D.Pagonis");
-				st.setString(5, inventory.SITE);
-				st.setString(6, inventory.TANKNUM);
-				st.setDate(7, Forecast.formatDate(currInvDate)); //ForecastDate
-				st.setTime(8, Forecast.formatTime(currInvDate), 'HH:MI:SS'); //ForecastTinme
-				st.setString(9, 'ORD'); //ENTRY_TYPE
-				st.setString(10, inventory.MATERIALID); //MATERIAL
-				st.setString(11, ' '); // Tankgrp
-				st.setInteger(12, critical_tank); //0==false, 1 ==true CRITICAL_TANK
-				st.setString(13, ''); //PROFILE_DAY
-				st.setString(14, ''); //PROFILE_PHD
-				st.setString(15, ''); //PROFILE
-				st.setString(16, ''); //PROFILE_TYPE
-				st.setString(17, ''); // FACTOR
-				st.setDecimal(18, parseFloat(orderdetails.ORDERQTY)); //Forecast Qty
-				st.setDecimal(19, mquan); //Forecast Inv
-				st.setString(20, forecast_event); //FORECAST_EVT
-				st.setTimestamp(21, Forecast.formatDateTime(currInvDate)); //ForecastedDateTime
-				st.addBatch();
+    var orderNumber = 0;
+    var currDate = new Date(currTstmp);
+    var currInvDate = new Date(inventory.MDATE);
+    currInvDate.setHours(inventory.MTIME.getHours());
+    var hoursDiff = Math.abs(currDate - currInvDate) / 3600000;
+    var forecastLoop = hoursDiff + 120;
+    var volToHitSFB = tankGrp.minHoursToReachSFB;
+    var criticalTank = tankGrp.criticalTank;
+    var hitSFBInPrevLoop = false;
+
+    for (var x = 0; x < forecastLoop; x++) {
+        var entry_type = 'FCT';
+        var forecast_event = '';
+        var critical_tank = 0;
+
+        if (hitSFBInPrevLoop) {
+            mquan += orderdetails.ORDERQTY + 500;
+            hitSFBInPrevLoop = false;
+
+            var insertOrderSQL = `
+                INSERT INTO MY_ROICEAD_FORECASTCALCULATION (
+                    CRTD_AT, CRTDBY, UPDT_AT, UPDTBY, SITE, TANKNUM, FORECASTDATE,
+                    FORECASTTIME, ENTRY_TYPE, MATERIAL, TANKGRP, CRITICAL_TANK,
+                    PROFILE_DAY, PROFILE_PHD, PROFILE, PROFILE_TYPE, FACTOR,
+                    FORECASTQTY, FORECASTINV, FORECAST_EVT, FORECASTEDDATETIME
+                ) VALUES (
+                    '${currTstmp.toISOString()}', 'D.Pagonis', '${currTstmp.toISOString()}', 'D.Pagonis',
+                    '${inventory.SITE}', '${inventory.TANKNUM}', '${Forecast.formatDate(currInvDate)}',
+                    '${Forecast.formatTime(currInvDate)}', 'ORD', '${inventory.MATERIALID}', ' ',
+                    ${critical_tank}, '', '', '', '', '', ${parseFloat(orderdetails.ORDERQTY)},
+                    ${mquan}, '${forecast_event}', '${Forecast.formatDateTime(currInvDate)}'
+                )
+            `;
+            await conn.executeUpdate(insertOrderSQL);
+        }
+
+        if (x === volToHitSFB) {
+            var orderdetails = {
+                SITE: inventory.SITE,
+                TANKNUM: inventory.TANKNUM,
+                ORDERQTY: parseFloat(tankdetails.TARLVL_VOL) - mquan,
+                Suppl_Date: currInvDate,
+                Suppl_Time: currInvDate,
+                Cutoff_Date: currInvDate,
+                orderNumber: orderNumber,
+                MATERIALID: tankdetails.MATERIALID,
+                MATERIALDESC: tankdetails.MATERIALDESC
+            };
+
+            if (inventory.TANKNUM === criticalTank) {
+                critical_tank = 1;
+            }
+
+            volToHitSFB += tankGrp.minHoursToReachSFBAfterOrder;
+            criticalTank = tankGrp.criticalTankAfterOrder;
+            hitSFBInPrevLoop = true;
+
+            if (Forecast.formatDate(currInvDate) >= Forecast.formatDate(currTstmp)) {
+                replOrder.push(orderdetails);
+                orderNumber++;
+            }
+        }
+
+        if (mquan <= parseFloat(tankdetails.BTMSAF_VOL)) {
+            forecast_event = 'SFB';
+        }
+
+        if (x === 0) {
+            entry_type = 'SFCT';
+        }
+
+        currInvDate.setHours(currInvDate.getHours() + 1);
+
+        if (x >= hoursDiff || x === 0) {
+            var insertForecastSQL = `INSERT INTO MY_ROICEAD_FORECASTCALCULATION (
+                    CRTD_AT, CRTDBY, UPDT_AT, UPDTBY, SITE, TANKNUM, FORECASTDATE,
+                    FORECASTTIME, ENTRY_TYPE, MATERIAL, TANKGRP, CRITICAL_TANK,
+                    PROFILE_DAY, PROFILE_PHD, PROFILE, PROFILE_TYPE, FACTOR,
+                    FORECASTQTY, FORECASTINV, FORECAST_EVT, FORECASTEDDATETIME
+                ) VALUES (
+                    '${currTstmp.toISOString()}', 'D.Pagonis', '${currTstmp.toISOString()}', 'D.Pagonis',
+                    '${inventory.SITE}', '${inventory.TANKNUM}', '${Forecast.formatDate(currInvDate)}',
+                    '${Forecast.formatTime(currInvDate)}', '${entry_type}', '${inventory.MATERIALID}', ' ',
+                    ${critical_tank}, '', '', '', '', '', 0.0, ${mquan}, '${forecast_event}',
+                    '${Forecast.formatDateTime(currInvDate)}'
+                )
+            `;
+            await conn.executeUpdate(insertForecastSQL);
+        }
+
+        mquan -= 500;
+    }
+
+    await conn.commit();
+    await conn.close();
+    return orderNumber + 1;
+},
+
+	saveInventoryInForecastTable: async function(inventories, tankdetails) {
+		var conn = await $.hdb.getConnection();
+		try {
+			
+			var currTstmpResult = await conn.executeQuery('SELECT CURRENT_TIMESTAMP FROM DUMMY');
+			var currTstmp = Forecast.formatDateTime(currTstmpResult[0].CURRENT_TIMESTAMP);
+			tankdetails.TANK_GRP = ' ';
+
+			for (var x = 0; x < inventories.length; x++) {
+				var currInvDate = new Date(inventories[x].MDATE);
+				currInvDate.setHours(inventories[x].MTIME.getHours());
+				currInvDate.setMinutes(inventories[x].MTIME.getMinutes());
+				var currInvTime = new Date(inventories[x].MTIME);
+
+				var sql = `INSERT INTO MY_ROICEAD_FORECASTCALCULATION VALUES(
+					'${currTstmp}',                         /*CREATEDAT <TIMESTAMP>*/
+					'D.Pagonis',                           /*CREATEDBY <NVARCHAR(255)>*/
+					'${currTstmp}',                        /*MODIFIEDAT <TIMESTAMP>*/
+					'D.Pagonis',                           /*MODIFIEDBY <NVARCHAR(255)>*/
+					'${inventories[x].SITE}',              /*SITE <NVARCHAR(10)>*/
+					'${inventories[x].TANKNUM}',           /*TANK <NVARCHAR(10)>*/
+					'${Forecast.formatDate(currInvDate)}',             /*FORECAST_DATE <DATE>*/
+					'${Forecast.formatTime(currInvTime)}',             /*FORECAST_TIME <TIME>*/
+					'INV',                                 /*ENTRY_TYPE <NVARCHAR(10)>*/
+					'${inventories[x].MATERIALID}',        /*MATERIAL <NVARCHAR(10)>*/
+					'${tankdetails.TANK_GRP}',            /*TANK_GRP <NVARCHAR(10)>*/
+					FALSE,                                     /*CRITICAL_TANK <BOOLEAN>*/
+					'',                                    /*PROFILE_DAY <NVARCHAR(15)>*/
+					'',                                    /*PROFILE_PHD <NVARCHAR(10)>*/
+					'',                                    /*PROFILE <NVARCHAR(10)>*/
+					'',                                    /*PROFILE_TYPE <NVARCHAR(10)>*/
+					'',                                    /*FACTOR <NVARCHAR(6)>*/
+					0.0,                                   /*FORECAST_QTY <DECIMAL>*/
+					${inventories[x].MQUAN},              /*FORECAST_INV <DECIMAL>*/
+					'',                                    /*FORECAST_EVT <NVARCHAR(5)>*/
+					'${Forecast.formatDateTime(currInvDate)}'  /*FORECASTEDTIMESTAMP <TIMESTAMP>*/
+				)`;
+				console.log("sql saveInventoryInForecastTable " + sql)
+				await conn.executeUpdate(sql);
 			}
-			if ((x) === volToHitSFB) {
-				var orderdetails = {};
-				orderdetails = {
-					"SITE": inventory.SITE,
-					"TANKNUM": inventory.TANKNUM,
-					"ORDERQTY": (parseFloat(tankdetails.TARLVL_VOL) - mquan),
-					"Suppl_Date": currInvDate,
-					"Suppl_Time": (currInvDate),
-					"Cutoff_Date": (currInvDate), //calculateCutOffDate
-					"orderNumber": orderNumber,
-					"MATERIALID": tankdetails.MATERIALID,
-					"MATERIALDESC": tankdetails.MATERIALDESC
-				}
-				if (inventory.TANKNUM === criticalTank) {
-					critical_tank = 1;
-				}
-				volToHitSFB = volToHitSFB + tankGrp.minHoursToReachSFBAfterOrder;
-				criticalTank = tankGrp.criticalTankAfterOrder;
-				hitSFBInPrevLoop = true;
-				if (Forecast.formatDate(currInvDate) >= Forecast.formatDate(currTstmp)) {
-					replOrder.push(orderdetails);
-					orderNumber = orderNumber + 1;
-				}
-			}
-			if (mquan <= parseFloat(tankdetails.BTMSAF_VOL)) {
-				forecast_event = 'SFB';
-			}
-			if (x === 0) {
-				entry_type = 'SFCT';
-			}
-			currInvDate = new Date(currInvDate.setHours(currInvDate.getHours() + 1));
-			if (!(x < hoursDiff) || x === 0) {
-				st.setTimestamp(1, currTstmp); //crtd at
-				st.setString(2, "D.Pagonis"); //crtdby
-				st.setTimestamp(3, currTstmp);
-				st.setString(4, "D.Pagonis");
-				st.setString(5, inventory.SITE);
-				st.setString(6, inventory.TANKNUM);
-				st.setDate(7, Forecast.formatDate(currInvDate)); //ForecastDate
-				st.setTime(8, Forecast.formatTime(currInvDate), 'HH:MI:SS'); //ForecastTinme
-				st.setString(9, entry_type); //ENTRY_TYPE
-				st.setString(10, inventory.MATERIALID); //MATERIAL
-				st.setString(11, ' '); // Tankgrp
-				st.setInteger(12, critical_tank); //0==false, 1 ==true CRITICAL_TANK
-				st.setString(13, ''); //PROFILE_DAY
-				st.setString(14, ''); //PROFILE_PHD
-				st.setString(15, ''); //PROFILE
-				st.setString(16, ''); //PROFILE_TYPE
-				st.setString(17, ''); // FACTOR
-				st.setDecimal(18, 0.0); //Forecast Qty
-				st.setDecimal(19, mquan); //Forecast Inv
-				st.setString(20, forecast_event); //FORECAST_EVT
-				st.setTimestamp(21, Forecast.formatDateTime(currInvDate)); //ForecastedDateTime
-				st.addBatch();
-			}
-			mquan = mquan - 500;
+			await conn.commit();
+		} catch (error) {
+			await conn.rollback();
+			throw error;
+		} finally {
+			await conn.close();
 		}
-		await st.executeBatch();
-		await conn.commit();
-		await conn.close();
-		return (orderNumber + 1);
-	},
-
-	saveInventoryInForecastTable : async function (inventories, tankdetails) {
-		var conn = await $.db.getConnection();
-		var currTimestampQuery = 'SELECT CURRENT_TIMESTAMP  FROM DUMMY';
-		var currTstmpResult = await connectn.executeQuery(currTimestampQuery);
-		var currTstmp = currTstmpResult[0].CURRENT_TIMESTAMP;
-		var st = conn.prepareStatement('INSERT INTO MY_ROICEAD_FORECASTCALCULATION VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
-		var entry_type = 'INV';
-		st.setBatchSize(inventories.length);
-		tankdetails.TANK_GRP = ' ';
-		for (var x = 0; x < inventories.length; x++) {
-			var currInvDate = (inventories[x].MDATE);
-			currInvDate = new Date(currInvDate.setHours(inventories[x].MTIME.getHours()));
-			currInvDate = new Date(currInvDate.setMinutes(inventories[x].MTIME.getMinutes()));
-			st.setTimestamp(1, currTstmp); //crtd at
-			st.setString(2, "D.Pagonis"); //crtdby
-			st.setTimestamp(3, currTstmp);
-			st.setString(4, "D.Pagonis");
-			st.setString(5, inventories[x].SITE);
-			st.setString(6, inventories[x].TANKNUM);
-			st.setDate(7, inventories[x].MDATE);
-			st.setTime(8, inventories[x].MTIME);
-			st.setString(9, entry_type); //ENTRY_TYPE
-			st.setString(10, inventories[x].MATERIALID); //MATERIAL
-			st.setString(11, tankdetails.TANK_GRP); // Tankgrp
-			st.setInteger(12, 0); //0==false, 1 ==true CRITICAL_TANK
-			st.setString(13, ''); //PROFILE_DAY
-			st.setString(14, ''); //PROFILE_PHD
-			st.setString(15, ''); //PROFILE
-			st.setString(16, ''); //PROFILE_TYPE
-			st.setString(17, ''); // FACTOR
-			st.setDecimal(18, 0.0); //Forecast Qty
-			st.setDecimal(19, inventories[x].MQUAN); //Forecast Inv
-			st.setString(20, ''); //FORECAST_EVT
-			st.setTimestamp(21, Forecast.formatDateTime(currInvDate)); //ForecastedDateTime
-			st.addBatch();
-		}
-
-		await st.executeBatch();
-		await conn.commit();
-		await conn.close();
 	},
 
 	getDeltaInventories : async function (site, tank, lastForecastDateTime, firstTimeForecast) {

@@ -461,7 +461,7 @@ entity DemandForecast : managed {
 };
 @Aggregation.ApplySupported.PropertyRestrictions : true
 @Search.searchable                               : true
-entity forecastDemand                       @(cds.persistence.skip : 'always')     as
+entity forecastDemand                            as
     select from DemandForecast {
         @Analytics.Dimension             : true
         @Search.searchable               : true
@@ -786,7 +786,7 @@ entity SALESPERMONTHBYPRODS {
 };
 
 // @Aggregation.ApplySupported.PropertyRestrictions : true
-// define view POSBYMATGRP @(cds.persistence.skip : 'always') as
+// define view POSBYMATGRP  as
 //     select
 //         key items.MATERIAL.MaterialGroup,
 //             @Aggregation.default : SUM
@@ -900,7 +900,7 @@ entity SALESPERMONTHBYPRODS {
    } group by POSAnalytics.Site,POSAnalytics.TOTAMOUNT, POSCount.COUNTOFTRANSACTIONS;
 @Aggregation.ApplySupported.PropertyRestrictions : true
 @Search.searchable                               : true
-entity Orders                       @(cds.persistence.skip : 'always')     as
+entity Orders                   as
     select from ReplenishmentOrders {
         key OrderNo,
         key Item,
@@ -935,7 +935,7 @@ entity Orders                       @(cds.persistence.skip : 'always')     as
             Suppl_Qty               @(title : 'Quantity')         : Decimal(13, 2),
             Suppl_Uom               @(title : 'Uom'),
             @Analytics.Dimension             : true
-            Suppl_Date              @(title : 'Supply Date')      : Date,
+            Suppl_Date              @(title : 'Supply Date'),
             Suppl_Time              @(title : 'Supply Time'),
             @DefaultAggregation              : #SUM
             @EndUserText.label               : 'Total Quantity'
@@ -949,7 +949,7 @@ entity Orders                       @(cds.persistence.skip : 'always')     as
 
 @Aggregation.ApplySupported.PropertyRestrictions : true
 @Search.searchable                               : true
-entity PriorityOrders               @(cds.persistence.skip : 'always')     as
+entity PriorityOrders                    as
     select from ReplenishmentOrders {
         key OrderNo,
         key Item,
@@ -1003,7 +1003,7 @@ entity PriorityOrders               @(cds.persistence.skip : 'always')     as
         );
 
 @Aggregation.ApplySupported.PropertyRestrictions : true
-entity CreatedReplOrders @(cds.persistence.skip : 'always')                as
+entity CreatedReplOrders                 as
     select distinct
         key (
                 OrderNo
@@ -1018,7 +1018,7 @@ entity CreatedReplOrders @(cds.persistence.skip : 'always')                as
 
 @Aggregation.ApplySupported.PropertyRestrictions : true
 @Search.searchable                               : true
-entity POSSales                         @(cds.persistence.skip : 'always') as
+entity POSSales                          as
     select from SitePosHeader {
         key SiteTrnID  @(title : 'Tramsaction ID'),
 
@@ -1060,7 +1060,7 @@ entity POSSales                         @(cds.persistence.skip : 'always') as
 
 @Aggregation.ApplySupported.PropertyRestrictions : true
 @Search.searchable                               : true
-entity POSSalesY2D  @(cds.persistence.skip : 'always')     as
+entity POSSalesY2D       as
     select from SitePosHeader as header inner join AmountPerPOSTrans as trans on header.SiteTrnID = trans.SiteTrnID {
             key header.SiteTrnID  @(title : 'Transaction ID'),
             
@@ -1096,4 +1096,4 @@ entity POSSalesY2D  @(cds.persistence.skip : 'always')     as
             trans.Amount            @(title : 'Gross Amount')
     }
     where
-        Year(header.TRN_TIMESTAMP) = '2022';
+        Year(header.TRN_TIMESTAMP) = '2025';

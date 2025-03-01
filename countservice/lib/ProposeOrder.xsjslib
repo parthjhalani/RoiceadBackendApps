@@ -22,7 +22,7 @@ getForecastOrder : async function (site,tankgrp) {
 			
 		}
 		var forecastOrderDetails = await ProposeOrder.getForecastOrderDetail(tankDetails);
-		if(forecastOrderDetails.length > 0){
+		if(Array.isArray(forecastOrderDetails) && forecastOrderDetails.length > 0){
 			var orderno = await ProposeOrder.getReplenishmentOrder();
 			for(var i=0;i<forecastOrderDetails.length;i++){
 				forecastOrderDetails[i].OrderNo = orderno;
@@ -52,6 +52,7 @@ getForecastOrderDetail : async function (tankinfo){
 		while(!stopForecast){
 		for(var i=0;i<tankinfo.length;i++){
 			var tankdetails = tankinfo[i];
+			console.log("tankinfo in getforecastorderdetail" + JSON.stringify(tankdetails));
 			if (hitSFBInPrevLoop === x) {
 				var orderdetails = {};
 				var curInvDateT = new Date(tankdetails.currInvDate.setHours(tankdetails.currInvDate.getHours() ));
@@ -76,9 +77,9 @@ getForecastOrderDetail : async function (tankinfo){
 			tankdetails.currInvDate = new Date(tankdetails.currInvDate.setHours(tankdetails.currInvDate.getHours() + 1));
 			if (tankdetails.MQUAN <= parseFloat(tankdetails.BTMSAF_VOL)) {
 				
-				critical_tank = 1;
+				let critical_tank = 1;
 				hitSFBInPrevLoop = x + 1;
-				if (ProposeOrder.formatDate(tankdetails.currInvDate) >= ProposeOrder.ProposeOrder.formatDate(currTstmp)) {
+				if (ProposeOrder.formatDate(tankdetails.currInvDate) >= ProposeOrder.formatDate(currTstmp)) {
 					
 					orderNumber = orderNumber + 1;
 				}

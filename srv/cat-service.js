@@ -9,7 +9,17 @@ module.exports = (srv)=>{ // `srv` is the instance of cds.Service
      //select(MeterReadings).where({MeasureDate <= reading.MeasureDate})
      console.log(req.data);
    }
- 
+   srv.on("READ", "MetersInventory", async(req) => {
+    const hasFilters = req.query.SELECT.where && req.query.SELECT.where.length > 0;
+    
+    if (!hasFilters) {
+      return [];
+    } else {
+      // Use the direct database service to avoid recursive handler calls
+      const db = await cds.connect.to('db');
+      return await db.run(req.query);
+    }
+  });
    srv.on("UploadTableData", async (req) => {
      let tabName = 'MY_ROICEAD_' + req.data.tablename;
      let data = JSON.parse(req.data.data);

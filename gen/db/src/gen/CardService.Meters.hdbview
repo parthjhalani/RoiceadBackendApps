@@ -23,7 +23,7 @@ VIEW CardService_Meters AS SELECT
   Meters_0.RegUser
 FROM my_roicead_Meters AS Meters_0
 WITH ASSOCIATIONS (
-  MANY TO MANY JOIN CardService_MeterReadings AS Inventory ON (Inventory.Site = Site AND Inventory.MeterNum = MeterNum),
+  MANY TO MANY JOIN CardService_MetersInventory AS Inventory ON (Inventory.Site = Site AND Inventory.MeterNum = MeterNum),
   MANY TO MANY JOIN CardService_MeterMaterialAllocation AS Material ON (Material.Site = Site AND Material.MeterNum = MeterNum AND Material.SiteType = SiteType),
   MANY TO MANY JOIN CardService_MeterTankAllocation AS AllotedTanks ON (AllotedTanks.Site = Site AND AllotedTanks.MeterNum = MeterNum)
 )

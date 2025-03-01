@@ -2249,7 +2249,6 @@
       "kind": "entity",
       "@Aggregation.ApplySupported.PropertyRestrictions": true,
       "@Search.searchable": true,
-      "@cds.persistence.skip": "always",
       "query": {
         "SELECT": {
           "from": {
@@ -4471,7 +4470,6 @@
       "kind": "entity",
       "@Aggregation.ApplySupported.PropertyRestrictions": true,
       "@Search.searchable": true,
-      "@cds.persistence.skip": "always",
       "query": {
         "SELECT": {
           "from": {
@@ -4573,10 +4571,7 @@
             {
               "ref": [
                 "Suppl_Date"
-              ],
-              "cast": {
-                "type": "cds.Date"
-              }
+              ]
             },
             {
               "ref": [
@@ -4712,7 +4707,7 @@
         "Suppl_Date": {
           "@Analytics.Dimension": true,
           "@title": "Supply Date",
-          "type": "cds.Date"
+          "type": "cds.Timestamp"
         },
         "Suppl_Time": {
           "@title": "Supply Time",
@@ -4743,7 +4738,6 @@
       "kind": "entity",
       "@Aggregation.ApplySupported.PropertyRestrictions": true,
       "@Search.searchable": true,
-      "@cds.persistence.skip": "always",
       "query": {
         "SELECT": {
           "from": {
@@ -5046,7 +5040,6 @@
     "my.roicead.CreatedReplOrders": {
       "kind": "entity",
       "@Aggregation.ApplySupported.PropertyRestrictions": true,
-      "@cds.persistence.skip": "always",
       "query": {
         "SELECT": {
           "from": {
@@ -5130,7 +5123,6 @@
       "kind": "entity",
       "@Aggregation.ApplySupported.PropertyRestrictions": true,
       "@Search.searchable": true,
-      "@cds.persistence.skip": "always",
       "query": {
         "SELECT": {
           "from": {
@@ -5349,7 +5341,6 @@
       "kind": "entity",
       "@Aggregation.ApplySupported.PropertyRestrictions": true,
       "@Search.searchable": true,
-      "@cds.persistence.skip": "always",
       "query": {
         "SELECT": {
           "from": {
@@ -5488,7 +5479,7 @@
             },
             "=",
             {
-              "val": "2022"
+              "val": "2025"
             }
           ]
         }
@@ -6885,7 +6876,7 @@
           "cardinality": {
             "max": "*"
           },
-          "target": "CardService.MeterReadings",
+          "target": "CardService.MetersInventory",
           "on": [
             {
               "ref": [
@@ -7126,6 +7117,142 @@
     },
     "CardService.MeterReadings": {
       "kind": "entity",
+      "projection": {
+        "from": {
+          "ref": [
+            "my.roicead.MeterReadings"
+          ]
+        }
+      },
+      "elements": {
+        "createdAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "createdBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@Core.Immutable": true,
+          "@title": "{i18n>CreatedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "modifiedAt": {
+          "@cds.on.insert": {
+            "=": "$now"
+          },
+          "@cds.on.update": {
+            "=": "$now"
+          },
+          "@UI.HiddenFilter": true,
+          "@title": "{i18n>ChangedAt}",
+          "@readonly": true,
+          "type": "cds.Timestamp"
+        },
+        "modifiedBy": {
+          "@cds.on.insert": {
+            "=": "$user"
+          },
+          "@cds.on.update": {
+            "=": "$user"
+          },
+          "@UI.HiddenFilter": true,
+          "@title": "{i18n>ChangedBy}",
+          "@readonly": true,
+          "@description": "{i18n>UserID.Description}",
+          "type": "User",
+          "length": 255
+        },
+        "ID": {
+          "key": true,
+          "type": "cds.String",
+          "length": 10
+        },
+        "Site": {
+          "key": true,
+          "type": "cds.String",
+          "length": 10
+        },
+        "MeterNum": {
+          "key": true,
+          "type": "cds.String",
+          "length": 10
+        },
+        "SiteType": {
+          "type": "cds.String",
+          "length": 5
+        },
+        "MeasureDate": {
+          "type": "cds.Timestamp"
+        },
+        "MTYPE": {
+          "type": "cds.String",
+          "length": 5
+        },
+        "MTZONE": {
+          "type": "cds.String",
+          "length": 4
+        },
+        "MaterialId": {
+          "type": "cds.String",
+          "length": 18
+        },
+        "MaterialDesc": {
+          "type": "cds.String",
+          "length": 40
+        },
+        "MREAD_ENTRY": {
+          "type": "cds.String",
+          "length": 25
+        },
+        "MREADING": {
+          "type": "cds.String",
+          "length": 25
+        },
+        "MQUANTITY": {
+          "type": "cds.String",
+          "length": 25
+        },
+        "MOVERFLOW": {
+          "type": "cds.Boolean"
+        },
+        "MeterFactor": {
+          "type": "cds.String",
+          "length": 5
+        },
+        "MFLEVEL": {
+          "type": "cds.String",
+          "length": 10
+        },
+        "MFUOM": {
+          "type": "cds.String",
+          "length": 3
+        },
+        "Regdate": {
+          "type": "cds.Date"
+        },
+        "RegTime": {
+          "type": "cds.Time"
+        },
+        "RegUser": {
+          "type": "cds.String",
+          "length": 50
+        }
+      }
+    },
+    "CardService.MetersInventory": {
+      "kind": "entity",
+      "@cds.redirection.target": true,
       "projection": {
         "from": {
           "ref": [
@@ -7706,7 +7833,6 @@
       "kind": "entity",
       "@Aggregation.ApplySupported.PropertyRestrictions": true,
       "@Search.searchable": true,
-      "@cds.persistence.skip": "always",
       "projection": {
         "from": {
           "ref": [
@@ -8483,7 +8609,6 @@
     "CardService.CreatedReplOrders": {
       "kind": "entity",
       "@Aggregation.ApplySupported.PropertyRestrictions": true,
-      "@cds.persistence.skip": "always",
       "projection": {
         "from": {
           "ref": [
@@ -9282,7 +9407,6 @@
       "kind": "entity",
       "@Aggregation.ApplySupported.PropertyRestrictions": true,
       "@Search.searchable": true,
-      "@cds.persistence.skip": "always",
       "projection": {
         "from": {
           "ref": [
@@ -9390,7 +9514,6 @@
       "kind": "entity",
       "@Aggregation.ApplySupported.PropertyRestrictions": true,
       "@Search.searchable": true,
-      "@cds.persistence.skip": "always",
       "projection": {
         "from": {
           "ref": [
@@ -9500,7 +9623,7 @@
         "Suppl_Date": {
           "@Analytics.Dimension": true,
           "@title": "Supply Date",
-          "type": "cds.Date"
+          "type": "cds.Timestamp"
         },
         "Suppl_Time": {
           "@title": "Supply Time",
@@ -9531,7 +9654,6 @@
       "kind": "entity",
       "@Aggregation.ApplySupported.PropertyRestrictions": true,
       "@Search.searchable": true,
-      "@cds.persistence.skip": "always",
       "projection": {
         "from": {
           "ref": [
@@ -9672,7 +9794,6 @@
       "kind": "entity",
       "@Aggregation.ApplySupported.PropertyRestrictions": true,
       "@Search.searchable": true,
-      "@cds.persistence.skip": "always",
       "projection": {
         "from": {
           "ref": [

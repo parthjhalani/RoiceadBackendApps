@@ -13,6 +13,8 @@ service CardService {
     entity MeterMaterialAllocation as projection on roicead.MeterMaterialAllocation;
     entity MeterTankAllocation as projection on roicead.MeterTankAllocation;
     entity MeterReadings as projection on roicead.MeterReadings;
+    @cds.redirection.target:true
+    entity MetersInventory as projection on roicead.MeterReadings;
     entity Reconciliation as projection on roicead.MeterReconciliation;
 	entity ForecastCalculation as projection on roicead.ForecastCalculation;
     entity DemandForecast as projection on roicead.DemandForecast;

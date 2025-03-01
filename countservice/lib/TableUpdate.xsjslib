@@ -23,148 +23,122 @@ updateTableRecords : async function (content) {
 },
 
 insertPosItems : async function  (data) {
+    let selectQueryDel = `Select TOP 1 * from MY_ROICEAD_SITEPOSITEMS`;
+    let selectQueryData = await connectn.executeUpdate(selectQueryDel);
 	for(var i=0; i< data.length; i++){
             let item = data[i];
-            let AMOUNT = convertToFloat(item.AMOUNT);
-            let insertq = `INSERT INTO MY_ROICEAD_SITEPOSITEMS VALUES(
-				'${item.SiteTrnID}',
-				'${item.SiteTrnItem}',
-                
-				'${item.QUANTITIY}',
-				'${item.UOM}',
-				'${item.UNIT_PRICE}',
-				${AMOUNT},
-				'${item.CURRENCY}',
-				'${item.VAT_PERC}',
-                '${item["MATERIAL/MaterialId"]}'
-				
-			)` ;
-				let querydel = `delete from MY_ROICEAD_SITEPOSITEMS where SiteTrnID = '${item.SiteTrnID}' and SiteTrnItem = '${item.SiteTrnItem}'`;
-				insertq =  insertq.replace(/undefined/g, "");
+            let AMOUNT = TableUpdate.convertToFloat(item.AMOUNT);
 				await connectn.executeUpdate(querydel);
-				await connectn.executeUpdate(insertq);
+                let insertQuery = TableUpdate.generateInsertQuery(item, selectQueryData.columnInfo, 'MY_ROICEAD_SITEPOSHEADER');
+                insertQuery =  insertQuery.replace(/undefined/g, null);
+                try {
+                    await connectn.executeUpdate(insertQuery);
+                }catch(e){
+                    console.log(e.message);
+                }
+				
 	}    
     await connectn.commit();    
 },
 insertPosHeader : async function (data) {
+    let selectQueryDel = `Select TOP 1 * from MY_ROICEAD_SITEPOSHEADER`;
+    
+    let selectQueryData = await connectn.executeUpdate(selectQueryDel);
 	for(var i=0; i< data.length; i++){
             let item = data[i];
             item.TransactDate = TableUpdate.timestampConverter(new Date(item.TransactDate));
-            item.IsConfirmed = convertStrToBool(item.IsConfirmed);
-            item.IsInvoiced = convertStrToBool(item.IsInvoiced);
+            
+            item[Object.keys(item).find(key => key.toLowerCase() === 'isconfirmed')] = TableUpdate.convertStrToBool(item[Object.keys(item).find(key => key.toLowerCase() === 'isconfirmed')]);
+        item[Object.keys(item).find(key => key.toLowerCase() === 'isinvoiced')] = TableUpdate.convertStrToBool(item[Object.keys(item).find(key => key.toLowerCase() === 'isinvoiced')]);
             // let delquery = `delete from ${tabName} where TransactId = '${item.TransactId}'`;
             // await tx.run(delquery);
             // await tx.run (INSERT(item).into(Drawings))
-        let insertq = `INSERT INTO MY_ROICEAD_SITEPOSHEADER VALUES(
-						'${item.SiteTrnID}'/*SITETRNID <NVARCHAR(10)>*/,
-						'${item.SYS_AUDIT_NO}'/*SYS_AUDIT_NO <NVARCHAR(10)>*/,
-						'${item["TRN_TIMESTAMP (UTC)"]}'/*TRN_TIMESTAMP <TIMESTAMP>*/,
-						'${item.TRN_TZONE}'/*TRN_TZONE <NVARCHAR(5)>*/,
-						'${item.TERMINAL_ID}'/*TERMINAL_ID <NVARCHAR(15)>*/,
-						'${item.TERMINAL_TYPE}'/*TERMINAL_TYPE <NVARCHAR(10)>*/,
-						'${item.TRN_TYPE}'/*TRN_TYPE <NVARCHAR(10)>*/,
-						'${item.TRN_APPROVED}'/*TRN_APPROVED <NVARCHAR(10)>*/,
-						'${item.AUTH_CODE}'/*AUTH_CODE <NVARCHAR(10)>*/,
-						${item.TRANS_AMOUNT}/*TRANS_AMOUNT <DECIMAL>*/,
-						'${item.CURRENCY}'/*CURRENCY <NVARCHAR(6)>*/,
-						'${item.BATCH_SEQ}'/*BATCH_SEQ <NVARCHAR(10)>*/,
-						'${item.MOP_TYPE}'/*MOP_TYPE <NVARCHAR(10)>*/,
-						'${item.CARD_TYPE}'/*CARD_TYPE <NVARCHAR(10)>*/,
-						'${item.CARD_PAN}'/*CARD_PAN <NVARCHAR(20)>*/,
-						'${item.CARD_PAN_ENTRY}'/*CARD_PAN_ENTRY <NVARCHAR(10)>*/,
-						'${item.CARD_TRACK_DATA}'/*CARD_TRACK_DATA <NVARCHAR(50)>*/,
-						'',
-						''/*REGTIME <TIME>*/,
-						'${item.RegUser}'/*REGUSER <NVARCHAR(50)>*/,
-						'${item["Site/Site"]}'/*SITE_SITE <NVARCHAR(10)>*/,
-						'${item["Site/SiteType"]}'/*SITE_SITETYPE <NVARCHAR(5)>*/
-				)` ;
+        
 				let querydel = `delete from MY_ROICEAD_SITEPOSHEADER where SiteTrnID = '${item.SiteTrnID}'`;
-				insertq =  insertq.replace(/undefined/g, "");
+				let insertQuery = TableUpdate.generateInsertQuery(item, selectQueryData.columnInfo, 'MY_ROICEAD_SITEPOSHEADER');
+                insertQuery =  insertQuery.replace(/undefined/g, null);
 				await connectn.executeUpdate(querydel);
-				await connectn.executeUpdate(insertq);
+                try {
+                    await connectn.executeUpdate(insertQuery);
+                }catch(e){
+                    console.log(e.message);
+                }
+				
        }
        await connectn.commit();
 },
 insertInDrawings : async function (data){
+    let selectQueryDel = `Select TOP 1 * from MY_ROICEAD_DRAWINGS`;
+    let selectQueryData = await connectn.executeUpdate(selectQueryDel);
+    debugger;
     for(var i=0; i<data.length; i++){
         let item = data[i];
-        let IsConfirmed = convertStrToBool(item.IsConfirmed);
-        let IsInvoiced = convertStrToBool(item.IsInvoiced);
-        let transactDate = TableUpdate.timestampConverter(new Date(item["TransactDate (UTC)"]));//; TableUpdate.timestampConverter(item["TransactDate (UTC)"]);
-        let Quantity = convertToFloat(item.Quantity);
-        let querydel = `delete from MY_ROICEAD_DRAWINGS where TransactId = '${item.TransactId}'`;
+        item[Object.keys(item).find(key => key.toLowerCase() === 'isconfirmed')] = TableUpdate.convertStrToBool(item[Object.keys(item).find(key => key.toLowerCase() === 'isconfirmed')]);
+        item[Object.keys(item).find(key => key.toLowerCase() === 'isinvoiced')] = TableUpdate.convertStrToBool(item[Object.keys(item).find(key => key.toLowerCase() === 'isinvoiced')]);
+        let TRANSACTDATE = TableUpdate.timestampConverter(new Date(item["TRANSACTDATE"]));//; TableUpdate.timestampConverter(item["TransactDate (UTC)"]);
+        let Quantity = TableUpdate.convertToFloat(item.QUANTITY);
+        let querydel = `delete from MY_ROICEAD_DRAWINGS where TransactId = '${item.TRANSACTID}'`;
         await connectn.executeUpdate(querydel);
-        if(!item["Pump"]){
-        	item["Pump"] = '';
+
+        if(!item["PUMP"]){
+        	item["PUMP"] = '';
         }
-        let insertq = `INSERT INTO MY_ROICEAD_DRAWINGS VALUES(
-            '${item.TransactId}',
-            '${item.StationId}',
-            '${item.StationAddress}',
-            '${item["Pump"]}',
-            '${item.Terminal}',
-            '${item.AuthorizationID}',
-            '${item.ReceiptNo}',
-            ${IsConfirmed},
-            ${IsInvoiced},
-            '${transactDate}',
-            '${item.Product}',
-            ${Quantity},
-            '${item.QuantityUOM}',
-            ${item.Price},
-            '${item.PriceType}',
-            '${item.PriceCurrency}',
-            ${item.NetValue},
-            ${item.GrossValue},
-            '${item.ValueCurrency}',
-            '${item.VatPercent}',
-            '${item.VatValue}',
-            '${item["Card/CardNum"]}'
-        )`;
-        insertq =  insertq.replace(/undefined/g, "");
-        await connectn.executeUpdate(insertq);
+        let insertQuery = TableUpdate.generateInsertQuery(item, selectQueryData.columnInfo, 'MY_ROICEAD_DRAWINGS');
+        insertQuery =  insertQuery.replace(/undefined/g, null);
+        try {
+            await connectn.executeUpdate(insertQuery);
+        }catch(e){
+            console.log(e.message);
+        }
     }
     await connectn.commit();
 },
+generateInsertQuery : function (item, columnInfo, tableName) {
+    // Extract column names in order from columnInfo
+    const columns = columnInfo.map(col => col.columnName);
+
+    const values = columns.map(col => {
+        // Handle different types of columns
+        const columnType = columnInfo.find(c => c.columnName === col)?.typeName;
+        
+        // Check if value exists and handle different types
+        const value = item[Object.keys(item).find(key => key.toLowerCase() === col.toLowerCase())];
+        
+        if (['UVAL8', 'DECIMAL'].includes(columnType)) {
+            // Numeric columns - don't quote
+            return value !== undefined && value !== null ? value : 'NULL';
+        } else {
+            // String columns - quote the value
+            return value !== undefined && value !== null ? `'${value}'` : 'NULL';
+        }
+    });
+
+    return `INSERT INTO ${tableName} (${columns.join(',')}) VALUES (${values.join(',')})`;
+},
+
 
 insertTankInventoryData : async function (data){
+    let selectQueryDel = `Select TOP 1 * from MY_ROICEAD_TANKINVENTORY`;
+    let selectQueryData = await connectn.executeUpdate(selectQueryDel);
     for(var i=0; i<data.length; i++){
         let item = data[i];
         let currtimestamp = TableUpdate.timestampConverter(new Date());
         let Mdate = TableUpdate.formatDate(new Date(item.MDATE));
         let MTime = TableUpdate.formatTime(new Date(item.MTIME));
-        //let IsInvoiced = convertStrToBool(item.IsInvoiced);
+        //let IsInvoiced = TableUpdate.convertStrToBool(item.IsInvoiced);
         //let transactDate = TableUpdate.timestampConverter(new Date(item["TransactDate (UTC)"]));//; TableUpdate.timestampConverter(item["TransactDate (UTC)"]);
-        let Quantity = convertToFloat(item.MQUAN);
+        let Quantity = TableUpdate.convertToFloat(item.MQUAN);
         
         let querydel = `delete from MY_ROICEAD_TANKINVENTORY where ID = '${item.ID}' and Site = '${item["Site"]}' and TankNum = '${item["TankNum"]}'`;
         await connectn.executeUpdate(querydel);
+        let insertQuery = TableUpdate.generateInsertQuery(item, selectQueryData.columnInfo, 'MY_ROICEAD_TANKINVENTORY');
+        insertQuery =  insertQuery.replace(/undefined/g, null);
+        try {
+            await connectn.executeUpdate(insertQuery);
+        }catch(e){
+            console.log(e.message);
+        }
         
-        let insertq = `INSERT INTO MY_ROICEAD_TANKINVENTORY VALUES(
-            '${currtimestamp}',
-            'dimitris.pagonis@roicead.com',
-            '${currtimestamp}',
-            'dimitris.pagonis@roicead.com',
-            '${item["ID"]}',
-            '${item["Site"]}',
-            '${item["TankNum"]}',
-            '${Mdate}',
-            '${MTime}',
-            '${item["MTYPE"]}',
-            '${item["MTZONE"]}',
-            '${item["MaterialId"]}',
-            '${item["MaterialDesc"]}',
-            '${item["MFLEVEL"]}',
-            '${item["MFUOM"]}',
-            ${Quantity},
-            '${item["MQUOM"]}',
-            '${Mdate}',
-            '${MTime}',
-            'dimitris.pagonis'
-        )`;
-        insertq =  insertq.replace(/undefined/g, "");
-        await connectn.executeUpdate(insertq);
     }
     connectn.commit();
 },

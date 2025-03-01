@@ -49,7 +49,7 @@
         </EntitySet>
         <EntitySet Name="TankInventory" EntityType="CardService.TankInventory"/>
         <EntitySet Name="Meters" EntityType="CardService.Meters">
-          <NavigationPropertyBinding Path="Inventory" Target="MeterReadings"/>
+          <NavigationPropertyBinding Path="Inventory" Target="MetersInventory"/>
           <NavigationPropertyBinding Path="Material" Target="MeterMaterialAllocation"/>
           <NavigationPropertyBinding Path="AllotedTanks" Target="MeterTankAllocation"/>
         </EntitySet>
@@ -59,6 +59,7 @@
         </EntitySet>
         <EntitySet Name="MeterTankAllocation" EntityType="CardService.MeterTankAllocation"/>
         <EntitySet Name="MeterReadings" EntityType="CardService.MeterReadings"/>
+        <EntitySet Name="MetersInventory" EntityType="CardService.MetersInventory"/>
         <EntitySet Name="Reconciliation" EntityType="CardService.Reconciliation"/>
         <EntitySet Name="ForecastCalculation" EntityType="CardService.ForecastCalculation"/>
         <EntitySet Name="DemandForecast" EntityType="CardService.DemandForecast">
@@ -406,7 +407,7 @@
         <Property Name="Regdate" Type="Edm.Date"/>
         <Property Name="RegTime" Type="Edm.TimeOfDay"/>
         <Property Name="RegUser" Type="Edm.String" MaxLength="50"/>
-        <NavigationProperty Name="Inventory" Type="Collection(CardService.MeterReadings)"/>
+        <NavigationProperty Name="Inventory" Type="Collection(CardService.MetersInventory)"/>
         <NavigationProperty Name="Material" Type="Collection(CardService.MeterMaterialAllocation)"/>
         <NavigationProperty Name="AllotedTanks" Type="Collection(CardService.MeterTankAllocation)"/>
       </EntityType>
@@ -450,6 +451,36 @@
         <Property Name="RegUser" Type="Edm.String" MaxLength="50"/>
       </EntityType>
       <EntityType Name="MeterReadings">
+        <Key>
+          <PropertyRef Name="ID"/>
+          <PropertyRef Name="Site"/>
+          <PropertyRef Name="MeterNum"/>
+        </Key>
+        <Property Name="createdAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="createdBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="modifiedAt" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="modifiedBy" Type="Edm.String" MaxLength="255"/>
+        <Property Name="ID" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="Site" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="MeterNum" Type="Edm.String" MaxLength="10" Nullable="false"/>
+        <Property Name="SiteType" Type="Edm.String" MaxLength="5"/>
+        <Property Name="MeasureDate" Type="Edm.DateTimeOffset" Precision="7"/>
+        <Property Name="MTYPE" Type="Edm.String" MaxLength="5"/>
+        <Property Name="MTZONE" Type="Edm.String" MaxLength="4"/>
+        <Property Name="MaterialId" Type="Edm.String" MaxLength="18"/>
+        <Property Name="MaterialDesc" Type="Edm.String" MaxLength="40"/>
+        <Property Name="MREAD_ENTRY" Type="Edm.String" MaxLength="25"/>
+        <Property Name="MREADING" Type="Edm.String" MaxLength="25"/>
+        <Property Name="MQUANTITY" Type="Edm.String" MaxLength="25"/>
+        <Property Name="MOVERFLOW" Type="Edm.Boolean"/>
+        <Property Name="MeterFactor" Type="Edm.String" MaxLength="5"/>
+        <Property Name="MFLEVEL" Type="Edm.String" MaxLength="10"/>
+        <Property Name="MFUOM" Type="Edm.String" MaxLength="3"/>
+        <Property Name="Regdate" Type="Edm.Date"/>
+        <Property Name="RegTime" Type="Edm.TimeOfDay"/>
+        <Property Name="RegUser" Type="Edm.String" MaxLength="50"/>
+      </EntityType>
+      <EntityType Name="MetersInventory">
         <Key>
           <PropertyRef Name="ID"/>
           <PropertyRef Name="Site"/>
@@ -985,7 +1016,7 @@
         <Property Name="MaterialDesc" Type="Edm.String" MaxLength="40"/>
         <Property Name="Suppl_Qty" Type="Edm.Decimal" Precision="13" Scale="2"/>
         <Property Name="Suppl_Uom" Type="Edm.String" MaxLength="10"/>
-        <Property Name="Suppl_Date" Type="Edm.Date"/>
+        <Property Name="Suppl_Date" Type="Edm.DateTimeOffset" Precision="7"/>
         <Property Name="Suppl_Time" Type="Edm.String" MaxLength="10"/>
         <Property Name="TotQty" Type="Edm.Decimal" Precision="8" Scale="2"/>
         <Property Name="ordercount" Type="Edm.Int32"/>
@@ -1177,6 +1208,30 @@
         <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
       </Annotations>
       <Annotations Target="CardService.MeterReadings/modifiedBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedBy}"/>
+      </Annotations>
+      <Annotations Target="CardService.MetersInventory/createdAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedAt}"/>
+      </Annotations>
+      <Annotations Target="CardService.MetersInventory/createdBy">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Immutable" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>CreatedBy}"/>
+      </Annotations>
+      <Annotations Target="CardService.MetersInventory/modifiedAt">
+        <Annotation Term="UI.HiddenFilter" Bool="true"/>
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Common.Label" String="{i18n>ChangedAt}"/>
+      </Annotations>
+      <Annotations Target="CardService.MetersInventory/modifiedBy">
         <Annotation Term="UI.HiddenFilter" Bool="true"/>
         <Annotation Term="Core.Computed" Bool="true"/>
         <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>

@@ -1,0 +1,9 @@
+{
+  "namespace": "my.roicead",
+  "definitions": {},
+  "meta": {
+    "creator": "CDS Compiler v4.8.0",
+    "build": "CDS Build v7.8.2"
+  },
+  "$version": "2.0"
+}

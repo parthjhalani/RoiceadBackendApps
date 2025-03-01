@@ -1,18 +1,9 @@
-var connectn;
-await $.hdb.getConnection({}, function(err, client) {
-    if (err) {
-        // Handle error
-        console.error("Error getting HANA DB connection:", err);
-        return;
-    }
-    connectn = client;
-    
-});
+var connectn = await $.hdb.getConnection();
 var MeterReadingAdjustment = {
 adjustMeterReading : async function (content){
 	var record = JSON.parse(content);
-	await insertRecord(record);
-	var resp = await updateMeterReadings(record);
+	await MeterReadingAdjustment.insertRecord(record);
+	var resp = await MeterReadingAdjustment.updateMeterReadings(record);
 	return "Data Record is successfully Saved";
 },
 updateMeterReadings : async function (record){
@@ -27,17 +18,17 @@ updateMeterReadings : async function (record){
 						if(meterReadingsRes[m].MQUANTITY !== mquan){
 							meterReadingsRes[m].MQUANTITY = mquan.toFixed(2) ;
 							meterReadingsRes[m].MOVERFLOW = false;
-							await updRecord(meterReadingsRes[m]);
+							await MeterReadingAdjustment.updRecord(meterReadingsRes[m]);
 						}
 						
 					}else{
 						meterReadingsRes[m].MOVERFLOW = true;
-						 maxRead = parseFloat(record.maxRead);
+						var maxRead = parseFloat(record.maxRead);
 						var mquan = (record.maxRead - prevRead) + (currRead);
 						if(meterReadingsRes[m].MQUANTITY !== mquan){
 							meterReadingsRes[m].MQUANTITY = mquan.toFixed(2) ;
 							meterReadingsRes[m].MOVERFLOW = true;
-							await updRecord(meterReadingsRes[m]);
+							await MeterReadingAdjustment.updRecord(meterReadingsRes[m]);
 						}
 					}
 					
@@ -46,6 +37,7 @@ updateMeterReadings : async function (record){
 },
 updRecord : async function  (record){
 	var sql = "UPDATE MY_ROICEAD_METERREADINGS SET MQUANTITY = '" + record.MQUANTITY + "', MOVERFLOW = " + record.MOVERFLOW + " WHERE ID = '" + record.ID + "'" ;
+	console.log(sql);
 	await connectn.executeUpdate(sql);
 	await connectn.commit(); 
 },
@@ -63,30 +55,34 @@ formatDateTime : function (date) {
 insertRecord : async function  (record){
 	var currTimestampQuery = 'SELECT CURRENT_TIMESTAMP  FROM DUMMY';
 		var currTstmpResult = await connectn.executeQuery(currTimestampQuery);
-		var currTstmp = formatDateTime(currTstmpResult[0].CURRENT_TIMESTAMP);
-	var sql = "INSERT INTO MY_ROICEAD_METERREADINGS VALUES( '" + 
-	record.ID + "' , '"  +
-	record.Site + "' , '"  +
-	record.MeterNum + "' , '"  +
-	record.SITETYPE + "' , '"  +
-	record.MeasureDate + "' , '"  +
-	record.MTYPE + "' , '"  +
-	record.MTZONE + "' , '"  +
-	record.MaterialId + "' , '"  +
-	record.MaterialDesc + "' , '"  +
-	record.MREAD_ENTRY + "' , '"  +
-	record.MREADING + "' , "  +
-	record.MOVERFLOW + " , '"  +
-	record.MeterFactor + "' , '"  +
-	record.MFLEVEL + "' , '"  +
-	record.MFUOM + "' , '"  +
-	record.Regdate + "' , '"  +
-	record.RegTime + "' , '"  +
-	record.RegUser + "' , '"  +
-	record.MQUANTITY + "' , '"  +
-	currTstmp + "' , 'D.Pagonis' , '"  +
-	currTstmp + "' , 'D.Pagonis' )" ;
-
+		var currTstmp = MeterReadingAdjustment.formatDateTime(currTstmpResult[0].CURRENT_TIMESTAMP);
+		
+	var sql = "INSERT INTO MY_ROICEAD_METERREADINGS VALUES( " +
+    "'" + currTstmp + "', " + // CREATEDAT <TIMESTAMP>
+    "'D.Pagonis', " + // CREATEDBY <NVARCHAR(255)>
+    "'" + currTstmp + "', " + // MODIFIEDAT <TIMESTAMP>
+    "'D.Pagonis', " + // MODIFIEDBY <NVARCHAR(255)>
+    "'" + record.ID + "', " + // ID <NVARCHAR(10)>
+    "'" + record.Site + "', " + // SITE <NVARCHAR(10)>
+    "'" + record.MeterNum + "', " + // METERNUM <NVARCHAR(10)>
+    "'" + record.SITETYPE + "', " + // SITETYPE <NVARCHAR(5)>
+    "'" + record.MeasureDate + "', " + // MEASUREDATE <TIMESTAMP>
+    "'" + record.MTYPE + "', " + // MTYPE <NVARCHAR(5)>
+    "'" + record.MTZONE + "', " + // MTZONE <NVARCHAR(4)>
+    "'" + record.MaterialId + "', " + // MATERIALID <NVARCHAR(18)>
+    "'" + record.MaterialDesc + "', " + // MATERIALDESC <NVARCHAR(40)>
+    "'" + record.MREAD_ENTRY + "', " + // MREAD_ENTRY <NVARCHAR(25)>
+    "'" + record.MREADING + "', " + // MREADING <NVARCHAR(25)>
+    "'" + record.MQUANTITY + "', " + // MQUANTITY <NVARCHAR(25)>
+    (record.MOVERFLOW ? 'TRUE' : 'FALSE') + ", " + 
+    "'" + record.MeterFactor + "', " + // METERFACTOR <NVARCHAR(5)>
+    "'" + record.MFLEVEL + "', " + // MFLEVEL <NVARCHAR(10)>
+    (record.MFUOM ? "'" + record.MFUOM + "'" : "NULL") + ", " +
+    "'" + record.Regdate + "', " + // REGDATE <DATE>
+    "'" + record.RegTime + "', " + // REGTIME <TIME>
+    "'" + record.RegUser + "'" + // REGUSER <NVARCHAR(50)>
+")";
+	console.log(sql);
 	await connectn.executeUpdate(sql);
 	await connectn.commit(); 
 

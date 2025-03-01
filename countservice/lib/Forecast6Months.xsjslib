@@ -8,16 +8,7 @@
 7. Create replenishment order for Safety buffer hit event
 
 */
-var connectn;
-await $.hdb.getConnection({}, function(err, client) {
-    if (err) {
-        // Handle error
-        console.error("Error getting HANA DB connection:", err);
-        return;
-    }
-    connectn = client;
-    
-});
+var connectn = await $.hdb.getConnection();
 
 var replOrder = [];
 var Forecast6Months = {
@@ -156,10 +147,10 @@ executeForecast : async function (site, tankfilter) {
 		return data;
 	},
 	/* Order Creation */
-	getReplenishmentOrderNumber : function () {
-		var connectn = $.hdb.getConnection();
+	getReplenishmentOrderNumber : async function () {
+		var connectn =await $.hdb.getConnection();
 		var query = 'SELECT GETORDERNUMBER.NEXTVAL FROM DUMMY';
-		var result = connectn.executeQuery(query);
+		var result = await connectn.executeQuery(query);
 		var order = result[0]['GETORDERNUMBER.NEXTVAL']._val;
 
 		return order;
@@ -170,15 +161,15 @@ executeForecast : async function (site, tankfilter) {
 		var orders = await connectn.executeQuery(orderquery);
 		return orders;
 	},
-	createReplenishmentOrder :function (noOfOrders) {
-		var conn = $.db.getConnection();
-		var so = conn.prepareStatement(
+	createReplenishmentOrder :async function (noOfOrders) {
+		var conn = await $.hdb.getConnection();
+		var so = await conn.prepareStatement(
 			'INSERT INTO MY_ROICEAD_REPLENISHMENTORDERS VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
 		if (noOfOrders > 0) {
 			so.setBatchSize(replOrder.length);
 			var orders = [];
 			for (var k = 0; k < noOfOrders; k++) {
-				var sonumber = "A" + Forecast6Months.getReplenishmentOrderNumber();
+				var sonumber = "A" + await Forecast6Months.getReplenishmentOrderNumber();
 				orders.push(sonumber.toString());
 			}
 			replOrder.sort(function (a, b) {
@@ -186,7 +177,7 @@ executeForecast : async function (site, tankfilter) {
 			});
 			var orderitems = replOrder;
 			var currTimestampQuery = 'SELECT CURRENT_TIMESTAMP  FROM DUMMY';
-			var currTstmpResult = connectn.executeQuery(currTimestampQuery);
+			var currTstmpResult = await connectn.executeQuery(currTimestampQuery);
 			var currTstmp = currTstmpResult[0].CURRENT_TIMESTAMP;
 			var x = 1
 			var prevOrderNumber = 0;
@@ -235,9 +226,9 @@ executeForecast : async function (site, tankfilter) {
 				x = x + 1;
 				so.addBatch();
 			}
-			so.executeBatch();
-			conn.commit();
-			conn.close();
+			await so.executeBatch();
+			await conn.commit();
+			await conn.close();
 		}
 		replOrder = [];
 
@@ -310,7 +301,7 @@ getForecastedInventoryCurrTime :	async function (site, tank) {
     deleteForecastedInventoriesBySite : async function (site) {
 		var delQ = "delete from MY_ROICEAD_DEMANDFORECAST where site_site ='" + site + "'";
 		var deleted = await connectn.executeUpdate(delQ);
-		connectn.commit();
+		await connectn.commit();
 		return true;
 	},
 
@@ -431,7 +422,7 @@ getForecastedInventoryCurrTime :	async function (site, tank) {
 		}
 	},
 	saveOldRORD : async function (tank){
-		var conn = await $.db.getConnection();
+		var conn = await $.hdb.getConnection();
 		var currTimestampQuery = 'SELECT CURRENT_TIMESTAMP  FROM DUMMY';
 		var currTstmpResult = await connectn.executeQuery(currTimestampQuery);
 		var currTstmp = currTstmpResult[0].CURRENT_TIMESTAMP;
@@ -492,7 +483,7 @@ getForecastedInventoryCurrTime :	async function (site, tank) {
 		return Forecast6Months.formatDate(cutoffdate);
 	},
 	executeForecastSimultaneously : async function (groupedTanks){
-		var conn = await $.db.getConnection();
+		var conn = await $.hdb.getConnection();
 		var currTimestampQuery = 'SELECT CURRENT_TIMESTAMP  FROM DUMMY';
 		var currTstmpResult = await connectn.executeQuery(currTimestampQuery);
 		var currTstmp = currTstmpResult[0].CURRENT_TIMESTAMP;
@@ -683,7 +674,7 @@ getForecastedInventoryCurrTime :	async function (site, tank) {
 		// currInvDate = new Date(currInvDate.setHours(inventory.MTIME.getHours()));
 		// //currInvDate = currInvDate.setMinutes(inventory.MTIME.getMinutes());
 		var mquan = parseFloat(tankdetails.MQUAN);
-		var conn = await $.db.getConnection();
+		var conn = await $.hdb.getConnection();
 		var currTimestampQuery = 'SELECT CURRENT_TIMESTAMP  FROM DUMMY';
 		var currTstmpResult = await connectn.executeQuery(currTimestampQuery);
 		var currTstmp = currTstmpResult[0].CURRENT_TIMESTAMP;
@@ -816,7 +807,7 @@ getForecastedInventoryCurrTime :	async function (site, tank) {
 	},
 
 	saveInventoryInForecastTable : async function (inventories, tankdetails,sitedetails) {
-		var conn = await $.db.getConnection();
+		var conn = await $.hdb.getConnection();
 		var currTimestampQuery = 'SELECT CURRENT_TIMESTAMP  FROM DUMMY';
 		var currTstmpResult = await connectn.executeQuery(currTimestampQuery);
 		var currTstmp = currTstmpResult[0].CURRENT_TIMESTAMP;

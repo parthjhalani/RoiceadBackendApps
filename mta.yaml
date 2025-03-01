@@ -67,6 +67,7 @@ modules:
           url: ~{counturl}
           forwardAuthToken: true    
       - name: MyRoiceadApps-auth
+      - name: MyRoiceadApps-destination
 
 resources:
   - name: MyRoiceadApps-auth
@@ -83,3 +84,8 @@ resources:
     parameters:
       service: hana
       service-plan: hdi-shared
+  - name: MyRoiceadApps-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite    
